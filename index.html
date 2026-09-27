@@ -1,0 +1,2006 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0e1f16">
+<title>ZYPPYN — Television, Reimagined.</title>
+<meta name="description" content="ZYPPYN is building a new generation of premium screens — better quality, smarter technology, better value.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<style>
+:root{
+  --g50:#f0f5ed;--g100:#dde8d6;--g200:#c6debb;--g300:#8fc4a0;
+  --g400:#5ba97a;--g500:#3a8f5e;--g600:#2a7a4d;--g700:#1e6b40;
+  --g800:#1a5936;--g900:#154a2d;--g950:#0d3520;
+  --dark:#0e1f16;--dark2:#0c1a12;--dark3:#162b1f;
+  --light:#f7f6f3;--white:#fbfaf8;
+  --ink:#1c2420;--muted:#6b7c70;--muted-d:#a3bfa8;
+  --line:#d4d8d0;--line-d:rgba(58,143,94,.14);
+  --gold:#c9a84c;--gold-soft:rgba(201,168,76,.12);
+  --radius:28px;--max:1360px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+body{
+  background:var(--dark);color:var(--ink);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  font-feature-settings:'liga' 1,'kern' 1
+}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font:inherit;border:none;outline:none}
+img{display:block;max-width:100%}
+::selection{background:var(--g600);color:#fff}
+
+.container{width:min(calc(100% - 48px),var(--max));margin:auto}
+.section{padding:140px 0}
+.label{
+  font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--g500);margin-bottom:22px
+}
+.h1,.h2,.h3{font-family:'Playfair Display',Georgia,serif;letter-spacing:-.03em;font-weight:700}
+.h1{font-size:clamp(48px,6.5vw,110px);line-height:.9}
+.h2{font-size:clamp(40px,5.5vw,82px);line-height:.96}
+.h3{font-size:clamp(26px,3.2vw,44px);line-height:1.08}
+.copy{color:var(--muted);font-size:clamp(17px,1.5vw,20px);line-height:1.72;max-width:650px}
+.btn{
+  height:54px;padding:0 30px;border-radius:999px;border:none;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-weight:700;font-size:14px;cursor:pointer;transition:.3s ease
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-green{
+  background:linear-gradient(135deg,var(--g500),var(--g700));
+  color:#fff;box-shadow:0 4px 24px rgba(42,122,77,.25),0 1px 0 rgba(255,255,255,.1) inset
+}
+.btn-green:hover{
+  background:linear-gradient(135deg,var(--g400),var(--g600));
+  box-shadow:0 8px 40px rgba(42,122,77,.35),0 1px 0 rgba(255,255,255,.15) inset
+}
+.btn-outline-light{background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.18);color:rgba(255,255,255,.9);backdrop-filter:blur(8px)}
+.btn-outline-light:hover{border-color:rgba(255,255,255,.35);color:#fff;background:rgba(255,255,255,.08)}
+.btn-dark{background:linear-gradient(135deg,#1a2e1e,#243a2c);color:#fff}
+.btn-dark:hover{background:linear-gradient(135deg,#243a2c,#2e4a36)}
+.btn-outline-dark{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.btn-outline-dark:hover{border-color:var(--g500);color:var(--g700)}
+
+/* ═══ NAV ═══ */
+nav{
+  height:74px;position:fixed;z-index:100;inset:0 0 auto;
+  background:rgba(8,28,20,.85);backdrop-filter:blur(32px) saturate(1.2);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  transition:opacity .5s ease,transform .5s ease
+}
+nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
+.navin{height:100%;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.logo{font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;letter-spacing:.22em;color:#fff}
+.links{display:flex;align-items:center;gap:28px}
+.links a{font-size:14px;font-weight:600;color:rgba(255,255,255,.6);transition:.2s}
+.links a:hover{color:#fff}
+.nav-right{display:flex;align-items:center;gap:10px}
+.menu-btn{display:none;background:none;font-size:24px;cursor:pointer;color:#fff}
+.mobile-panel{
+  display:none;position:fixed;inset:74px 0 0;background:#0a2418;z-index:90;
+  padding:40px 24px;flex-direction:column
+}
+.mobile-panel.open{display:flex}
+.mobile-panel a{
+  display:block;font-family:'Playfair Display',Georgia,serif;font-weight:600;
+  font-size:30px;letter-spacing:-.01em;padding:16px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);color:#fff
+}
+
+/* ═══════════════════════════════════════
+   HERO — PREMIUM SCROLL-DRIVEN ANIMATION
+   ═══════════════════════════════════════ */
+.hero-zone{
+  height:300vh;
+  position:relative;
+  z-index:1
+}
+.hero-sticky{
+  position:sticky;top:0;
+  height:100vh;width:100%;
+  overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 62% 42%,#1a5038 0%,#144530 20%,#0e3526 45%,#0a2418 72%,#081c14 100%),
+    linear-gradient(180deg,#0e3526 0%,#0a2418 100%)
+}
+.hero-bg-orb{
+  position:absolute;border-radius:999px;pointer-events:none;
+  filter:blur(48px) saturate(115%);will-change:transform;
+  transform:translateZ(0);backface-visibility:hidden
+}
+.hero-bg-orb-1{
+  width:46vw;height:46vw;right:4%;top:2%;
+  background:radial-gradient(circle at 45% 45%,rgba(58,143,94,.38),rgba(58,143,94,.1) 42%,transparent 68%);
+  animation:orbDrift1 22s ease-in-out infinite alternate
+}
+.hero-bg-orb-2{
+  width:40vw;height:40vw;right:26%;top:28%;
+  background:radial-gradient(circle at 55% 55%,rgba(91,169,122,.3),rgba(42,122,77,.08) 44%,transparent 68%);
+  animation:orbDrift2 30s ease-in-out infinite alternate
+}
+.hero-bg-orb-3{
+  width:52vw;height:30vw;left:-8%;bottom:-10%;
+  background:radial-gradient(circle at 60% 45%,rgba(30,107,64,.35),rgba(20,80,48,.1) 50%,transparent 72%);
+  animation:orbDrift3 26s ease-in-out infinite alternate
+}
+@keyframes orbDrift1{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  100%{transform:translate3d(-3%,4%,0) scale(1.08)}
+}
+@keyframes orbDrift2{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  100%{transform:translate3d(5%,-3%,0) scale(.92)}
+}
+@keyframes orbDrift3{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  100%{transform:translate3d(4%,-4%,0) scale(1.1)}
+}
+.hero-aurora{
+  position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;
+  background:
+    radial-gradient(ellipse 55% 50% at 62% 44%,rgba(58,143,94,.14),transparent 66%),
+    radial-gradient(ellipse 35% 38% at 64% 42%,rgba(91,169,122,.16),transparent 60%),
+    radial-gradient(ellipse 65% 40% at 22% 78%,rgba(20,80,48,.3),transparent 65%)
+}
+.hero-aurora-2{
+  position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;
+  background:
+    radial-gradient(circle 18vw at 62% 44%,rgba(58,143,94,.18),transparent 62%),
+    radial-gradient(circle 10vw at 62% 44%,rgba(143,196,160,.12),transparent 55%),
+    radial-gradient(circle 6vw at 62% 44%,rgba(255,255,255,.04),transparent 55%)
+}
+.hero-sticky::before{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 90% 80% at 50% 50%,transparent 40%,rgba(4,14,10,.5) 100%)
+}
+.hero-sticky::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-size:128px 128px;
+  opacity:.4
+}
+#heroCanvas{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  width:100%;height:100%
+}
+.hero-boot-overlay{
+  position:absolute;inset:0;z-index:20;
+  background:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:16px;cursor:pointer;pointer-events:auto
+}
+.hero-boot-overlay .boot-logo{
+  font-family:'Playfair Display',Georgia,serif;font-weight:700;
+  letter-spacing:.35em;font-size:clamp(28px,4vw,48px);color:var(--ink)
+}
+.hero-boot-overlay .boot-sub{
+  font-size:clamp(8px,1vw,13px);color:var(--muted);
+  letter-spacing:.2em;font-weight:600;text-transform:uppercase
+}
+.hero-boot-overlay .boot-enter{
+  margin-top:12px;font-size:clamp(9px,1vw,12px);color:var(--muted);
+  letter-spacing:.25em;font-weight:500;text-transform:uppercase;
+  opacity:0;animation:bootEnterPulse 2s ease-in-out 1.2s infinite
+}
+@keyframes bootEnterPulse{
+  0%,100%{opacity:.35}
+  50%{opacity:.7}
+}
+.hero-boot-overlay .boot-bar{
+  width:clamp(80px,14vw,180px);height:2px;
+  background:rgba(0,0,0,.06);border-radius:2px;overflow:hidden
+}
+.hero-boot-overlay .boot-fill{
+  width:100%;height:100%;border-radius:2px;background:var(--g500);
+  animation:bootScan 3s ease-in-out infinite
+}
+
+.hero-text{
+  position:absolute;z-index:5;
+  left:clamp(24px,5%,72px);top:50%;
+  max-width:min(42%,540px);
+  will-change:transform,opacity
+}
+#heroText{opacity:0}
+.hero-text .h1{color:#fff;margin-bottom:24px;line-height:.88}
+.hero-text .h1 .accent{
+  font-style:italic;color:#fff
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 22px;border-radius:999px;margin-bottom:30px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.5)
+}
+.hero-badge-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--g400);
+  animation:dotPulse 2s ease-in-out infinite
+}
+@keyframes dotPulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-sub{
+  color:rgba(255,255,255,.4);font-size:clamp(16px,1.3vw,19px);
+  line-height:1.75;margin-bottom:36px;max-width:440px
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+.hero-tv-wrap{
+  position:absolute;z-index:3;
+  right:5%;top:50%;
+  width:min(44%,580px);
+  transform-origin:center center;
+  will-change:transform
+}
+
+.hero-tv-bezel{
+  position:relative;
+  border-radius:10px;
+  padding:10px 10px 16px;
+  background:linear-gradient(170deg,#2e3230 0%,#1e2120 25%,#141716 50%,#1a1c1b 75%,#252827 100%);
+  box-shadow:
+    0 80px 160px rgba(0,0,0,.6),
+    0 40px 80px rgba(0,0,0,.4),
+    0 20px 40px rgba(0,0,0,.3),
+    0 8px 16px rgba(0,0,0,.25),
+    0 0 0 1px rgba(255,255,255,.05),
+    inset 0 1px 0 rgba(255,255,255,.09),
+    inset 0 -1px 0 rgba(0,0,0,.4)
+}
+.hero-tv-bezel::before{
+  content:"";position:absolute;top:0;left:8%;right:8%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.14) 30%,rgba(255,255,255,.2) 50%,rgba(255,255,255,.14) 70%,transparent);
+  border-radius:1px;z-index:20
+}
+.hero-tv-bezel::after{
+  content:"";position:absolute;bottom:6px;left:50%;transform:translateX(-50%);
+  width:5px;height:5px;border-radius:50%;
+  background:rgba(91,169,122,.5);
+  animation:ledPulse 3s ease-in-out infinite;z-index:20
+}
+@keyframes ledPulse{0%,100%{opacity:1}50%{opacity:.2}}
+
+.hero-tv-screen{
+  width:100%;aspect-ratio:16/9;border-radius:4px;overflow:hidden;
+  position:relative;background:#fff;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)
+}
+.hero-tv-screen::after{display:none}
+
+.hero-tv-glow{
+  position:absolute;inset:-50%;z-index:-1;pointer-events:none;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(58,143,94,.2),rgba(30,107,64,.08) 40%,transparent 65%);
+  filter:blur(50px)
+}
+
+.screen-content{
+  position:absolute;inset:0;z-index:2;overflow:hidden;
+  transition:opacity .4s cubic-bezier(.4,0,.2,1)
+}
+.screen-boot{
+  position:absolute;inset:0;background:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:clamp(6px,1.5vh,16px)
+}
+.screen-boot-logo{
+  font-family:'Playfair Display',Georgia,serif;font-weight:700;
+  letter-spacing:.35em;font-size:clamp(10px,3.5vw,24px);color:var(--ink)
+}
+.screen-boot-sub{
+  font-size:clamp(3px,.7vw,7px);color:var(--muted);
+  letter-spacing:.2em;font-weight:600;text-transform:uppercase
+}
+.screen-boot-bar{
+  width:clamp(36px,12vw,100px);height:clamp(1px,.15vw,2px);
+  background:rgba(0,0,0,.06);border-radius:2px;overflow:hidden
+}
+.screen-boot-fill{
+  width:100%;height:100%;border-radius:2px;background:var(--g500);
+  animation:bootScan 3s ease-in-out infinite
+}
+@keyframes bootScan{
+  0%{transform:translateX(-100%)}50%{transform:translateX(0)}100%{transform:translateX(100%)}
+}
+
+.tv-feat{
+  position:absolute;inset:0;z-index:10;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;background:#fff;gap:clamp(2px,.5vh,8px)
+}
+.tv-feat-big{
+  font-family:'Inter',system-ui,sans-serif;font-weight:900;
+  font-size:clamp(20px,7vw,52px);letter-spacing:-.04em;color:var(--ink);line-height:1
+}
+.tv-feat-pill{
+  display:inline-flex;padding:clamp(1px,.2vw,3px) clamp(4px,.8vw,10px);
+  border-radius:999px;background:rgba(42,122,77,.08);
+  font-size:clamp(3px,.55vw,7px);font-weight:800;letter-spacing:.1em;color:var(--g600)
+}
+.tv-feat-icon{
+  width:clamp(14px,4vw,32px);height:clamp(14px,4vw,32px);color:var(--g500)
+}
+.tv-feat-icon svg{width:100%;height:100%}
+.tv-feat-title{
+  font-family:'Playfair Display',Georgia,serif;font-size:clamp(7px,2vw,16px);
+  font-weight:700;color:var(--ink);letter-spacing:-.01em;text-align:center
+}
+.tv-feat-sub{
+  font-size:clamp(3px,.6vw,7px);color:var(--muted);
+  text-align:center;max-width:80%;line-height:1.5
+}
+.tv-feat-spectrum{
+  display:flex;gap:clamp(2px,.35vw,4px);margin-top:clamp(2px,.4vh,4px)
+}
+.tv-feat-spectrum span{
+  width:clamp(5px,1.5vw,14px);height:clamp(2px,.35vw,3px);border-radius:2px
+}
+.tv-feat-spectrum span:nth-child(1){background:#e74c3c}
+.tv-feat-spectrum span:nth-child(2){background:#f39c12}
+.tv-feat-spectrum span:nth-child(3){background:#2ecc71}
+.tv-feat-spectrum span:nth-child(4){background:#3498db}
+.tv-feat-spectrum span:nth-child(5){background:#9b59b6}
+.tv-feat-price{display:flex;align-items:baseline;gap:clamp(4px,.8vw,10px)}
+.tv-feat-price-old{
+  font-family:'Inter',system-ui,sans-serif;font-size:clamp(8px,2vw,18px);
+  font-weight:600;color:var(--muted);text-decoration:line-through
+}
+.tv-feat-price-new{
+  font-family:'Inter',system-ui,sans-serif;font-size:clamp(14px,4.5vw,36px);
+  font-weight:800;color:var(--g600);letter-spacing:-.03em
+}
+.tv-feat-mini-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(2px,.3vw,3px);
+  margin-top:clamp(1px,.3vh,4px)
+}
+.tv-feat-mini-grid span{
+  width:clamp(8px,2vw,18px);height:clamp(8px,2vw,18px);
+  border-radius:clamp(2px,.25vw,3px)
+}
+.tv-feat-mini-grid span:nth-child(1){background:rgba(42,122,77,.1)}
+.tv-feat-mini-grid span:nth-child(2){background:rgba(201,168,76,.1)}
+.tv-feat-mini-grid span:nth-child(3){background:rgba(91,169,122,.1)}
+.tv-feat-mini-grid span:nth-child(4){background:rgba(42,122,77,.06)}
+
+.tv-dots{
+  position:absolute;bottom:10%;left:50%;transform:translateX(-50%);
+  z-index:12;display:flex;gap:clamp(3px,.6vw,5px);opacity:0;transition:opacity .4s ease
+}
+.tv-dot{
+  width:clamp(3px,.45vw,5px);height:clamp(3px,.45vw,5px);border-radius:50%;
+  background:rgba(0,0,0,.1);transition:all .4s cubic-bezier(.4,0,.2,1)
+}
+.tv-dot.active{background:var(--g500);transform:scale(1.5)}
+
+.scroll-hint{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  z-index:6;display:flex;flex-direction:column;align-items:center;gap:10px;
+  color:rgba(255,255,255,.5);font-size:10px;font-weight:700;letter-spacing:.25em;
+  text-transform:uppercase
+}
+.scroll-hint-line{
+  width:1px;height:40px;
+  background:linear-gradient(to bottom,rgba(255,255,255,.15),rgba(255,255,255,.04),transparent);
+  animation:scrollLine 2.5s ease-in-out infinite
+}
+@keyframes scrollLine{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.15;transform:scaleY(.5)}}
+
+/* ═══ MARQUEE ═══ */
+.marquee{
+  position:relative;z-index:2;
+  border-top:1px solid rgba(42,122,77,.2);
+  border-bottom:1px solid rgba(42,122,77,.2);
+  overflow:hidden;
+  background:var(--g800)
+}
+.track{
+  display:flex;width:max-content;gap:56px;padding:20px 0;
+  font-family:'Playfair Display',Georgia,serif;font-size:13px;font-weight:600;
+  letter-spacing:.14em;color:rgba(255,255,255,.45);text-transform:uppercase;
+  animation:marq 28s linear infinite
+}
+.track span{position:relative}
+.track span::after{
+  content:"";display:inline-block;width:4px;height:4px;
+  background:var(--g500);border-radius:1px;transform:rotate(45deg);
+  margin-left:56px;vertical-align:middle
+}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ═══ SECTION BASE ═══ */
+.section{padding:clamp(100px,14vh,160px) 0}
+.sec-num{
+  font-size:11px;font-weight:800;letter-spacing:.3em;
+  color:var(--g500);margin-bottom:10px;
+  font-variant-numeric:tabular-nums;display:block
+}
+.label{
+  font-size:11px;text-transform:uppercase;letter-spacing:.18em;font-weight:800;
+  color:var(--muted);margin-bottom:16px
+}
+.h2{
+  font-family:'Playfair Display',Georgia,serif;font-weight:700;
+  font-size:clamp(36px,5vw,72px);line-height:1.05;letter-spacing:-.02em
+}
+.h3{
+  font-family:'Playfair Display',Georgia,serif;font-weight:700;
+  font-size:clamp(24px,2.5vw,36px);line-height:1.15;letter-spacing:-.01em
+}
+.copy{
+  font-size:clamp(15px,1.15vw,17px);line-height:1.8;
+  color:var(--muted);max-width:560px
+}
+.hl{color:var(--g500)}
+
+.sec-dark{
+  background:linear-gradient(175deg,#153e2c 0%,#184530 50%,#1a4a34 100%);
+  color:#fff;position:relative;z-index:2;overflow:hidden
+}
+.sec-dark .label{color:var(--g400)}
+.sec-dark .copy{color:rgba(255,255,255,.4)}
+.sec-dark .hl{color:var(--g400)}
+.sec-light{
+  background:#f5f4f0;
+  position:relative;z-index:2;overflow:hidden
+}
+.sec-cream{background:#fbfaf8}
+
+/* ═══ 01 — VISION ═══ */
+#vision{overflow:visible}
+.vision-split{
+  display:grid;grid-template-columns:.38fr .58fr;gap:clamp(60px,8vw,120px)
+}
+.vision-left{
+  position:sticky;top:clamp(100px,14vh,160px);align-self:start;
+  will-change:transform
+}
+.vision-left .h2{max-width:440px}
+.vision-right-col{display:flex;flex-direction:column;gap:56px}
+.vision-intro .copy{margin:0}
+.vision-closing{
+  padding-top:48px;
+  border-top:1px solid var(--line)
+}
+.vision-closing .copy{color:var(--muted);margin-bottom:0}
+.vision-stats{
+  display:grid;grid-template-columns:1fr;gap:0
+}
+.vision-stat{
+  padding:36px 0;
+  border-top:1px solid var(--line);
+  display:grid;grid-template-columns:180px 1fr;gap:32px;align-items:baseline
+}
+.vision-stat:last-child{border-bottom:1px solid var(--line)}
+.vision-stat-val{
+  font-family:'Inter',system-ui,sans-serif;font-weight:800;
+  font-size:clamp(36px,4.5vw,60px);letter-spacing:-.04em;
+  color:var(--ink);font-variant-numeric:tabular-nums
+}
+.vision-stat-label{
+  font-size:15px;color:var(--muted);line-height:1.7;max-width:360px
+}
+
+/* ═══ 02 — TECHNOLOGY ═══ */
+#technology{overflow:visible}
+.tech-split{
+  display:grid;grid-template-columns:.38fr .58fr;gap:clamp(60px,8vw,120px)
+}
+.tech-left{
+  position:sticky;top:clamp(100px,14vh,160px);align-self:start
+}
+.tech-left .h2{max-width:420px}
+.tech-left .copy{margin-top:20px}
+.tech-right-col{display:flex;flex-direction:column;gap:0}
+.tech-header{
+  display:grid;grid-template-columns:.45fr .55fr;gap:60px;
+  align-items:end;margin-bottom:72px
+}
+.tech-pillars{
+  display:grid;gap:0
+}
+.tech-pillar{
+  display:grid;grid-template-columns:64px 1fr 1.2fr;gap:32px;
+  align-items:center;
+  padding:36px 0;
+  border-top:1px solid var(--line)
+}
+.tech-pillar:last-child{border-bottom:1px solid var(--line)}
+.tech-pillar-num{
+  font-size:11px;font-weight:800;letter-spacing:.3em;
+  color:var(--g500);font-variant-numeric:tabular-nums
+}
+.tech-pillar-title{
+  display:flex;align-items:center;gap:18px
+}
+.tech-pillar-icon{
+  width:40px;height:40px;flex-shrink:0;
+  color:var(--g500)
+}
+.tech-pillar-icon svg{width:100%;height:100%}
+.tech-pillar-name{
+  font-family:'Playfair Display',Georgia,serif;font-weight:700;
+  font-size:clamp(20px,2vw,28px);color:var(--ink);letter-spacing:-.01em
+}
+.tech-pillar-desc{
+  font-size:14px;line-height:1.75;color:var(--muted);max-width:420px
+}
+.tech-visual-strip{
+  margin-top:60px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
+  border-radius:16px;overflow:hidden
+}
+.tech-vblock{
+  height:200px;position:relative;
+  background:linear-gradient(160deg,var(--g100),var(--g50))
+}
+.tech-vblock::after{
+  content:attr(data-label);
+  position:absolute;bottom:16px;left:16px;
+  font-size:10px;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--g500)
+}
+.tech-vblock-line{
+  position:absolute;top:50%;left:20%;right:20%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--g400),transparent);opacity:.3
+}
+
+/* ═══ 03 — BUSINESS MODEL ═══ */
+.model-section{
+  background:linear-gradient(175deg,#153e2c 0%,#184530 40%,#1a4a34 100%);
+  color:#fff;position:relative;z-index:2;overflow:hidden
+}
+.model-section::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(91,169,122,.2) 30%,rgba(91,169,122,.2) 70%,transparent)
+}
+.model-header{
+  text-align:center;max-width:720px;margin:0 auto 80px
+}
+.model-header .h2{color:#fff}
+.model-header .copy{color:rgba(255,255,255,.4);margin:20px auto 0}
+.model-table{
+  max-width:1100px;margin:0 auto;
+  border:1px solid rgba(255,255,255,.06);border-radius:20px;overflow:hidden
+}
+.model-table-head{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  border-bottom:1px solid rgba(255,255,255,.06)
+}
+.model-th{
+  padding:28px 36px;
+  font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase
+}
+.model-th:first-child{color:rgba(255,255,255,.25)}
+.model-th:nth-child(2){
+  color:rgba(255,255,255,.35);text-align:center;
+  border-left:1px solid rgba(255,255,255,.06);
+  border-right:1px solid rgba(255,255,255,.06)
+}
+.model-th:nth-child(3){
+  color:var(--g400);text-align:center;
+  background:rgba(42,122,77,.06)
+}
+.model-row{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  transition:background .3s ease
+}
+.model-row:last-child{border-bottom:none}
+.model-row:hover{background:rgba(255,255,255,.02)}
+.model-td{padding:24px 36px;font-size:15px;line-height:1.5}
+.model-td:first-child{
+  color:rgba(255,255,255,.5);font-weight:600;
+  display:flex;align-items:center;gap:14px
+}
+.model-td:first-child svg{width:20px;height:20px;flex-shrink:0;color:var(--g500);opacity:.5}
+.model-td:nth-child(2){
+  text-align:center;color:rgba(255,255,255,.25);
+  border-left:1px solid rgba(255,255,255,.06);
+  border-right:1px solid rgba(255,255,255,.06)
+}
+.model-td:nth-child(3){
+  text-align:center;color:#fff;font-weight:600;
+  background:rgba(42,122,77,.04)
+}
+.model-td .val-good{color:var(--g400)}
+.model-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:48px;max-width:1100px;margin-left:auto;margin-right:auto;
+  padding:32px 40px;
+  background:linear-gradient(135deg,var(--g700),var(--g800));
+  border-radius:16px
+}
+.model-bottom-text{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(18px,2vw,24px);font-weight:600;color:#fff;
+  letter-spacing:-.01em
+}
+.model-bottom-text span{color:var(--g200)}
+
+/* ═══ 04 — ENVIRONMENTS ═══ */
+.env-header{
+  display:grid;grid-template-columns:.5fr .5fr;gap:60px;
+  align-items:end;margin-bottom:60px
+}
+.env-header .copy{margin:0}
+.env-cards{
+  display:grid;grid-template-columns:1fr 1fr;gap:20px
+}
+.env-card{
+  padding:56px 44px;min-height:380px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;overflow:hidden;
+  background:#fff;
+  border:1px solid var(--line);border-radius:20px;
+  transition:box-shadow .35s ease,transform .35s ease
+}
+.env-card:hover{
+  box-shadow:0 20px 60px rgba(42,122,77,.08),0 8px 24px rgba(0,0,0,.04);
+  transform:translateY(-4px)
+}
+.env-card-top{display:flex;justify-content:space-between;align-items:flex-start}
+.env-card-tag{
+  font-size:10px;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--g600);
+  padding:8px 14px;background:rgba(42,122,77,.06);
+  border:1px solid rgba(42,122,77,.12);border-radius:999px
+}
+.env-card-icon{width:36px;height:36px;color:var(--g300)}
+.env-card-icon svg{width:100%;height:100%}
+.env-card-body{margin-top:auto}
+.env-card-title{
+  font-family:'Playfair Display',Georgia,serif;font-weight:700;
+  font-size:clamp(28px,3.5vw,48px);color:var(--ink);letter-spacing:-.02em;
+  margin-bottom:12px
+}
+.env-card-desc{font-size:14px;line-height:1.7;color:var(--muted);max-width:320px}
+.env-card-line{
+  position:absolute;bottom:0;left:44px;right:44px;height:2px;
+  background:linear-gradient(90deg,var(--g500),var(--g200));opacity:.4
+}
+
+/* ═══ MYSTERY ═══ */
+.mystery{
+  background:linear-gradient(175deg,#153e2c 0%,#184530 40%,#1a4a34 100%);
+  color:#fff;padding:clamp(100px,14vh,160px) 0;
+  position:relative;overflow:hidden;z-index:2
+}
+.mystery::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(91,169,122,.2) 30%,rgba(91,169,122,.2) 70%,transparent)
+}
+.mystery .container{position:relative;z-index:2}
+.mystery-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(60px,8vw,120px);
+  align-items:start
+}
+.mystery-left{max-width:520px}
+.mystery .label{color:var(--g300)}
+.mystery .h2{
+  font-size:clamp(28px,3.5vw,48px);line-height:1.08;
+  color:#fff;letter-spacing:-.02em
+}
+.mystery .copy{color:rgba(255,255,255,.45);margin-top:20px;font-size:15px;line-height:1.8}
+.mystery-right{display:flex;flex-direction:column;gap:0}
+.mystery-fact{
+  padding:32px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline
+}
+.mystery-fact:first-child{padding-top:0}
+.mystery-fact-num{
+  font-family:'Inter',system-ui,sans-serif;font-weight:800;
+  font-size:28px;letter-spacing:-.03em;color:var(--g400);
+  font-variant-numeric:tabular-nums
+}
+.mystery-fact-text{
+  font-size:15px;line-height:1.7;color:rgba(255,255,255,.5)
+}
+.mystery-mission{
+  margin-top:48px;padding:36px 40px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);border-radius:16px
+}
+.mystery-mission-text{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(20px,2.4vw,32px);line-height:1.3;
+  letter-spacing:-.01em;font-weight:600;
+  color:rgba(255,255,255,.85)
+}
+.mystery-mission-text .hl{color:var(--g400)}
+
+/* ═══ 05 — PARTNERS ═══ */
+.partner-header{
+  text-align:center;max-width:680px;margin:0 auto 64px
+}
+.partner-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border:1px solid var(--line);border-radius:20px;overflow:hidden
+}
+.partner-card{
+  padding:40px 28px;text-align:center;
+  border-right:1px solid var(--line);
+  transition:background .3s ease
+}
+.partner-card:last-child{border-right:0}
+.partner-card:hover{background:rgba(42,122,77,.03)}
+.partner-card-icon{
+  width:44px;height:44px;margin:0 auto 20px;
+  color:var(--g500)
+}
+.partner-card-icon svg{width:100%;height:100%}
+.partner-card-title{
+  font-family:'Playfair Display',Georgia,serif;font-weight:700;
+  font-size:18px;margin-bottom:8px;color:var(--ink)
+}
+.partner-card-desc{font-size:13px;line-height:1.65;color:var(--muted)}
+
+/* ═══ 06 — INVESTOR ═══ */
+#investors{overflow:visible}
+.inv-split{
+  display:grid;grid-template-columns:.38fr .58fr;gap:clamp(60px,8vw,120px)
+}
+.inv-left{
+  position:sticky;top:clamp(100px,14vh,160px);align-self:start
+}
+.inv-left .h2{color:#fff;max-width:440px}
+.inv-left .copy{margin-top:20px;color:rgba(255,255,255,.4)}
+.inv-right-col{display:flex;flex-direction:column;gap:48px}
+.inv-right-col .investor-stats,
+.inv-right-col .investor-cards{grid-template-columns:1fr 1fr}
+.investor{
+  position:relative;overflow:hidden;
+  padding:clamp(120px,16vh,180px) 0 clamp(100px,14vh,160px);
+  background:linear-gradient(175deg,#153e2c 0%,#184530 40%,#1a4a34 100%)
+}
+.investor::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(42,122,77,.3) 30%,rgba(42,122,77,.3) 70%,transparent)
+}
+.investor .container{position:relative;z-index:2}
+.investor .label{color:var(--g400)}
+.investor-head{text-align:center;max-width:880px;margin:0 auto 80px}
+.investor-head h2{color:#fff}
+.investor-head .copy{color:rgba(255,255,255,.4);margin:22px auto 0}
+.investor-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
+  border-radius:16px;overflow:hidden;margin-bottom:80px
+}
+.inv-stat{
+  padding:36px 28px;text-align:center;
+  background:rgba(255,255,255,.03);
+  border:none;
+  transition:background .3s ease
+}
+.inv-stat:hover{background:rgba(255,255,255,.05)}
+.inv-stat-num{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(28px,3.5vw,44px);font-weight:700;
+  letter-spacing:-.03em;color:#fff;margin-bottom:8px
+}
+.inv-stat-label{
+  font-size:11px;color:rgba(255,255,255,.3);font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase
+}
+.investor-cards{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
+  border-radius:16px;overflow:hidden;margin-bottom:80px
+}
+.inv-card{
+  background:rgba(255,255,255,.03);
+  border:none;border-radius:0;
+  padding:40px 28px;
+  transition:background .35s ease
+}
+.inv-card:hover{
+  background:rgba(255,255,255,.06)
+}
+.inv-card-icon{
+  width:44px;height:44px;margin-bottom:24px;
+  color:var(--g400)
+}
+.inv-card-icon svg{width:100%;height:100%}
+.inv-card h4{
+  font-family:'Playfair Display',Georgia,serif;font-size:20px;
+  font-weight:700;letter-spacing:-.01em;color:#fff;margin-bottom:12px
+}
+.inv-card p{font-size:14px;line-height:1.7;color:rgba(255,255,255,.35)}
+.investor-bottom{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start
+}
+.investor-pitch h3{color:#fff;margin-bottom:18px}
+.investor-pitch .copy{color:rgba(255,255,255,.4)}
+.investor-pitch-points{
+  margin-top:36px;display:grid;gap:0
+}
+.investor-pitch-point{
+  display:flex;align-items:center;gap:16px;
+  padding:18px 0;border-bottom:1px solid rgba(255,255,255,.06);
+  font-size:15px;font-weight:600;color:rgba(255,255,255,.6)
+}
+.investor-pitch-point::before{
+  content:"";width:8px;height:1px;background:var(--g400);flex-shrink:0
+}
+.pitch-form{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);border-radius:24px;padding:44px
+}
+.pitch-form-title{
+  font-family:'Playfair Display',Georgia,serif;font-size:22px;
+  font-weight:700;letter-spacing:-.01em;color:#fff;margin-bottom:6px
+}
+.pitch-form-sub{font-size:14px;color:rgba(255,255,255,.3);margin-bottom:28px}
+.field{margin-bottom:16px}
+.field label{
+  display:block;font-size:11px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;margin-bottom:7px;color:var(--g400)
+}
+.field input,.field select{
+  width:100%;height:52px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.03);padding:0 16px;color:#fff;
+  font-size:15px;transition:.25s
+}
+.field input::placeholder{color:rgba(255,255,255,.18)}
+.field input:focus,.field select:focus{
+  border-color:var(--g500);
+  background:rgba(255,255,255,.05);
+  outline:none;
+  box-shadow:0 0 0 3px rgba(42,122,77,.12)
+}
+.field select{
+  cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233a8f5e' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center
+}
+.field select option{background:#0e1f16;color:#fff}
+.pitch-form .btn{width:100%;margin-top:10px;height:54px;font-size:15px}
+.form-success{
+  display:none;margin-top:14px;padding:14px 16px;border-radius:12px;
+  background:rgba(42,122,77,.1);border:1px solid rgba(42,122,77,.15);
+  font-size:14px;color:var(--g400);text-align:center;font-weight:600
+}
+
+/* ═══ FOOTER ═══ */
+footer{
+  background:#123524;color:#fff;
+  padding:64px 0 28px;
+  border-top:1px solid rgba(42,122,77,.12)
+}
+.footer-top{
+  display:grid;grid-template-columns:1fr auto;gap:60px;
+  align-items:start;padding-bottom:48px;
+  border-bottom:1px solid rgba(255,255,255,.05)
+}
+.footer-brand p{color:rgba(255,255,255,.3);margin-top:10px;font-size:14px}
+.footer-links{display:flex;gap:32px;flex-wrap:wrap}
+.footer-links a{color:rgba(255,255,255,.35);font-size:14px;transition:color .2s}
+.footer-links a:hover{color:var(--g400)}
+.footer-bottom{
+  margin-top:28px;display:flex;justify-content:space-between;gap:24px;
+  color:rgba(255,255,255,.18);font-size:12px
+}
+
+/* ═══ SCROLL REVEALS ═══ */
+.reveal{opacity:0;transform:translateY(24px)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .investor-cards,.investor-stats{grid-template-columns:1fr 1fr}
+}
+@media(max-width:980px){
+  .links{display:none}.menu-btn{display:block}
+  .vision-split,.tech-split,.inv-split,.tech-header,.env-header,.investor-bottom{grid-template-columns:1fr;gap:40px}
+  .vision-left,.tech-left,.inv-left{position:static}
+  .inv-right-col .investor-stats,
+  .inv-right-col .investor-cards{grid-template-columns:repeat(4,1fr)}
+  .vision-stat{grid-template-columns:140px 1fr;gap:20px}
+  .tech-pillar{grid-template-columns:48px 1fr;gap:20px}
+  .tech-pillar-desc{grid-column:1/-1;padding-left:68px}
+  .tech-visual-strip{grid-template-columns:1fr 1fr}
+  .model-table-head,.model-row{grid-template-columns:1fr 1fr}
+  .model-td:first-child{grid-column:1/-1;padding-bottom:4px}
+  .model-td:nth-child(2){text-align:left;border-left:none}
+  .model-td:nth-child(3){text-align:left}
+  .model-bottom{flex-direction:column;gap:20px;text-align:center}
+  .mystery-grid{grid-template-columns:1fr}
+  .env-cards{grid-template-columns:1fr}
+  .partner-grid{grid-template-columns:1fr 1fr}
+  .partner-card:nth-child(2){border-right:0}
+  .partner-card:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .hero-zone{height:auto;min-height:100vh}
+  .hero-sticky{position:relative;display:flex;flex-direction:column;align-items:center;padding:84px 24px 40px;gap:24px}
+  .hero-tv-wrap{position:static;width:90%;max-width:500px;transform:none!important}
+  .hero-text{position:static;max-width:100%;opacity:1!important;transform:none!important;text-align:center;order:-1}
+  .hero-text .hero-actions{justify-content:center}
+  .scroll-hint,.tv-feat,.tv-dots,.hero-bg-orb,.hero-aurora{display:none}
+  nav.nav-hidden{opacity:1;transform:none;pointer-events:all}
+}
+@media(max-width:680px){
+  .container{width:min(calc(100% - 28px),var(--max))}
+  .section{padding:80px 0}
+  nav{height:64px}.mobile-panel{inset:64px 0 0}
+  .nav-right .btn{display:none}
+  .investor{padding:100px 0 80px}
+  .investor-cards,.investor-stats,
+  .inv-right-col .investor-stats,
+  .inv-right-col .investor-cards{grid-template-columns:1fr}
+  .tech-visual-strip{grid-template-columns:1fr}
+  .tech-pillar-desc{padding-left:0}
+  .vision-stat{grid-template-columns:1fr;gap:8px}
+  .model-table-head,.model-row{grid-template-columns:1fr}
+  .model-th,.model-td{border-left:none!important;border-right:none!important;text-align:left!important}
+  .model-td{padding:12px 24px}
+  .model-td:first-child{padding-bottom:4px;font-size:13px}
+  .model-bottom{flex-direction:column;gap:16px;text-align:center;padding:24px}
+  .mystery-fact{grid-template-columns:56px 1fr;gap:16px}
+  .env-card{min-height:300px;padding:36px 28px}
+  .partner-grid{grid-template-columns:1fr}
+  .partner-card{border-right:0;border-bottom:1px solid var(--line)}
+  .partner-card:last-child{border-bottom:0}
+  .footer-top{grid-template-columns:1fr}
+  .footer-links{gap:16px 28px}
+  .footer-bottom{flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  #heroCanvas{opacity:.3}
+  .hero-zone{height:auto}
+}
+</style>
+</head>
+
+<body>
+
+<nav id="mainNav">
+  <div class="container navin">
+    <a href="#top" class="logo">ZYPPYN</a>
+    <div class="links">
+      <a href="#vision">Vision</a>
+      <a href="#technology">Technology</a>
+      <a href="#model">Model</a>
+      <a href="#investors">Investors</a>
+    </div>
+    <div class="nav-right">
+      <a href="#investors" class="btn btn-green">Request Pitch Deck</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-panel" id="mobilePanel">
+  <a href="#vision">Vision</a>
+  <a href="#technology">Technology</a>
+  <a href="#model">Model</a>
+  <a href="#investors">Investors</a>
+  <a href="#partners">Partners</a>
+</div>
+
+<main>
+
+<!-- ═══════════ HERO SCROLL ZONE ═══════════ -->
+<section class="hero-zone" id="top">
+  <div class="hero-sticky">
+    <canvas id="heroCanvas"></canvas>
+
+    <div class="hero-bg-orb hero-bg-orb-1"></div>
+    <div class="hero-bg-orb hero-bg-orb-2"></div>
+    <div class="hero-bg-orb hero-bg-orb-3"></div>
+    <div class="hero-aurora"></div>
+    <div class="hero-aurora hero-aurora-2"></div>
+
+    <div class="hero-boot-overlay" id="heroBootOverlay">
+      <div class="boot-logo">ZYPPYN</div>
+      <div class="boot-sub">Television, Reimagined.</div>
+      <div class="boot-bar"><div class="boot-fill"></div></div>
+      <div class="boot-enter">Click to Experience</div>
+    </div>
+    <audio id="heroAudio" preload="auto" src="intro.mp3"></audio>
+
+    <div class="hero-text" id="heroText">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Pre-Launch 2026
+      </div>
+      <h1 class="h1">Television,<br><span class="accent">Reimagined.</span></h1>
+      <p class="hero-sub">
+        Premium screens powered by a smarter business model.
+        Better quality. Better technology. Better value.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-green" href="#vision">Discover Zyppyn</a>
+        <a class="btn btn-outline-light" href="#investors">Request Pitch Deck</a>
+      </div>
+    </div>
+
+    <div class="hero-tv-wrap" id="heroTvWrap">
+      <div class="hero-tv-glow" id="heroTvGlow"></div>
+      <div class="hero-tv-bezel">
+        <div class="hero-tv-screen" id="heroScreen">
+          <div class="screen-content" id="screenContent">
+            <div class="screen-boot">
+              <span class="screen-boot-logo">ZYPPYN</span>
+              <span class="screen-boot-sub">Television, Reimagined.</span>
+              <div class="screen-boot-bar"><div class="screen-boot-fill"></div></div>
+            </div>
+          </div>
+          <div class="tv-feat" id="feat0">
+            <div class="tv-feat-big">4K</div>
+            <div class="tv-feat-pill">HDR10+</div>
+            <span class="tv-feat-title">Premium Display</span>
+            <span class="tv-feat-sub">Cinema-grade color accuracy at every size</span>
+            <div class="tv-feat-spectrum"><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
+          <div class="tv-feat" id="feat1">
+            <div class="tv-feat-icon"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="24" height="24" rx="4" stroke="currentColor" stroke-width="1.5"/><circle cx="13" cy="13" r="2.5" stroke="currentColor" stroke-width="1.5"/><circle cx="19" cy="19" r="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M13 15.5v3a1.5 1.5 0 001.5 1.5H16M19 16.5v-3A1.5 1.5 0 0017.5 12H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            <span class="tv-feat-title">Smart Platform</span>
+            <span class="tv-feat-sub">OTA updates, always current, always evolving</span>
+            <div class="tv-feat-mini-grid"><span></span><span></span><span></span><span></span></div>
+          </div>
+          <div class="tv-feat" id="feat2">
+            <div class="tv-feat-price">
+              <span class="tv-feat-price-old">$899</span>
+              <span class="tv-feat-price-new">$449</span>
+            </div>
+            <span class="tv-feat-title">Smarter Pricing</span>
+            <span class="tv-feat-sub">Premium quality, intelligently subsidized</span>
+          </div>
+          <div class="tv-feat" id="feat3">
+            <div class="tv-feat-icon"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="1.5"/><path d="M16 4a18 18 0 010 24M16 4a18 18 0 000 24" stroke="currentColor" stroke-width="1.5" opacity=".3"/><path d="M4 16h24M5.5 10h21M5.5 22h21" stroke="currentColor" stroke-width="1.5" opacity=".2"/></svg></div>
+            <span class="tv-feat-title">Built for Scale</span>
+            <span class="tv-feat-sub">Home, office, hospitality, retail, everywhere</span>
+          </div>
+          <div class="tv-dots" id="tvDots">
+            <div class="tv-dot" data-i="0"></div>
+            <div class="tv-dot" data-i="1"></div>
+            <div class="tv-dot" data-i="2"></div>
+            <div class="tv-dot" data-i="3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint" id="scrollHint">
+      <div class="scroll-hint-line"></div>
+      Scroll
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ MARQUEE ═══════════ -->
+<div class="marquee">
+  <div class="track">
+    <span>Premium Screens</span><span>Better Value</span><span>Ad-Powered Model</span>
+    <span>Connected Platform</span><span>Built for Scale</span>
+    <span>Premium Screens</span><span>Better Value</span><span>Ad-Powered Model</span>
+    <span>Connected Platform</span><span>Built for Scale</span>
+  </div>
+</div>
+
+<!-- ═══════════ 01 — VISION ═══════════ -->
+<section class="section sec-light" id="vision">
+  <div class="container vision-split">
+    <div class="vision-left">
+      <span class="sec-num reveal">01</span>
+      <div class="label reveal">Why Zyppyn</div>
+      <h2 class="h2 reveal">Premium shouldn't mean expensive.</h2>
+    </div>
+    <div class="vision-right-col">
+      <div class="vision-intro">
+        <p class="copy reveal">Customers and businesses are forced to choose between an affordable television and a genuinely premium screen. We believe there's a smarter way — one that doesn't compromise on quality or price.</p>
+      </div>
+      <div class="vision-stats">
+        <div class="vision-stat reveal">
+          <div class="vision-stat-val" data-count="250" data-prefix="$" data-suffix="B+">$250B+</div>
+          <div class="vision-stat-label">Global television market, still dominated by the same pricing models for decades.</div>
+        </div>
+        <div class="vision-stat reveal">
+          <div class="vision-stat-val" data-count="2" data-suffix="x">2x</div>
+          <div class="vision-stat-label">Revenue streams per screen. Hardware sale upfront, recurring ad revenue ongoing.</div>
+        </div>
+        <div class="vision-stat reveal">
+          <div class="vision-stat-val" data-count="2026">2026</div>
+          <div class="vision-stat-label">Target launch year. Currently in development with select manufacturing partners.</div>
+        </div>
+      </div>
+      <div class="vision-closing reveal">
+        <p class="copy">The television industry hasn't seen a fundamentally new business model in decades. ZYPPYN is building one — designed for today's market, not yesterday's assumptions.</p>
+        <a class="btn btn-dark" href="#technology" style="margin-top:28px">See the Technology</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 02 — TECHNOLOGY ═══════════ -->
+<section class="section sec-light" id="technology">
+  <div class="container tech-split">
+    <div class="tech-left">
+      <span class="sec-num reveal">02</span>
+      <div class="label reveal">More than a television</div>
+      <h2 class="h2 reveal">Built to evolve.</h2>
+      <p class="copy reveal">ZYPPYN is a connected screen platform — combining premium hardware, intelligent software, and services into one evolving ecosystem.</p>
+    </div>
+    <div class="tech-right-col">
+    <div class="tech-pillars">
+      <div class="tech-pillar reveal">
+        <span class="tech-pillar-num">01</span>
+        <div class="tech-pillar-title">
+          <div class="tech-pillar-icon"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="6" width="34" height="22" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M15 34h10M20 28v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 14h20M10 20h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".4"/></svg></div>
+          <span class="tech-pillar-name">Premium Display</span>
+        </div>
+        <p class="tech-pillar-desc">Hardware foundation built on display quality that rivals screens at twice the price. Every size, every pixel, no compromise.</p>
+      </div>
+      <div class="tech-pillar reveal">
+        <span class="tech-pillar-num">02</span>
+        <div class="tech-pillar-title">
+          <div class="tech-pillar-icon"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="28" height="28" rx="4" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="3" stroke="currentColor" stroke-width="1.5"/><circle cx="24" cy="24" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M16 19v3a2 2 0 002 2h2M24 21v-3a2 2 0 00-2-2h-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <span class="tech-pillar-name">Software Platform</span>
+        </div>
+        <p class="tech-pillar-desc">Software-driven, always evolving. OTA updates, intelligent ad placement, usage analytics, and content integration built from day one.</p>
+      </div>
+      <div class="tech-pillar reveal">
+        <span class="tech-pillar-num">03</span>
+        <div class="tech-pillar-title">
+          <div class="tech-pillar-icon"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="20" r="6" stroke="currentColor" stroke-width="1.5" opacity=".5"/><circle cx="20" cy="20" r="2" fill="currentColor"/><path d="M20 6v4M20 30v4M6 20h4M30 20h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".3"/></svg></div>
+          <span class="tech-pillar-name">Revenue Engine</span>
+        </div>
+        <p class="tech-pillar-desc">Ad-powered value creation. Intelligent, non-intrusive advertising subsidizes hardware costs while generating recurring revenue per screen.</p>
+      </div>
+    </div>
+    <div class="tech-visual-strip reveal">
+      <div class="tech-vblock" data-label="Display"><div class="tech-vblock-line"></div></div>
+      <div class="tech-vblock" data-label="Software"><div class="tech-vblock-line"></div></div>
+      <div class="tech-vblock" data-label="Services"><div class="tech-vblock-line"></div></div>
+      <div class="tech-vblock" data-label="Revenue"><div class="tech-vblock-line"></div></div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 03 — BUSINESS MODEL ═══════════ -->
+<section class="section model-section" id="model">
+  <div class="container">
+    <div class="model-header">
+      <span class="sec-num reveal">03</span>
+      <div class="label reveal" style="color:var(--g400)">A different model</div>
+      <h2 class="h2 reveal">Same quality.<br>Different economics.</h2>
+      <p class="copy reveal">The television industry charges a premium because there's no alternative revenue stream. ZYPPYN changes that equation entirely.</p>
+    </div>
+    <div class="model-table reveal">
+      <div class="model-table-head">
+        <div class="model-th">Metric</div>
+        <div class="model-th">Traditional</div>
+        <div class="model-th">Zyppyn</div>
+      </div>
+      <div class="model-row">
+        <div class="model-td"><svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2v16M2 10h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Revenue Model</div>
+        <div class="model-td">Hardware sale only</div>
+        <div class="model-td"><span class="val-good">Hardware + recurring ad revenue</span></div>
+      </div>
+      <div class="model-row">
+        <div class="model-td"><svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a8 8 0 110 16 8 8 0 010-16z" stroke="currentColor" stroke-width="1.5"/><path d="M7 10h6M10 7v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Consumer Price</div>
+        <div class="model-td">Full margin pricing</div>
+        <div class="model-td"><span class="val-good">Subsidized by ad revenue</span></div>
+      </div>
+      <div class="model-row">
+        <div class="model-td"><svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 16V8M8 16V5M12 16V10M16 16V3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Revenue Per Unit</div>
+        <div class="model-td">One-time</div>
+        <div class="model-td"><span class="val-good">Ongoing lifetime value</span></div>
+      </div>
+      <div class="model-row">
+        <div class="model-td"><svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 18h6M10 15v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Display Quality</div>
+        <div class="model-td">Premium at premium price</div>
+        <div class="model-td"><span class="val-good">Premium at accessible price</span></div>
+      </div>
+      <div class="model-row">
+        <div class="model-td"><svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Software Updates</div>
+        <div class="model-td">Limited or none</div>
+        <div class="model-td"><span class="val-good">OTA updates, always current</span></div>
+      </div>
+      <div class="model-row">
+        <div class="model-td"><svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2l6 4v8l-6 4-6-4V6l6-4z" stroke="currentColor" stroke-width="1.5"/></svg>Market Reach</div>
+        <div class="model-td">Niche premium buyers</div>
+        <div class="model-td"><span class="val-good">Mass market + premium quality</span></div>
+      </div>
+    </div>
+    <div class="model-bottom reveal">
+      <div class="model-bottom-text">The result: <span>premium screens everyone can afford.</span></div>
+      <a class="btn btn-outline-light" href="#investors">See the Opportunity</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 04 — ENVIRONMENTS ═══════════ -->
+<section class="section sec-light" id="environments">
+  <div class="container">
+    <div class="env-header">
+      <div>
+        <span class="sec-num reveal">04</span>
+        <div class="label reveal">One screen. More places.</div>
+        <h2 class="h2 reveal">Made for home.<br>Built for business.</h2>
+      </div>
+      <p class="copy reveal">From living rooms to restaurants, hotels, offices, retail and public spaces — designed for environments where screens matter.</p>
+    </div>
+    <div class="env-cards">
+      <div class="env-card reveal">
+        <div class="env-card-top">
+          <span class="env-card-tag">Living Spaces</span>
+          <div class="env-card-icon"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 26V14a2 2 0 012-2h20a2 2 0 012 2v12" stroke="currentColor" stroke-width="1.5"/><path d="M4 26h28M10 26v4M26 26v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M11 20h14M11 16h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".4"/></svg></div>
+        </div>
+        <div class="env-card-body">
+          <div class="env-card-title">Home</div>
+          <p class="env-card-desc">Premium entertainment for living rooms, bedrooms, and personal spaces. Cinema-quality display at a fraction of the price.</p>
+        </div>
+        <div class="env-card-line"></div>
+      </div>
+      <div class="env-card reveal">
+        <div class="env-card-top">
+          <span class="env-card-tag">Commercial Spaces</span>
+          <div class="env-card-icon"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="28" height="28" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M4 14h28M14 14v18M14 22h18" stroke="currentColor" stroke-width="1.5" opacity=".4"/><circle cx="9" cy="9" r="2" stroke="currentColor" stroke-width="1.5"/></svg></div>
+        </div>
+        <div class="env-card-body">
+          <div class="env-card-title">Business</div>
+          <p class="env-card-desc">Restaurants, hotels, offices, retail, and public spaces. Scalable deployment with centralized management and targeted content.</p>
+        </div>
+        <div class="env-card-line"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ MYSTERY ═══════════ -->
+<section class="mystery">
+  <div class="container">
+    <div class="mystery-grid">
+      <div class="mystery-left">
+        <span class="sec-num reveal">05</span>
+        <div class="label reveal">Still under wraps</div>
+        <h2 class="h2 reveal">We're not ready to show you everything yet.</h2>
+        <p class="copy reveal">ZYPPYN is currently in stealth development. The full product, technology stack, and go-to-market strategy remain confidential until our public launch.</p>
+        <div class="mystery-mission reveal">
+          <div class="mystery-mission-text">Our mission: give people <span class="hl">better screens</span> without the unnecessary markup.</div>
+        </div>
+        <div style="margin-top:36px" class="reveal"><a class="btn btn-green" href="#investors">Be First to See It</a></div>
+      </div>
+      <div class="mystery-right">
+        <div class="mystery-fact reveal">
+          <div class="mystery-fact-num">01</div>
+          <div class="mystery-fact-text">Product design and engineering currently underway with select manufacturing partners across Asia.</div>
+        </div>
+        <div class="mystery-fact reveal">
+          <div class="mystery-fact-num">02</div>
+          <div class="mystery-fact-text">Proprietary ad-integration platform being built in-house. Non-intrusive, intelligent, and privacy-first by design.</div>
+        </div>
+        <div class="mystery-fact reveal">
+          <div class="mystery-fact-num">03</div>
+          <div class="mystery-fact-text">Software platform with OTA update capability. Every screen shipped is a connected device that improves over time.</div>
+        </div>
+        <div class="mystery-fact reveal">
+          <div class="mystery-fact-num">04</div>
+          <div class="mystery-fact-text">Initial market strategy covers both consumer and B2B segments. Dual-channel revenue from day one.</div>
+        </div>
+        <div class="mystery-fact reveal">
+          <div class="mystery-fact-num">05</div>
+          <div class="mystery-fact-text">Target launch: 2026. Seed funding round currently open for qualified investors and strategic partners.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 05 — PARTNERS ═══════════ -->
+<section class="section sec-light" id="partners">
+  <div class="container">
+    <div class="partner-header">
+      <span class="sec-num reveal">06</span>
+      <div class="label reveal">Partnerships</div>
+      <h2 class="h2 reveal">Build the next generation with us.</h2>
+      <p class="copy reveal" style="margin:20px auto 0">We're looking for partners who believe the television industry can work differently.</p>
+    </div>
+    <div class="partner-grid reveal">
+      <div class="partner-card">
+        <div class="partner-card-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 6l-14 8v16l14 8 14-8V14l-14-8z" stroke="currentColor" stroke-width="1.5"/><path d="M22 22l14-8M22 22v16M22 22L8 14" stroke="currentColor" stroke-width="1.5" opacity=".3"/><circle cx="22" cy="22" r="3" stroke="currentColor" stroke-width="1.5"/></svg></div>
+        <div class="partner-card-title">Investors</div>
+        <p class="partner-card-desc">Seed, angel, and series-stage capital for scaling production and market entry.</p>
+      </div>
+      <div class="partner-card">
+        <div class="partner-card-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="32" height="20" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M14 12V8a2 2 0 012-2h12a2 2 0 012 2v4" stroke="currentColor" stroke-width="1.5"/><path d="M6 20h32" stroke="currentColor" stroke-width="1.5" opacity=".4"/><circle cx="22" cy="24" r="3" stroke="currentColor" stroke-width="1.5"/></svg></div>
+        <div class="partner-card-title">Manufacturers</div>
+        <p class="partner-card-desc">Display and hardware manufacturing partners for premium production at scale.</p>
+      </div>
+      <div class="partner-card">
+        <div class="partner-card-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="22" r="16" stroke="currentColor" stroke-width="1.5"/><path d="M16 22l4 4 8-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="partner-card-title">Technology</div>
+        <p class="partner-card-desc">Software, chipset, and platform integration partners driving the connected experience.</p>
+      </div>
+      <div class="partner-card">
+        <div class="partner-card-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 34V18l14-12 14 12v16a2 2 0 01-2 2H10a2 2 0 01-2-2z" stroke="currentColor" stroke-width="1.5"/><path d="M18 36V26h8v10" stroke="currentColor" stroke-width="1.5"/></svg></div>
+        <div class="partner-card-title">Commercial</div>
+        <p class="partner-card-desc">Hospitality, retail, and enterprise deployment partners for B2B market entry.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px" class="reveal"><a class="btn btn-dark" href="#investors">Partner With Zyppyn</a></div>
+  </div>
+</section>
+
+<!-- ═══════════ 06 — INVESTOR ═══════════ -->
+<section class="investor" id="investors">
+  <div class="container inv-split">
+    <div class="inv-left">
+      <span class="sec-num reveal">07</span>
+      <div class="label reveal">For Investors</div>
+      <h2 class="h2 reveal">Invest in the future<br>of television.</h2>
+      <p class="copy reveal">ZYPPYN is rethinking how premium screens reach consumers — and building a scalable business model around it.</p>
+      <div class="investor-pitch-points reveal" style="margin-top:36px">
+        <div class="investor-pitch-point">Hardware margins plus recurring ad revenue</div>
+        <div class="investor-pitch-point">Consumer and B2B market penetration</div>
+        <div class="investor-pitch-point">Software platform with OTA update capability</div>
+        <div class="investor-pitch-point">Scalable from launch to global deployment</div>
+      </div>
+    </div>
+    <div class="inv-right-col">
+    <div class="investor-stats reveal">
+      <div class="inv-stat">
+        <div class="inv-stat-num">$250B+</div>
+        <div class="inv-stat-label">Global TV Market</div>
+      </div>
+      <div class="inv-stat">
+        <div class="inv-stat-num">2x</div>
+        <div class="inv-stat-label">Revenue Streams</div>
+      </div>
+      <div class="inv-stat">
+        <div class="inv-stat-num">Home + B2B</div>
+        <div class="inv-stat-label">Dual Market</div>
+      </div>
+      <div class="inv-stat">
+        <div class="inv-stat-num">2026</div>
+        <div class="inv-stat-label">Target Launch</div>
+      </div>
+    </div>
+    <div class="investor-cards">
+      <div class="inv-card reveal">
+        <div class="inv-card-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="8" width="36" height="22" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M16 38h12M22 30v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="22" cy="19" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M22 14v5l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h4>Massive Market</h4>
+        <p>The global television market is worth hundreds of billions. ZYPPYN is positioned to capture share with a fundamentally different approach.</p>
+      </div>
+      <div class="inv-card reveal">
+        <div class="inv-card-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 34V20M18 34V14M26 34V24M34 34V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 38h32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h4>Recurring Revenue</h4>
+        <p>An ad-powered model creates ongoing revenue beyond the initial hardware sale — turning every screen into a long-term asset.</p>
+      </div>
+      <div class="inv-card reveal">
+        <div class="inv-card-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="22" r="16" stroke="currentColor" stroke-width="1.5"/><circle cx="22" cy="22" r="8" stroke="currentColor" stroke-width="1.5" opacity=".5"/><circle cx="22" cy="22" r="2.5" fill="currentColor"/><path d="M22 6v4M22 34v4M6 22h4M34 22h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".3"/></svg></div>
+        <h4>Scalable Platform</h4>
+        <p>Software-driven architecture means every new screen deployed expands the platform. More screens, more reach, more value.</p>
+      </div>
+      <div class="inv-card reveal">
+        <div class="inv-card-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 6l-12 12h8v8H8l14 12 14-12H26V18h8L22 6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <h4>First Mover</h4>
+        <p>No one is doing this at scale in the premium segment. ZYPPYN has the opportunity to define and own this category.</p>
+      </div>
+    </div>
+      <div class="investor-pitch">
+        <h3 class="h3 reveal" style="color:#fff">The opportunity is now.</h3>
+        <p class="copy reveal">Television hasn't had a meaningful business model innovation in decades. ZYPPYN is changing that — combining premium hardware with an ad-powered revenue engine to deliver screens at prices the market hasn't seen.</p>
+      </div>
+      <form class="pitch-form reveal" id="pitchForm">
+        <div class="pitch-form-title">Request a Pitch Deck</div>
+        <p class="pitch-form-sub">Get the full picture — product, model, and roadmap.</p>
+        <div class="field"><label for="fname">Full Name</label><input id="fname" type="text" placeholder="Your name" required></div>
+        <div class="field"><label for="femail">Email</label><input id="femail" type="email" placeholder="you@example.com" required></div>
+        <div class="field"><label for="fcompany">Company / Fund</label><input id="fcompany" type="text" placeholder="Organization name"></div>
+        <div class="field"><label for="finterest">Interest Area</label>
+          <select id="finterest"><option value="" disabled selected>Select one</option><option>Seed / Angel Investment</option><option>Series Investment</option><option>Strategic Partnership</option><option>Manufacturing Partnership</option><option>Other</option></select>
+        </div>
+        <button class="btn btn-green" type="submit">Request Pitch Deck</button>
+        <div class="form-success" id="formSuccess">Thanks — we'll send the pitch deck to your email shortly.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="logo">ZYPPYN</div><p>Premium Screens. Better Value.</p></div>
+      <div class="footer-links">
+        <a href="#vision">Vision</a><a href="#technology">Technology</a>
+        <a href="#model">Model</a><a href="#investors">Investors</a>
+        <a href="#partners">Partnerships</a><a href="#">Privacy</a>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Zyppyn. All rights reserved.</span><span>A new generation of television.</span></div>
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════
+   GSAP SCROLL-DRIVEN HERO ANIMATION
+   ═══════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════
+   HERO CANVAS PARTICLE FIELD
+   ═══════════════════════════════════════════ */
+function initHeroParticles() {
+  var canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  var w, h, particles = [], mouseX = -1, mouseY = -1;
+  var count = window.innerWidth >= 768 ? 160 : 70;
+
+  function resize() {
+    w = canvas.width = canvas.offsetWidth;
+    h = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+
+  for (var i = 0; i < count; i++) {
+    var layer = Math.random();
+    particles.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      r: 0.8 + Math.random() * 2.2,
+      alpha: 0.12 + Math.random() * 0.4,
+      pulse: Math.random() * Math.PI * 2,
+      speed: 0.2 + Math.random() * 0.9,
+      driftAngle: Math.random() * Math.PI * 2,
+      driftSpeed: 0.002 + Math.random() * 0.006,
+      layer: layer
+    });
+  }
+
+  canvas.parentElement.addEventListener('mousemove', function(e) {
+    var rect = canvas.getBoundingClientRect();
+    mouseX = e.clientX - rect.left;
+    mouseY = e.clientY - rect.top;
+  });
+  canvas.parentElement.addEventListener('mouseleave', function() {
+    mouseX = -1; mouseY = -1;
+  });
+
+  var running = true;
+  var frame = 0;
+
+  function draw() {
+    if (!running) return;
+    frame++;
+    ctx.clearRect(0, 0, w, h);
+
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.pulse += 0.012 * p.speed;
+      p.driftAngle += p.driftSpeed;
+
+      p.vx += Math.cos(p.driftAngle) * 0.015;
+      p.vy += Math.sin(p.driftAngle) * 0.012;
+
+      if (mouseX > 0) {
+        var dxM = p.x - mouseX;
+        var dyM = p.y - mouseY;
+        var distM = Math.sqrt(dxM * dxM + dyM * dyM);
+        if (distM < 160) {
+          var force = (160 - distM) / 160 * 0.9;
+          p.vx += (dxM / distM) * force;
+          p.vy += (dyM / distM) * force;
+        }
+      }
+
+      if (frame % 4 === 0) {
+        for (var j = i + 1; j < particles.length; j++) {
+          var other = particles[j];
+          var sepX = p.x - other.x;
+          var sepY = p.y - other.y;
+          var sepDist = sepX * sepX + sepY * sepY;
+          if (sepDist < 900 && sepDist > 0) {
+            var sepLen = Math.sqrt(sepDist);
+            var repel = (30 - sepLen) / 30 * 0.08;
+            var nx = sepX / sepLen * repel;
+            var ny = sepY / sepLen * repel;
+            p.vx += nx; p.vy += ny;
+            other.vx -= nx; other.vy -= ny;
+          }
+        }
+      }
+
+      p.vx *= 0.985;
+      p.vy *= 0.985;
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < -30) p.x = w + 30;
+      if (p.x > w + 30) p.x = -30;
+      if (p.y < -30) p.y = h + 30;
+      if (p.y > h + 30) p.y = -30;
+
+      var glow = 0.5 + 0.5 * Math.sin(p.pulse);
+      var a = p.alpha * (0.5 + glow * 0.5);
+
+      var green = Math.round(120 + p.layer * 80 + glow * 20);
+      var red = Math.round(30 + p.layer * 40);
+      var blue = Math.round(60 + p.layer * 30);
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + a.toFixed(3) + ')';
+      ctx.fill();
+
+      if (p.r > 1.8 && p.layer > 0.5) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + (a * 0.1).toFixed(3) + ')';
+        ctx.fill();
+      }
+    }
+
+    for (var i = 0; i < particles.length; i++) {
+      for (var j = i + 1; j < particles.length; j++) {
+        var dx = particles[i].x - particles[j].x;
+        var dy = particles[i].y - particles[j].y;
+        var dist = dx * dx + dy * dy;
+        if (dist < 14000) {
+          var a = (1 - dist / 14000) * 0.1;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = 'rgba(58,143,94,' + a.toFixed(3) + ')';
+          ctx.lineWidth = 0.4;
+          ctx.stroke();
+        }
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      resize();
+    }, 200);
+  });
+
+  return function() { running = false; };
+}
+
+function calcTvLayout(wrap, screen) {
+  if (!wrap || !screen) return null;
+  const vw = window.innerWidth, vh = window.innerHeight;
+
+  gsap.set(wrap, { clearProps: 'transform' });
+
+  const screenRect = screen.getBoundingClientRect();
+  const wrapRect = wrap.getBoundingClientRect();
+
+  const scaleToFill = Math.max(vw / screenRect.width, vh / screenRect.height) * 1.05;
+
+  const wrapCx = wrapRect.left + wrapRect.width / 2;
+  const wrapCy = wrapRect.top + wrapRect.height / 2;
+  const screenCx = screenRect.left + screenRect.width / 2;
+  const screenCy = screenRect.top + screenRect.height / 2;
+  const scrOffX = screenCx - wrapCx;
+  const scrOffY = screenCy - wrapCy;
+
+  const H = wrap.offsetHeight;
+
+  const txFull = vw / 2 - wrapCx - scrOffX * scaleToFill;
+  const tyFull = vh / 2 - wrapCy - scrOffY * scaleToFill;
+  const tyNat = -H / 2;
+
+  return { txFull, tyFull, tyNat, fullScale: scaleToFill };
+}
+
+
+function buildHeroTimeline() {
+  if (window.innerWidth < 981) {
+    var bo = document.getElementById('heroBootOverlay');
+    if (bo) bo.style.display = 'none';
+    return;
+  }
+
+  const wrap = document.getElementById('heroTvWrap');
+  const screen = document.getElementById('heroScreen');
+  const heroText = document.getElementById('heroText');
+  const glow = document.getElementById('heroTvGlow');
+  const screenContent = document.getElementById('screenContent');
+  const scrollHint = document.getElementById('scrollHint');
+  const nav = document.getElementById('mainNav');
+  const dotsWrap = document.getElementById('tvDots');
+  const dots = document.querySelectorAll('.tv-dot');
+  const bootOverlay = document.getElementById('heroBootOverlay');
+  const feats = [
+    document.getElementById('feat0'),
+    document.getElementById('feat1'),
+    document.getElementById('feat2'),
+    document.getElementById('feat3')
+  ];
+
+  if (!wrap || !screen || !heroText) return;
+
+  gsap.set(heroText, { opacity: 0, y: '-50%', yPercent: 0 });
+  if (glow) gsap.set(glow, { opacity: 0 });
+  nav.classList.add('nav-hidden');
+
+  const tv = calcTvLayout(wrap, screen);
+  if (!tv) return;
+
+  gsap.set(wrap, {
+    x: tv.txFull,
+    y: tv.tyFull,
+    scale: tv.fullScale
+  });
+
+  let currentFeat = -1;
+
+  ScrollTrigger.create({
+    trigger: '.hero-zone',
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: 1,
+    onUpdate: function(self) {
+      const p = self.progress;
+
+      /* ── FEATURES: 0.06 → 0.50 ── */
+      const fStart = 0.06, fEnd = 0.50;
+      const fRange = fEnd - fStart, fStep = fRange / 4;
+      let activeIdx = -1;
+
+      feats.forEach(function(f, i) {
+        if (!f) return;
+        const s = fStart + i * fStep;
+        const e = s + fStep;
+        let op = 0;
+
+        if (p >= s && p <= e) {
+          const local = (p - s) / (e - s);
+          if (local < 0.15) op = local / 0.15;
+          else if (local > 0.85) op = (1 - local) / 0.15;
+          else op = 1;
+          activeIdx = i;
+        }
+        op = Math.max(0, Math.min(1, op));
+        f.style.opacity = op;
+        f.style.transform = 'translateY(' + ((1 - op) * 10) + 'px)';
+      });
+
+      if (screenContent) screenContent.style.opacity = activeIdx >= 0 ? '0' : '1';
+      if (dotsWrap) dotsWrap.style.opacity = activeIdx >= 0 ? '1' : '0';
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === activeIdx); });
+
+      if (activeIdx !== currentFeat) currentFeat = activeIdx;
+
+      /* ── TV ZOOM-OUT: 0.35 → 1.0 ── */
+      const zStart = 0;
+      const zRaw = Math.max(0, (p - zStart) / (1 - zStart));
+      const zEased = zRaw < 0.5 ? 4 * zRaw * zRaw * zRaw : 1 - Math.pow(-2 * zRaw + 2, 3) / 2;
+
+      const sc = tv.fullScale + (1 - tv.fullScale) * zEased;
+      const tx = tv.txFull * (1 - zEased);
+      const ty = tv.tyFull + (tv.tyNat - tv.tyFull) * zEased;
+
+      wrap.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) scale(' + sc + ')';
+
+      if (glow) glow.style.opacity = Math.max(0, Math.min(1, (zEased - 0.4) / 0.45));
+
+      /* ── HERO TEXT ── */
+      const tStart = 0.55;
+      const tRaw = Math.max(0, (p - tStart) / (1 - tStart));
+      const tEased = tRaw < 0.5 ? 4 * tRaw * tRaw * tRaw : 1 - Math.pow(-2 * tRaw + 2, 3) / 2;
+      heroText.style.opacity = tEased;
+      heroText.style.transform = 'translateY(calc(-50% + ' + (30 * (1 - tEased)) + 'px))';
+
+      /* ── SCROLL HINT ── */
+      scrollHint.style.opacity = Math.max(0, 1 - p * 6);
+
+      /* ── BOOT OVERLAY ── */
+      if (bootOverlay) {
+        var bootEnd = 0.04;
+        if (p < bootEnd) {
+          bootOverlay.style.opacity = 1 - (p / bootEnd);
+        } else {
+          bootOverlay.style.opacity = '0';
+          bootOverlay.style.display = 'none';
+        }
+      }
+
+      /* ── NAV ── */
+      if (p > 0.5) nav.classList.remove('nav-hidden');
+      else nav.classList.add('nav-hidden');
+    }
+  });
+}
+
+/* ═══════════════════════════════════════════
+   SECTION PARALLAX + SCROLL ANIMATIONS
+   ═══════════════════════════════════════════ */
+function buildSectionAnimations() {
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    var delay = 0;
+    if (el.classList.contains('reveal-d1')) delay = 0.08;
+    if (el.classList.contains('reveal-d2')) delay = 0.16;
+    if (el.classList.contains('reveal-d3')) delay = 0.24;
+    if (el.classList.contains('reveal-d4')) delay = 0.32;
+
+    gsap.fromTo(el, {
+      opacity: 0,
+      y: 24
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      delay: delay,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 90%',
+        toggleActions: 'play none none none'
+      }
+    });
+  });
+
+
+  var visionStats = document.querySelectorAll('.vision-stat-val[data-count]');
+  if (visionStats.length) {
+    ScrollTrigger.create({
+      trigger: '.vision-stats',
+      start: 'top 80%',
+      once: true,
+      onEnter: function() {
+        visionStats.forEach(function(el) {
+          var target = parseFloat(el.getAttribute('data-count'));
+          var prefix = el.getAttribute('data-prefix') || '';
+          var suffix = el.getAttribute('data-suffix') || '';
+          var obj = { val: 0 };
+          gsap.to(obj, {
+            val: target,
+            duration: 2,
+            ease: 'power2.out',
+            onUpdate: function() {
+              var display = target >= 100 ? Math.round(obj.val) : Math.round(obj.val * 10) / 10;
+              el.textContent = prefix + display + suffix;
+            }
+          });
+        });
+      }
+    });
+  }
+
+  var techVisual = document.querySelector('.tech-visual');
+  if (techVisual) {
+    gsap.fromTo(techVisual, { y: 60, scale: 0.95 }, {
+      y: 0, scale: 1,
+      scrollTrigger: {
+        trigger: techVisual,
+        start: 'top 85%',
+        end: 'top 30%',
+        scrub: 1.5
+      }
+    });
+  }
+
+  document.querySelectorAll('.env-card').forEach(function(card, i) {
+    gsap.fromTo(card, { y: 30 + i * 10 }, {
+      y: 0,
+      scrollTrigger: {
+        trigger: card,
+        start: 'top 92%',
+        end: 'top 50%',
+        scrub: 1
+      }
+    });
+  });
+
+  document.querySelectorAll('.inv-card').forEach(function(card, i) {
+    gsap.fromTo(card, { y: 40, opacity: 0 }, {
+      y: 0, opacity: 1,
+      duration: 0.8,
+      delay: i * 0.1,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '.investor-cards',
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      }
+    });
+  });
+
+  var statNums = document.querySelectorAll('.inv-stat-num');
+  if (statNums.length) {
+    ScrollTrigger.create({
+      trigger: '.investor-stats',
+      start: 'top 80%',
+      once: true,
+      onEnter: function() {
+        statNums.forEach(function(el) {
+          var text = el.textContent;
+          var match = text.match(/^(\$?)([\d.]+)(\w*\+?)$/);
+          if (match) {
+            var prefix = match[1];
+            var num = parseFloat(match[2]);
+            var suffix = match[3];
+            var obj = { val: 0 };
+            gsap.to(obj, {
+              val: num,
+              duration: 1.8,
+              ease: 'power2.out',
+              onUpdate: function() {
+                var display = num >= 100 ? Math.round(obj.val) : Math.round(obj.val * 10) / 10;
+                el.textContent = prefix + display + suffix;
+              }
+            });
+          }
+        });
+      }
+    });
+  }
+
+
+
+  var pitchForm = document.querySelector('.pitch-form');
+  if (pitchForm) {
+    gsap.fromTo(pitchForm, { y: 40, opacity: 0 }, {
+      y: 0, opacity: 1,
+      duration: 1,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: pitchForm,
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      }
+    });
+  }
+}
+
+/* ═══════════════════════════════════════════
+   AUTO-SCROLL CINEMATIC INTRO
+   ═══════════════════════════════════════════ */
+function initAutoScroll() {
+  var overlay = document.getElementById('heroBootOverlay');
+  var audio = document.getElementById('heroAudio');
+  if (!overlay) return;
+  if (window.innerWidth < 981) return;
+
+  overlay.style.pointerEvents = 'auto';
+  overlay.style.cursor = 'pointer';
+
+  var scrolling = false;
+  var cancelled = false;
+
+  function cancelAutoScroll() {
+    if (!scrolling) return;
+    cancelled = true;
+    if (audio) { audio.pause(); }
+  }
+
+  function startAutoScroll() {
+    if (scrolling) return;
+    scrolling = true;
+
+    if (audio) {
+      audio.currentTime = 6.4;
+      audio.volume = 0.6;
+      audio.play().catch(function() {});
+      var stopAudio = function() {
+        if (audio.currentTime >= 10) {
+          audio.pause();
+          audio.removeEventListener('timeupdate', stopAudio);
+        }
+      };
+      audio.addEventListener('timeupdate', stopAudio);
+    }
+
+    overlay.style.pointerEvents = 'none';
+
+    var heroZone = document.querySelector('.hero-zone');
+    var target = heroZone ? heroZone.offsetHeight - window.innerHeight : window.innerHeight * 2;
+    var duration = 2500;
+    var startPos = window.scrollY;
+    var startTime = null;
+    var cancelArmed = false;
+
+    setTimeout(function() {
+      cancelArmed = true;
+      window.addEventListener('wheel', cancelAutoScroll, { passive: true });
+      window.addEventListener('touchstart', cancelAutoScroll, { passive: true });
+      window.addEventListener('keydown', cancelAutoScroll);
+    }, 300);
+
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var elapsed = timestamp - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+
+      if (cancelled) {
+        window.removeEventListener('wheel', cancelAutoScroll);
+        window.removeEventListener('touchstart', cancelAutoScroll);
+        window.removeEventListener('keydown', cancelAutoScroll);
+        return;
+      }
+
+      var eased = easeOutCubic(progress);
+      window.scrollTo(0, startPos + (target - startPos) * eased);
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        window.removeEventListener('wheel', cancelAutoScroll);
+        window.removeEventListener('touchstart', cancelAutoScroll);
+        window.removeEventListener('keydown', cancelAutoScroll);
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  overlay.addEventListener('click', function() {
+    startAutoScroll();
+  });
+}
+
+/* ═══════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════ */
+window.addEventListener('DOMContentLoaded', function() {
+  gsap.registerPlugin(ScrollTrigger);
+
+  initHeroParticles();
+  buildHeroTimeline();
+  buildSectionAnimations();
+  initAutoScroll();
+
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      ScrollTrigger.getAll().forEach(function(st) { st.kill(); });
+      buildHeroTimeline();
+      buildSectionAnimations();
+    }, 200);
+  });
+
+  document.getElementById('menuBtn').addEventListener('click', function() {
+    var panel = document.getElementById('mobilePanel');
+    panel.classList.toggle('open');
+    document.getElementById('menuBtn').innerHTML = panel.classList.contains('open') ? '&times;' : '&#9776;';
+  });
+  document.querySelectorAll('#mobilePanel a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      document.getElementById('mobilePanel').classList.remove('open');
+      document.getElementById('menuBtn').innerHTML = '&#9776;';
+    });
+  });
+
+  document.getElementById('pitchForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('formSuccess').style.display = 'block';
+    var btn = e.currentTarget.querySelector('button');
+    btn.textContent = 'Requested';
+    btn.disabled = true;
+    btn.style.opacity = '.65';
+  });
+});
+</script>
+
+</body>
+</html>
