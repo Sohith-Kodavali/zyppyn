@@ -1461,8 +1461,8 @@ function initHeroParticles() {
     particles.push({
       x: Math.random() * w,
       y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.05,
-      vy: (Math.random() - 0.5) * 0.05,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
       r: 1 + Math.random() * 2.5,
       alpha: 0.15 + Math.random() * 0.45,
       pulse: Math.random() * Math.PI * 2,
@@ -1497,8 +1497,8 @@ function initHeroParticles() {
       var dyA = anchor.y - p.y;
       var distA = Math.sqrt(dxA * dxA + dyA * dyA);
       var pull = Math.max(0, 1 - distA / (w * 0.4));
-      p.vx += dxA * pull * 0.000008;
-      p.vy += dyA * pull * 0.000008;
+      p.vx += dxA * pull * 0.00004;
+      p.vy += dyA * pull * 0.00004;
 
       if (mouseX > 0) {
         var dxM = p.x - mouseX;
@@ -1528,8 +1528,8 @@ function initHeroParticles() {
         }
       }
 
-      p.vx *= 0.96;
-      p.vy *= 0.96;
+      p.vx *= 0.98;
+      p.vy *= 0.98;
       p.x += p.vx;
       p.y += p.vy;
 
