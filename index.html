@@ -1440,7 +1440,7 @@ function initHeroParticles() {
   if (!ctx) return;
 
   var w, h, particles = [], mouseX = -1, mouseY = -1;
-  var count = window.innerWidth >= 768 ? 160 : 70;
+  var count = window.innerWidth >= 768 ? 140 : 60;
 
   function resize() {
     w = canvas.width = canvas.offsetWidth;
@@ -1448,20 +1448,26 @@ function initHeroParticles() {
   }
   resize();
 
+  var anchors = [
+    { x: w * 0.18, y: h * 0.30 },
+    { x: w * 0.10, y: h * 0.70 },
+    { x: w * 0.38, y: h * 0.55 },
+    { x: w * 0.30, y: h * 0.15 },
+    { x: w * 0.75, y: h * 0.82 }
+  ];
+
   for (var i = 0; i < count; i++) {
-    var layer = Math.random();
+    var anchor = anchors[i % anchors.length];
     particles.push({
       x: Math.random() * w,
       y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
-      r: 0.8 + Math.random() * 2.2,
-      alpha: 0.12 + Math.random() * 0.4,
+      vx: (Math.random() - 0.5) * 0.05,
+      vy: (Math.random() - 0.5) * 0.05,
+      r: 1 + Math.random() * 2.5,
+      alpha: 0.15 + Math.random() * 0.45,
       pulse: Math.random() * Math.PI * 2,
-      speed: 0.2 + Math.random() * 0.9,
-      driftAngle: Math.random() * Math.PI * 2,
-      driftSpeed: 0.002 + Math.random() * 0.006,
-      layer: layer
+      speed: 0.3 + Math.random() * 0.8,
+      anchorIdx: i % anchors.length
     });
   }
 
@@ -1484,32 +1490,36 @@ function initHeroParticles() {
 
     for (var i = 0; i < particles.length; i++) {
       var p = particles[i];
-      p.pulse += 0.012 * p.speed;
-      p.driftAngle += p.driftSpeed;
+      p.pulse += 0.015 * p.speed;
 
-      p.vx += Math.cos(p.driftAngle) * 0.015;
-      p.vy += Math.sin(p.driftAngle) * 0.012;
+      var anchor = anchors[p.anchorIdx];
+      var dxA = anchor.x - p.x;
+      var dyA = anchor.y - p.y;
+      var distA = Math.sqrt(dxA * dxA + dyA * dyA);
+      var pull = Math.max(0, 1 - distA / (w * 0.4));
+      p.vx += dxA * pull * 0.000008;
+      p.vy += dyA * pull * 0.000008;
 
       if (mouseX > 0) {
         var dxM = p.x - mouseX;
         var dyM = p.y - mouseY;
         var distM = Math.sqrt(dxM * dxM + dyM * dyM);
-        if (distM < 160) {
-          var force = (160 - distM) / 160 * 0.9;
+        if (distM < 150) {
+          var force = (150 - distM) / 150 * 0.8;
           p.vx += (dxM / distM) * force;
           p.vy += (dyM / distM) * force;
         }
       }
 
-      if (frame % 4 === 0) {
+      if (frame % 3 === 0) {
         for (var j = i + 1; j < particles.length; j++) {
           var other = particles[j];
           var sepX = p.x - other.x;
           var sepY = p.y - other.y;
           var sepDist = sepX * sepX + sepY * sepY;
-          if (sepDist < 900 && sepDist > 0) {
+          if (sepDist < 1200 && sepDist > 0) {
             var sepLen = Math.sqrt(sepDist);
-            var repel = (30 - sepLen) / 30 * 0.08;
+            var repel = (35 - sepLen) / 35 * 0.05;
             var nx = sepX / sepLen * repel;
             var ny = sepY / sepLen * repel;
             p.vx += nx; p.vy += ny;
@@ -1518,32 +1528,33 @@ function initHeroParticles() {
         }
       }
 
-      p.vx *= 0.985;
-      p.vy *= 0.985;
+      p.vx *= 0.96;
+      p.vy *= 0.96;
       p.x += p.vx;
       p.y += p.vy;
 
-      if (p.x < -30) p.x = w + 30;
-      if (p.x > w + 30) p.x = -30;
-      if (p.y < -30) p.y = h + 30;
-      if (p.y > h + 30) p.y = -30;
+      if (p.x < -20) p.x = w + 20;
+      if (p.x > w + 20) p.x = -20;
+      if (p.y < -20) p.y = h + 20;
+      if (p.y > h + 20) p.y = -20;
 
       var glow = 0.5 + 0.5 * Math.sin(p.pulse);
-      var a = p.alpha * (0.5 + glow * 0.5);
+      var a = p.alpha * (0.6 + glow * 0.4);
+      var nearAnchor = Math.max(0, 1 - distA / (w * 0.3));
 
-      var green = Math.round(120 + p.layer * 80 + glow * 20);
-      var red = Math.round(30 + p.layer * 40);
-      var blue = Math.round(60 + p.layer * 30);
+      var green = Math.round(140 + nearAnchor * 60 + glow * 20);
+      var red = Math.round(40 + nearAnchor * 30);
+      var blue = Math.round(80 + nearAnchor * 20);
 
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, p.r * (1 + nearAnchor * 0.5), 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + a.toFixed(3) + ')';
       ctx.fill();
 
-      if (p.r > 1.8 && p.layer > 0.5) {
+      if (nearAnchor > 0.3 && p.r > 1.5) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + (a * 0.1).toFixed(3) + ')';
+        ctx.fillStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + (a * 0.15).toFixed(3) + ')';
         ctx.fill();
       }
     }
@@ -1553,13 +1564,13 @@ function initHeroParticles() {
         var dx = particles[i].x - particles[j].x;
         var dy = particles[i].y - particles[j].y;
         var dist = dx * dx + dy * dy;
-        if (dist < 14000) {
-          var a = (1 - dist / 14000) * 0.1;
+        if (dist < 12000) {
+          var a = (1 - dist / 12000) * 0.12;
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
           ctx.strokeStyle = 'rgba(58,143,94,' + a.toFixed(3) + ')';
-          ctx.lineWidth = 0.4;
+          ctx.lineWidth = 0.5;
           ctx.stroke();
         }
       }
@@ -1574,6 +1585,13 @@ function initHeroParticles() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function() {
       resize();
+      anchors = [
+        { x: w * 0.18, y: h * 0.30 },
+        { x: w * 0.10, y: h * 0.70 },
+        { x: w * 0.38, y: h * 0.55 },
+        { x: w * 0.30, y: h * 0.15 },
+        { x: w * 0.75, y: h * 0.82 }
+      ];
     }, 200);
   });
 
