@@ -269,7 +269,15 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
     0 8px 16px rgba(0,0,0,.25),
     0 0 0 1px rgba(255,255,255,.05),
     inset 0 1px 0 rgba(255,255,255,.09),
-    inset 0 -1px 0 rgba(0,0,0,.4)
+    inset 0 -1px 0 rgba(0,0,0,.4);
+  /* Boot-moment crop default: visible immediately on load, on every
+     viewport, with no dependency on JS/scroll timing. The desktop
+     scroll timeline (buildHeroTimeline) takes over and clears this
+     once the user scrolls past the opening boot screen; on narrow
+     viewports (where that timeline doesn't run) it stays as-is, which
+     matches the static boot screen shown there. */
+  clip-path:inset(0 35% 0 0);
+  transform:translateX(17.5%)
 }
 .hero-tv-bezel::before{
   content:"";position:absolute;top:0;left:8%;right:8%;height:1px;
@@ -1640,7 +1648,7 @@ function initHeroParticles() {
    real product. Fades out (and the TV re-centers) before the scripted
    feature callouts begin. */
 const BOOT_CROP_FRAC = 0.35;
-const BOOT_CROP_WINDOW = 0.04;
+const BOOT_CROP_WINDOW = 0.06;
 
 function calcTvLayout(wrap, screen) {
   if (!wrap || !screen) return null;
@@ -1708,6 +1716,12 @@ function buildHeroTimeline() {
   const tv = calcTvLayout(wrap, screen);
   if (!tv) return;
 
+  /* The CSS default (visible before this script even runs) uses a fixed
+     translateX to re-center the crop. Once the desktop timeline takes
+     over, the wrap-level transform below handles that re-centering
+     precisely at every scale, so cancel the CSS one to avoid stacking. */
+  if (bezel) bezel.style.transform = 'none';
+
   /* Amount (0-1) of the boot-moment crop still in effect at progress p. */
   function bootCropAmount(p) {
     return Math.max(0, 1 - p / BOOT_CROP_WINDOW);
@@ -1717,7 +1731,7 @@ function buildHeroTimeline() {
     if (!bezel) return;
     bezel.style.clipPath = t > 0.001
       ? 'inset(0 ' + (BOOT_CROP_FRAC * 100 * t).toFixed(2) + '% 0 0)'
-      : '';
+      : 'none';
   }
 
   const initialBootT = bootCropAmount(0);
