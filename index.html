@@ -270,14 +270,14 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
     0 0 0 1px rgba(255,255,255,.05),
     inset 0 1px 0 rgba(255,255,255,.09),
     inset 0 -1px 0 rgba(0,0,0,.4);
-  /* Boot-moment crop default: visible immediately on load, on every
+  /* Boot-moment crop default: the right ~35% is simply gone, no
+     repositioning to compensate - this is a plain, honest cut, not a
+     redesigned smaller TV. Visible immediately on load, on every
      viewport, with no dependency on JS/scroll timing. The desktop
-     scroll timeline (buildHeroTimeline) takes over and clears this
-     once the user scrolls past the opening boot screen; on narrow
-     viewports (where that timeline doesn't run) it stays as-is, which
-     matches the static boot screen shown there. */
-  clip-path:inset(0 35% 0 0);
-  transform:translateX(17.5%)
+     scroll timeline (buildHeroTimeline) clears this once the user
+     scrolls past the opening boot screen; on narrow viewports (where
+     that timeline doesn't run) it stays as-is. */
+  clip-path:inset(0 35% 0 0)
 }
 .hero-tv-bezel::before{
   content:"";position:absolute;top:0;left:8%;right:8%;height:1px;
@@ -1674,11 +1674,7 @@ function calcTvLayout(wrap, screen) {
   const tyFull = vh / 2 - wrapCy - scrOffY * scaleToFill;
   const tyNat = -H / 2;
 
-  /* Half the cropped width, so shifting the TV right by this amount
-     re-centers what's left visible once the right edge is clipped. */
-  const bootPushPx = (wrapRect.width * scaleToFill) * BOOT_CROP_FRAC / 2;
-
-  return { txFull, tyFull, tyNat, fullScale: scaleToFill, bootPushPx };
+  return { txFull, tyFull, tyNat, fullScale: scaleToFill };
 }
 
 
@@ -1716,12 +1712,6 @@ function buildHeroTimeline() {
   const tv = calcTvLayout(wrap, screen);
   if (!tv) return;
 
-  /* The CSS default (visible before this script even runs) uses a fixed
-     translateX to re-center the crop. Once the desktop timeline takes
-     over, the wrap-level transform below handles that re-centering
-     precisely at every scale, so cancel the CSS one to avoid stacking. */
-  if (bezel) bezel.style.transform = 'none';
-
   /* Amount (0-1) of the boot-moment crop still in effect at progress p. */
   function bootCropAmount(p) {
     return Math.max(0, 1 - p / BOOT_CROP_WINDOW);
@@ -1734,11 +1724,10 @@ function buildHeroTimeline() {
       : 'none';
   }
 
-  const initialBootT = bootCropAmount(0);
-  applyBootCrop(initialBootT);
+  applyBootCrop(bootCropAmount(0));
 
   gsap.set(wrap, {
-    x: tv.txFull + tv.bootPushPx * initialBootT,
+    x: tv.txFull,
     y: tv.tyFull,
     scale: tv.fullScale
   });
@@ -1798,13 +1787,11 @@ function buildHeroTimeline() {
       const ty = tv.tyFull + (tv.tyNat - tv.tyFull) * zEased;
 
       /* ── BOOT CROP: hide the right ~35% of the TV, only for the
-         opening instant, and re-center what's left. Gone by the time
-         features start, and never re-applies once hasEntered. */
-      const bootT = hasEntered ? 0 : bootCropAmount(p);
-      applyBootCrop(bootT);
-      const bootPush = tv.bootPushPx * bootT;
+         opening instant. Gone by the time features start, and never
+         re-applies once hasEntered. */
+      applyBootCrop(hasEntered ? 0 : bootCropAmount(p));
 
-      wrap.style.transform = 'translate(' + (tx + bootPush) + 'px, ' + ty + 'px) scale(' + sc + ')';
+      wrap.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) scale(' + sc + ')';
 
       if (glow) glow.style.opacity = Math.max(0, Math.min(1, (zEased - 0.4) / 0.45));
 
