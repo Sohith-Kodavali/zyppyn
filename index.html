@@ -188,21 +188,36 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
   letter-spacing:.2em;font-weight:600;text-transform:uppercase
 }
 .hero-boot-overlay .boot-enter{
-  margin-top:12px;font-size:clamp(9px,1vw,12px);color:var(--muted);
-  letter-spacing:.25em;font-weight:500;text-transform:uppercase;
-  opacity:0;animation:bootEnterPulse 2s ease-in-out 1.2s infinite
+  margin-top:18px;font-size:clamp(10px,1.05vw,13px);color:var(--muted);
+  letter-spacing:.2em;font-weight:600;text-transform:uppercase;
+  display:flex;align-items:center;gap:10px;
+  padding:12px 26px;border-radius:999px;border:1.5px solid rgba(0,0,0,.12);
+  opacity:0;transform:translateY(4px);
+  transition:opacity .5s ease,transform .5s ease,border-color .3s ease,background .3s ease,color .3s ease
 }
+.hero-boot-overlay .boot-enter.ready{
+  opacity:.75;transform:translateY(0);
+  animation:bootEnterPulse 2.2s ease-in-out infinite
+}
+.hero-boot-overlay .boot-enter:hover{
+  border-color:var(--g500);color:var(--ink);background:var(--g50)
+}
+.hero-boot-overlay .boot-enter-arrow{display:inline-block;animation:bootArrowBounce 1.6s ease-in-out infinite}
 @keyframes bootEnterPulse{
-  0%,100%{opacity:.35}
-  50%{opacity:.7}
+  0%,100%{opacity:.75}
+  50%{opacity:1}
+}
+@keyframes bootArrowBounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(4px)}
 }
 .hero-boot-overlay .boot-bar{
   width:clamp(80px,14vw,180px);height:2px;
-  background:rgba(0,0,0,.06);border-radius:2px;overflow:hidden
+  background:rgba(0,0,0,.08);border-radius:2px;overflow:hidden
 }
 .hero-boot-overlay .boot-fill{
-  width:100%;height:100%;border-radius:2px;background:var(--g500);
-  animation:bootScan 3s ease-in-out infinite
+  width:0%;height:100%;border-radius:2px;background:var(--g500);
+  transition:width 1.5s cubic-bezier(.65,0,.35,1)
 }
 
 .hero-text{
@@ -1012,7 +1027,10 @@ footer{
       <div class="boot-logo">ZYPPYN</div>
       <div class="boot-sub">Television, Reimagined.</div>
       <div class="boot-bar"><div class="boot-fill"></div></div>
-      <div class="boot-enter">Click to Experience</div>
+      <div class="boot-enter" id="bootEnter">
+        <span>Click anywhere or scroll to enter</span>
+        <span class="boot-enter-arrow">&#8595;</span>
+      </div>
     </div>
     <audio id="heroAudio" preload="auto" src="intro.mp3"></audio>
 
@@ -1911,6 +1929,8 @@ function buildSectionAnimations() {
 function initAutoScroll() {
   var overlay = document.getElementById('heroBootOverlay');
   var audio = document.getElementById('heroAudio');
+  var fill = overlay ? overlay.querySelector('.boot-fill') : null;
+  var enterLabel = document.getElementById('bootEnter');
   if (!overlay) return;
   if (window.innerWidth < 981) return;
 
@@ -1919,6 +1939,13 @@ function initAutoScroll() {
 
   var scrolling = false;
   var cancelled = false;
+  var interacted = false;
+  var autoEnterTimer = null;
+
+  function markInteracted() {
+    interacted = true;
+    if (autoEnterTimer) { clearTimeout(autoEnterTimer); autoEnterTimer = null; }
+  }
 
   function cancelAutoScroll() {
     if (!scrolling) return;
@@ -1929,6 +1956,7 @@ function initAutoScroll() {
   function startAutoScroll() {
     if (scrolling) return;
     scrolling = true;
+    markInteracted();
 
     if (audio) {
       audio.currentTime = 6.4;
@@ -1993,6 +2021,27 @@ function initAutoScroll() {
   overlay.addEventListener('click', function() {
     startAutoScroll();
   });
+
+  /* ── LOADING BAR: fills once 0% → 100% and stays full ── */
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      if (fill) fill.style.width = '100%';
+    });
+  });
+
+  var LOAD_MS = 1500;
+  var AUTO_ENTER_GRACE_MS = 3500;
+
+  setTimeout(function() {
+    if (enterLabel) enterLabel.classList.add('ready');
+    autoEnterTimer = setTimeout(function() {
+      if (!interacted) startAutoScroll();
+    }, AUTO_ENTER_GRACE_MS);
+  }, LOAD_MS);
+
+  window.addEventListener('scroll', function() {
+    if (!scrolling) markInteracted();
+  }, { passive: true });
 }
 
 /* ═══════════════════════════════════════════
