@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="ZYPPYN">
+  <defs>
+    <linearGradient id="zg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#184530"/>
+      <stop offset="1" stop-color="#0c1a12"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#zg)"/>
+  <path d="M19 20H45L19 44H45" fill="none" stroke="#eef6ee" stroke-width="5.5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="19" y="50" width="26" height="3" rx="1.5" fill="#c9a84c"/>
+</svg>

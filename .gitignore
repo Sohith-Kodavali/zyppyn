@@ -1,0 +1,6 @@
+# Local tooling / agent state
+.commandcode/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -6,13 +6,36 @@
 <meta name="theme-color" content="#0e1f16">
 <title>ZYPPYN — Television, Reimagined.</title>
 <meta name="description" content="ZYPPYN is building a new generation of premium screens — better quality, smarter technology, better value.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://www.zyppyn.com/">
+
+<!-- Icons -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+
+<!-- Social / Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ZYPPYN">
+<meta property="og:title" content="ZYPPYN — Television, Reimagined.">
+<meta property="og:description" content="Premium screens powered by a smarter business model. Better quality. Better technology. Better value.">
+<meta property="og:url" content="https://www.zyppyn.com/">
+<meta property="og:image" content="https://www.zyppyn.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ZYPPYN — Television, Reimagined.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ZYPPYN — Television, Reimagined.">
+<meta name="twitter:description" content="Premium screens powered by a smarter business model. Better quality. Better technology. Better value.">
+<meta name="twitter:image" content="https://www.zyppyn.com/og-image.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
 
 <style>
 :root{
@@ -21,7 +44,7 @@
   --g800:#1a5936;--g900:#154a2d;--g950:#0d3520;
   --dark:#0e1f16;--dark2:#0c1a12;--dark3:#162b1f;
   --light:#f7f6f3;--white:#fbfaf8;
-  --ink:#1c2420;--muted:#6b7c70;--muted-d:#a3bfa8;
+  --ink:#1c2420;--muted:#5b6b60;--muted-d:#a3bfa8;
   --line:#d4d8d0;--line-d:rgba(58,143,94,.14);
   --gold:#c9a84c;--gold-soft:rgba(201,168,76,.12);
   --radius:28px;--max:1360px;
@@ -82,7 +105,7 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
 .navin{height:100%;display:flex;align-items:center;justify-content:space-between;gap:32px}
 .logo{font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;letter-spacing:.22em;color:#fff}
 .links{display:flex;align-items:center;gap:28px}
-.links a{font-size:14px;font-weight:600;color:rgba(255,255,255,.6);transition:.2s}
+.links a{font-size:14px;font-weight:600;color:rgba(255,255,255,.72);transition:.2s}
 .links a:hover{color:#fff}
 .nav-right{display:flex;align-items:center;gap:10px}
 .menu-btn{display:none;background:none;font-size:24px;cursor:pointer;color:#fff}
@@ -221,7 +244,7 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
   padding:10px 22px;border-radius:999px;margin-bottom:30px;
   background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
   font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  color:rgba(255,255,255,.5)
+  color:rgba(255,255,255,.62)
 }
 .hero-badge-dot{
   width:6px;height:6px;border-radius:50%;background:var(--g400);
@@ -229,7 +252,7 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
 }
 @keyframes dotPulse{0%,100%{opacity:1}50%{opacity:.3}}
 .hero-sub{
-  color:rgba(255,255,255,.4);font-size:clamp(16px,1.3vw,19px);
+  color:rgba(255,255,255,.68);font-size:clamp(16px,1.3vw,19px);
   line-height:1.75;margin-bottom:36px;max-width:440px
 }
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
@@ -237,7 +260,7 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
 .hero-tv-wrap{
   position:absolute;z-index:3;
   right:5%;top:50%;
-  width:min(44%,580px);
+  width:min(68%,960px);
   transform-origin:center center;
   will-change:transform
 }
@@ -294,14 +317,14 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
 }
 .screen-boot-logo{
   font-family:'Playfair Display',Georgia,serif;font-weight:700;
-  letter-spacing:.35em;font-size:clamp(10px,3.5vw,24px);color:var(--ink)
+  letter-spacing:.35em;font-size:clamp(12px,4vw,34px);color:var(--ink)
 }
 .screen-boot-sub{
-  font-size:clamp(3px,.7vw,7px);color:var(--muted);
+  font-size:clamp(4px,.85vw,11px);color:var(--muted);
   letter-spacing:.2em;font-weight:600;text-transform:uppercase
 }
 .screen-boot-bar{
-  width:clamp(36px,12vw,100px);height:clamp(1px,.15vw,2px);
+  width:clamp(48px,13vw,140px);height:clamp(2px,.2vw,3px);
   background:rgba(0,0,0,.06);border-radius:2px;overflow:hidden
 }
 .screen-boot-fill{
@@ -315,56 +338,47 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
 .tv-feat{
   position:absolute;inset:0;z-index:10;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  opacity:0;pointer-events:none;background:#fff;gap:clamp(2px,.5vh,8px)
+  opacity:0;pointer-events:none;background:#fff;gap:clamp(3px,.7vh,11px)
 }
 .tv-feat-big{
   font-family:'Inter',system-ui,sans-serif;font-weight:900;
-  font-size:clamp(20px,7vw,52px);letter-spacing:-.04em;color:var(--ink);line-height:1
+  font-size:clamp(24px,8vw,74px);letter-spacing:-.04em;color:var(--ink);line-height:1
 }
 .tv-feat-pill{
-  display:inline-flex;padding:clamp(1px,.2vw,3px) clamp(4px,.8vw,10px);
+  display:inline-flex;padding:clamp(2px,.28vw,5px) clamp(6px,1vw,15px);
   border-radius:999px;background:rgba(42,122,77,.08);
-  font-size:clamp(3px,.55vw,7px);font-weight:800;letter-spacing:.1em;color:var(--g600)
+  font-size:clamp(4px,.7vw,10px);font-weight:800;letter-spacing:.1em;color:var(--g600)
 }
 .tv-feat-icon{
-  width:clamp(14px,4vw,32px);height:clamp(14px,4vw,32px);color:var(--g500)
+  width:clamp(18px,5vw,46px);height:clamp(18px,5vw,46px);color:var(--g500)
 }
 .tv-feat-icon svg{width:100%;height:100%}
 .tv-feat-title{
-  font-family:'Playfair Display',Georgia,serif;font-size:clamp(7px,2vw,16px);
+  font-family:'Playfair Display',Georgia,serif;font-size:clamp(11px,2.5vw,25px);
   font-weight:700;color:var(--ink);letter-spacing:-.01em;text-align:center
 }
 .tv-feat-sub{
-  font-size:clamp(3px,.6vw,7px);color:var(--muted);
+  font-size:clamp(4px,.85vw,11px);color:var(--muted);
   text-align:center;max-width:80%;line-height:1.5
 }
 .tv-feat-spectrum{
-  display:flex;gap:clamp(2px,.35vw,4px);margin-top:clamp(2px,.4vh,4px)
+  display:flex;gap:clamp(2px,.4vw,6px);margin-top:clamp(3px,.5vh,6px)
 }
 .tv-feat-spectrum span{
-  width:clamp(5px,1.5vw,14px);height:clamp(2px,.35vw,3px);border-radius:2px
+  width:clamp(6px,1.8vw,20px);height:clamp(2px,.45vw,4px);border-radius:2px
 }
 .tv-feat-spectrum span:nth-child(1){background:#e74c3c}
 .tv-feat-spectrum span:nth-child(2){background:#f39c12}
 .tv-feat-spectrum span:nth-child(3){background:#2ecc71}
 .tv-feat-spectrum span:nth-child(4){background:#3498db}
 .tv-feat-spectrum span:nth-child(5){background:#9b59b6}
-.tv-feat-price{display:flex;align-items:baseline;gap:clamp(4px,.8vw,10px)}
-.tv-feat-price-old{
-  font-family:'Inter',system-ui,sans-serif;font-size:clamp(8px,2vw,18px);
-  font-weight:600;color:var(--muted);text-decoration:line-through
-}
-.tv-feat-price-new{
-  font-family:'Inter',system-ui,sans-serif;font-size:clamp(14px,4.5vw,36px);
-  font-weight:800;color:var(--g600);letter-spacing:-.03em
-}
 .tv-feat-mini-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:clamp(2px,.3vw,3px);
-  margin-top:clamp(1px,.3vh,4px)
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(3px,.45vw,5px);
+  margin-top:clamp(2px,.45vh,6px)
 }
 .tv-feat-mini-grid span{
-  width:clamp(8px,2vw,18px);height:clamp(8px,2vw,18px);
-  border-radius:clamp(2px,.25vw,3px)
+  width:clamp(10px,2.4vw,28px);height:clamp(10px,2.4vw,28px);
+  border-radius:clamp(2px,.3vw,4px)
 }
 .tv-feat-mini-grid span:nth-child(1){background:rgba(42,122,77,.1)}
 .tv-feat-mini-grid span:nth-child(2){background:rgba(201,168,76,.1)}
@@ -411,7 +425,7 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
 .track{
   display:flex;width:max-content;gap:48px;padding:18px 0;
   font-family:'Inter',system-ui,sans-serif;font-size:11px;font-weight:600;
-  letter-spacing:.22em;color:rgba(255,255,255,.45);text-transform:uppercase;
+  letter-spacing:.22em;color:rgba(255,255,255,.62);text-transform:uppercase;
   animation:marq 36s linear infinite
 }
 .track span{display:flex;align-items:center;gap:48px;white-space:nowrap}
@@ -548,92 +562,21 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
   border-radius:16px;overflow:hidden
 }
 .tech-vblock{
-  height:200px;position:relative;
+  min-height:200px;position:relative;
   background:linear-gradient(160deg,var(--g100),var(--g50))
 }
-.tech-vblock::after{
-  content:attr(data-label);
-  position:absolute;bottom:16px;left:16px;
-  font-size:10px;font-weight:700;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--g500)
+.tech-vblock-body{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  justify-content:center;gap:8px;padding:26px
 }
-.tech-vblock-line{
-  position:absolute;top:50%;left:20%;right:20%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--g400),transparent);opacity:.3
+.tech-vblock-num{
+  font-size:10px;font-weight:800;letter-spacing:.3em;color:var(--g500)
 }
-
-/* ═══ 03 — BUSINESS MODEL ═══ */
-.model-section{
-  background:linear-gradient(175deg,#153e2c 0%,#184530 40%,#1a4a34 100%);
-  color:#fff;position:relative;z-index:2;overflow:hidden
+.tech-vblock-title{
+  font-family:'Playfair Display',Georgia,serif;font-weight:700;
+  font-size:clamp(18px,1.5vw,22px);color:var(--ink);letter-spacing:-.01em
 }
-.model-section::before{
-  content:"";position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(91,169,122,.2) 30%,rgba(91,169,122,.2) 70%,transparent)
-}
-.model-header{
-  text-align:center;max-width:720px;margin:0 auto 80px
-}
-.model-header .h2{color:#fff}
-.model-header .copy{color:rgba(255,255,255,.4);margin:20px auto 0}
-.model-table{
-  max-width:1100px;margin:0 auto;
-  border:1px solid rgba(255,255,255,.06);border-radius:20px;overflow:hidden
-}
-.model-table-head{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  border-bottom:1px solid rgba(255,255,255,.06)
-}
-.model-th{
-  padding:28px 36px;
-  font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase
-}
-.model-th:first-child{color:rgba(255,255,255,.25)}
-.model-th:nth-child(2){
-  color:rgba(255,255,255,.35);text-align:center;
-  border-left:1px solid rgba(255,255,255,.06);
-  border-right:1px solid rgba(255,255,255,.06)
-}
-.model-th:nth-child(3){
-  color:var(--g400);text-align:center;
-  background:rgba(42,122,77,.06)
-}
-.model-row{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  border-bottom:1px solid rgba(255,255,255,.04);
-  transition:background .3s ease
-}
-.model-row:last-child{border-bottom:none}
-.model-row:hover{background:rgba(255,255,255,.02)}
-.model-td{padding:24px 36px;font-size:15px;line-height:1.5}
-.model-td:first-child{
-  color:rgba(255,255,255,.5);font-weight:600;
-  display:flex;align-items:center;gap:14px
-}
-.model-td:first-child svg{width:20px;height:20px;flex-shrink:0;color:var(--g500);opacity:.5}
-.model-td:nth-child(2){
-  text-align:center;color:rgba(255,255,255,.25);
-  border-left:1px solid rgba(255,255,255,.06);
-  border-right:1px solid rgba(255,255,255,.06)
-}
-.model-td:nth-child(3){
-  text-align:center;color:#fff;font-weight:600;
-  background:rgba(42,122,77,.04)
-}
-.model-td .val-good{color:var(--g400)}
-.model-bottom{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-top:48px;max-width:1100px;margin-left:auto;margin-right:auto;
-  padding:32px 40px;
-  background:linear-gradient(135deg,var(--g700),var(--g800));
-  border-radius:16px
-}
-.model-bottom-text{
-  font-family:'Playfair Display',Georgia,serif;
-  font-size:clamp(18px,2vw,24px);font-weight:600;color:#fff;
-  letter-spacing:-.01em
-}
-.model-bottom-text span{color:var(--g200)}
+.tech-vblock-copy{font-size:12.5px;line-height:1.6;color:var(--muted);max-width:220px}
 
 /* ═══ 04 — ENVIRONMENTS ═══ */
 .env-header{
@@ -698,7 +641,7 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
   font-size:clamp(28px,3.5vw,48px);line-height:1.08;
   color:#fff;letter-spacing:-.02em
 }
-.mystery .copy{color:rgba(255,255,255,.45);margin-top:20px;font-size:15px;line-height:1.8}
+.mystery .copy{color:rgba(255,255,255,.66);margin-top:20px;font-size:15px;line-height:1.8}
 .mystery-right{display:flex;flex-direction:column;gap:0}
 .mystery-fact{
   padding:32px 0;
@@ -712,7 +655,7 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
   font-variant-numeric:tabular-nums
 }
 .mystery-fact-text{
-  font-size:15px;line-height:1.7;color:rgba(255,255,255,.5)
+  font-size:15px;line-height:1.7;color:rgba(255,255,255,.7)
 }
 .mystery-mission{
   margin-top:48px;padding:36px 40px;
@@ -762,9 +705,9 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
   position:sticky;top:clamp(100px,14vh,160px);align-self:start
 }
 .inv-left .h2{color:#fff;max-width:440px}
-.inv-left .copy{margin-top:20px;color:rgba(255,255,255,.4)}
+.inv-left .copy{margin-top:20px;color:rgba(255,255,255,.62)}
 .inv-right-col{display:flex;flex-direction:column;gap:48px}
-.inv-right-col .investor-stats,
+.inv-right-col .investor-stats{grid-template-columns:repeat(3,1fr)}
 .inv-right-col .investor-cards{grid-template-columns:1fr 1fr}
 .investor{
   position:relative;overflow:hidden;
@@ -797,7 +740,7 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
   letter-spacing:-.03em;color:#fff;margin-bottom:8px
 }
 .inv-stat-label{
-  font-size:11px;color:rgba(255,255,255,.3);font-weight:700;
+  font-size:11px;color:rgba(255,255,255,.58);font-weight:700;
   letter-spacing:.12em;text-transform:uppercase
 }
 .investor-cards{
@@ -822,19 +765,19 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
   font-family:'Playfair Display',Georgia,serif;font-size:20px;
   font-weight:700;letter-spacing:-.01em;color:#fff;margin-bottom:12px
 }
-.inv-card p{font-size:14px;line-height:1.7;color:rgba(255,255,255,.35)}
+.inv-card p{font-size:14px;line-height:1.7;color:rgba(255,255,255,.66)}
 .investor-bottom{
   display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start
 }
 .investor-pitch h3{color:#fff;margin-bottom:18px}
-.investor-pitch .copy{color:rgba(255,255,255,.4)}
+.investor-pitch .copy{color:rgba(255,255,255,.62)}
 .investor-pitch-points{
   margin-top:36px;display:grid;gap:0
 }
 .investor-pitch-point{
   display:flex;align-items:center;gap:16px;
   padding:18px 0;border-bottom:1px solid rgba(255,255,255,.06);
-  font-size:15px;font-weight:600;color:rgba(255,255,255,.6)
+  font-size:15px;font-weight:600;color:rgba(255,255,255,.74)
 }
 .investor-pitch-point::before{
   content:"";width:8px;height:1px;background:var(--g400);flex-shrink:0
@@ -847,7 +790,7 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
   font-family:'Playfair Display',Georgia,serif;font-size:22px;
   font-weight:700;letter-spacing:-.01em;color:#fff;margin-bottom:6px
 }
-.pitch-form-sub{font-size:14px;color:rgba(255,255,255,.3);margin-bottom:28px}
+.pitch-form-sub{font-size:14px;color:rgba(255,255,255,.55);margin-bottom:28px}
 .field{margin-bottom:16px}
 .field label{
   display:block;font-size:11px;font-weight:700;letter-spacing:.12em;
@@ -890,13 +833,13 @@ footer{
   align-items:start;padding-bottom:48px;
   border-bottom:1px solid rgba(255,255,255,.05)
 }
-.footer-brand p{color:rgba(255,255,255,.3);margin-top:10px;font-size:14px}
+.footer-brand p{color:rgba(255,255,255,.5);margin-top:10px;font-size:14px}
 .footer-links{display:flex;gap:32px;flex-wrap:wrap}
-.footer-links a{color:rgba(255,255,255,.35);font-size:14px;transition:color .2s}
+.footer-links a{color:rgba(255,255,255,.6);font-size:14px;transition:color .2s}
 .footer-links a:hover{color:var(--g400)}
 .footer-bottom{
   margin-top:28px;display:flex;justify-content:space-between;gap:24px;
-  color:rgba(255,255,255,.18);font-size:12px
+  color:rgba(255,255,255,.45);font-size:12px
 }
 
 /* ═══ SCROLL REVEALS ═══ */
@@ -910,17 +853,12 @@ footer{
   .links{display:none}.menu-btn{display:block}
   .vision-split,.tech-split,.inv-split,.tech-header,.env-header,.investor-bottom{grid-template-columns:1fr;gap:40px}
   .vision-left,.tech-left,.inv-left{position:static}
-  .inv-right-col .investor-stats,
+  .inv-right-col .investor-stats{grid-template-columns:repeat(3,1fr)}
   .inv-right-col .investor-cards{grid-template-columns:repeat(4,1fr)}
   .vision-stat{grid-template-columns:140px 1fr;gap:20px}
   .tech-pillar{grid-template-columns:48px 1fr;gap:20px}
   .tech-pillar-desc{grid-column:1/-1;padding-left:68px}
   .tech-visual-strip{grid-template-columns:1fr 1fr}
-  .model-table-head,.model-row{grid-template-columns:1fr 1fr}
-  .model-td:first-child{grid-column:1/-1;padding-bottom:4px}
-  .model-td:nth-child(2){text-align:left;border-left:none}
-  .model-td:nth-child(3){text-align:left}
-  .model-bottom{flex-direction:column;gap:20px;text-align:center}
   .mystery-grid{grid-template-columns:1fr}
   .env-cards{grid-template-columns:1fr}
   .partner-grid{grid-template-columns:1fr 1fr}
@@ -946,11 +884,6 @@ footer{
   .tech-visual-strip{grid-template-columns:1fr}
   .tech-pillar-desc{padding-left:0}
   .vision-stat{grid-template-columns:1fr;gap:8px}
-  .model-table-head,.model-row{grid-template-columns:1fr}
-  .model-th,.model-td{border-left:none!important;border-right:none!important;text-align:left!important}
-  .model-td{padding:12px 24px}
-  .model-td:first-child{padding-bottom:4px;font-size:13px}
-  .model-bottom{flex-direction:column;gap:16px;text-align:center;padding:24px}
   .mystery-fact{grid-template-columns:56px 1fr;gap:16px}
   .env-card{min-height:300px;padding:36px 28px}
   .partner-grid{grid-template-columns:1fr}
@@ -960,6 +893,25 @@ footer{
   .footer-links{gap:16px 28px}
   .footer-bottom{flex-direction:column}
 }
+/* ═══ FOCUS VISIBILITY ═══ */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{
+  outline:2px solid var(--g400);outline-offset:3px;border-radius:4px
+}
+.skip-link{
+  position:absolute;top:-60px;left:50%;transform:translateX(-50%);
+  z-index:200;background:var(--g600);color:#fff;
+  padding:12px 22px;border-radius:0 0 12px 12px;
+  font-size:13px;font-weight:700;transition:top .2s ease
+}
+.skip-link:focus{top:0}
+
+/* ═══ GRACEFUL FALLBACK WHEN GSAP IS UNAVAILABLE ═══ */
+.no-gsap .hero-boot-overlay{display:none!important}
+.no-gsap #heroText{opacity:1!important;transform:none!important}
+.no-gsap .hero-tv-glow{opacity:1!important}
+.no-gsap #heroTvWrap{transform:none!important}
+.no-gsap .reveal{opacity:1!important;transform:none!important}
+
 @media(prefers-reduced-motion:reduce){
   *{scroll-behavior:auto!important;animation:none!important;transition:none!important}
   .reveal{opacity:1;transform:none}
@@ -967,9 +919,12 @@ footer{
   .hero-zone{height:auto}
 }
 </style>
+<noscript><style>.hero-boot-overlay{display:none!important}#heroText{opacity:1!important;transform:none!important}.hero-tv-glow{opacity:1!important}.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 
 <body>
+
+<a class="skip-link" href="#main">Skip to content</a>
 
 <nav id="mainNav">
   <div class="container navin">
@@ -977,7 +932,6 @@ footer{
     <div class="links">
       <a href="#vision">Vision</a>
       <a href="#technology">Technology</a>
-      <a href="#model">Model</a>
       <a href="#investors">Investors</a>
     </div>
     <div class="nav-right">
@@ -990,12 +944,11 @@ footer{
 <div class="mobile-panel" id="mobilePanel">
   <a href="#vision">Vision</a>
   <a href="#technology">Technology</a>
-  <a href="#model">Model</a>
   <a href="#investors">Investors</a>
   <a href="#partners">Partners</a>
 </div>
 
-<main>
+<main id="main">
 
 <!-- ═══════════ HERO SCROLL ZONE ═══════════ -->
 <section class="hero-zone" id="top">
@@ -1008,7 +961,7 @@ footer{
     <div class="hero-aurora"></div>
     <div class="hero-aurora hero-aurora-2"></div>
 
-    <div class="hero-boot-overlay" id="heroBootOverlay">
+    <div class="hero-boot-overlay" id="heroBootOverlay" role="button" tabindex="0" aria-label="Enter the ZYPPYN experience">
       <div class="boot-logo">ZYPPYN</div>
       <div class="boot-sub">Television, Reimagined.</div>
       <div class="boot-bar"><div class="boot-fill"></div></div>
@@ -1019,7 +972,7 @@ footer{
     <div class="hero-text" id="heroText">
       <div class="hero-badge">
         <span class="hero-badge-dot"></span>
-        Pre-Launch 2026
+        Pre-Launch 2027
       </div>
       <h1 class="h1">Television,<br><span class="accent">Reimagined.</span></h1>
       <p class="hero-sub">
@@ -1044,7 +997,7 @@ footer{
             </div>
           </div>
           <div class="tv-feat" id="feat0">
-            <div class="tv-feat-big">4K</div>
+            <div class="tv-feat-big">Cinematic</div>
             <div class="tv-feat-pill">HDR10+</div>
             <span class="tv-feat-title">Premium Display</span>
             <span class="tv-feat-sub">Cinema-grade color accuracy at every size</span>
@@ -1056,14 +1009,6 @@ footer{
             <span class="tv-feat-sub">OTA updates, always current, always evolving</span>
             <div class="tv-feat-mini-grid"><span></span><span></span><span></span><span></span></div>
           </div>
-          <div class="tv-feat" id="feat2">
-            <div class="tv-feat-price">
-              <span class="tv-feat-price-old">$899</span>
-              <span class="tv-feat-price-new">$449</span>
-            </div>
-            <span class="tv-feat-title">Smarter Pricing</span>
-            <span class="tv-feat-sub">Premium quality, intelligently subsidized</span>
-          </div>
           <div class="tv-feat" id="feat3">
             <div class="tv-feat-icon"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="1.5"/><path d="M16 4a18 18 0 010 24M16 4a18 18 0 000 24" stroke="currentColor" stroke-width="1.5" opacity=".3"/><path d="M4 16h24M5.5 10h21M5.5 22h21" stroke="currentColor" stroke-width="1.5" opacity=".2"/></svg></div>
             <span class="tv-feat-title">Built for Scale</span>
@@ -1073,7 +1018,6 @@ footer{
             <div class="tv-dot" data-i="0"></div>
             <div class="tv-dot" data-i="1"></div>
             <div class="tv-dot" data-i="2"></div>
-            <div class="tv-dot" data-i="3"></div>
           </div>
         </div>
       </div>
@@ -1089,20 +1033,20 @@ footer{
 <!-- ═══════════ MARQUEE ═══════════ -->
 <div class="marquee">
   <div class="track">
-    <span><b class="stat-val">4K QLED</b> Display</span>
-    <span><b class="stat-val">40-50%</b> Below Retail</span>
-    <span>Ad-Powered Revenue</span>
-    <span><b class="stat-val">12M+</b> Addressable Homes</span>
-    <span>Dual Revenue Model</span>
-    <span><b class="stat-val">D2C</b> Distribution</span>
-    <span>Pre-Launch 2026</span>
-    <span><b class="stat-val">4K QLED</b> Display</span>
-    <span><b class="stat-val">40-50%</b> Below Retail</span>
-    <span>Ad-Powered Revenue</span>
-    <span><b class="stat-val">12M+</b> Addressable Homes</span>
-    <span>Dual Revenue Model</span>
-    <span><b class="stat-val">D2C</b> Distribution</span>
-    <span>Pre-Launch 2026</span>
+    <span><b class="stat-val">Cinematic</b> Display</span>
+    <span>Home + B2B</span>
+    <span><b class="stat-val">OTA</b> Always Evolving</span>
+    <span>Connected Platform</span>
+    <span>Built to Last</span>
+    <span>Premium at Every Size</span>
+    <span>Pre-Launch 2027</span>
+    <span><b class="stat-val">Cinematic</b> Display</span>
+    <span>Home + B2B</span>
+    <span><b class="stat-val">OTA</b> Always Evolving</span>
+    <span>Connected Platform</span>
+    <span>Built to Last</span>
+    <span>Premium at Every Size</span>
+    <span>Pre-Launch 2027</span>
   </div>
 </div>
 
@@ -1120,15 +1064,15 @@ footer{
       </div>
       <div class="vision-stats">
         <div class="vision-stat reveal">
-          <div class="vision-stat-val" data-count="250" data-prefix="$" data-suffix="B+">$250B+</div>
-          <div class="vision-stat-label">Global television market, still dominated by the same pricing models for decades.</div>
+          <div class="vision-stat-val">Smart</div>
+          <div class="vision-stat-label">A connected software platform built into every ZYPPYN screen.</div>
         </div>
         <div class="vision-stat reveal">
-          <div class="vision-stat-val" data-count="2" data-suffix="x">2x</div>
-          <div class="vision-stat-label">Revenue streams per screen. Hardware sale upfront, recurring ad revenue ongoing.</div>
+          <div class="vision-stat-val">OTA</div>
+          <div class="vision-stat-label">Over-the-air updates keep every screen current and evolving over time.</div>
         </div>
         <div class="vision-stat reveal">
-          <div class="vision-stat-val" data-count="2026">2026</div>
+          <div class="vision-stat-val" data-count="2027">2027</div>
           <div class="vision-stat-label">Target launch year. Currently in development with select manufacturing partners.</div>
         </div>
       </div>
@@ -1177,64 +1121,35 @@ footer{
       </div>
     </div>
     <div class="tech-visual-strip reveal">
-      <div class="tech-vblock" data-label="Display"><div class="tech-vblock-line"></div></div>
-      <div class="tech-vblock" data-label="Software"><div class="tech-vblock-line"></div></div>
-      <div class="tech-vblock" data-label="Services"><div class="tech-vblock-line"></div></div>
-      <div class="tech-vblock" data-label="Revenue"><div class="tech-vblock-line"></div></div>
-    </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ 03 — BUSINESS MODEL ═══════════ -->
-<section class="section model-section" id="model">
-  <div class="container">
-    <div class="model-header">
-      <span class="sec-num reveal">03</span>
-      <div class="label reveal" style="color:var(--g400)">A different model</div>
-      <h2 class="h2 reveal">Same quality.<br>Different economics.</h2>
-      <p class="copy reveal">The television industry charges a premium because there's no alternative revenue stream. ZYPPYN changes that equation entirely.</p>
-    </div>
-    <div class="model-table reveal">
-      <div class="model-table-head">
-        <div class="model-th">Metric</div>
-        <div class="model-th">Traditional</div>
-        <div class="model-th">Zyppyn</div>
+      <div class="tech-vblock">
+        <div class="tech-vblock-body">
+          <div class="tech-vblock-num">01</div>
+          <div class="tech-vblock-title">Premium Display</div>
+          <div class="tech-vblock-copy">Cinematic panel quality at every size — no compromise.</div>
+        </div>
       </div>
-      <div class="model-row">
-        <div class="model-td"><svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2v16M2 10h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Revenue Model</div>
-        <div class="model-td">Hardware sale only</div>
-        <div class="model-td"><span class="val-good">Hardware + recurring ad revenue</span></div>
+      <div class="tech-vblock">
+        <div class="tech-vblock-body">
+          <div class="tech-vblock-num">02</div>
+          <div class="tech-vblock-title">Software</div>
+          <div class="tech-vblock-copy">OTA updates keep every screen current and evolving.</div>
+        </div>
       </div>
-      <div class="model-row">
-        <div class="model-td"><svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a8 8 0 110 16 8 8 0 010-16z" stroke="currentColor" stroke-width="1.5"/><path d="M7 10h6M10 7v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Consumer Price</div>
-        <div class="model-td">Full margin pricing</div>
-        <div class="model-td"><span class="val-good">Subsidized by ad revenue</span></div>
+      <div class="tech-vblock">
+        <div class="tech-vblock-body">
+          <div class="tech-vblock-num">03</div>
+          <div class="tech-vblock-title">Services</div>
+          <div class="tech-vblock-copy">Streaming, content and integrations built in from day one.</div>
+        </div>
       </div>
-      <div class="model-row">
-        <div class="model-td"><svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 16V8M8 16V5M12 16V10M16 16V3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Revenue Per Unit</div>
-        <div class="model-td">One-time</div>
-        <div class="model-td"><span class="val-good">Ongoing lifetime value</span></div>
-      </div>
-      <div class="model-row">
-        <div class="model-td"><svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 18h6M10 15v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Display Quality</div>
-        <div class="model-td">Premium at premium price</div>
-        <div class="model-td"><span class="val-good">Premium at accessible price</span></div>
-      </div>
-      <div class="model-row">
-        <div class="model-td"><svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Software Updates</div>
-        <div class="model-td">Limited or none</div>
-        <div class="model-td"><span class="val-good">OTA updates, always current</span></div>
-      </div>
-      <div class="model-row">
-        <div class="model-td"><svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2l6 4v8l-6 4-6-4V6l6-4z" stroke="currentColor" stroke-width="1.5"/></svg>Market Reach</div>
-        <div class="model-td">Niche premium buyers</div>
-        <div class="model-td"><span class="val-good">Mass market + premium quality</span></div>
+      <div class="tech-vblock">
+        <div class="tech-vblock-body">
+          <div class="tech-vblock-num">04</div>
+          <div class="tech-vblock-title">Platform</div>
+          <div class="tech-vblock-copy">One connected system for the home and for business.</div>
+        </div>
       </div>
     </div>
-    <div class="model-bottom reveal">
-      <div class="model-bottom-text">The result: <span>premium screens everyone can afford.</span></div>
-      <a class="btn btn-outline-light" href="#investors">See the Opportunity</a>
     </div>
   </div>
 </section>
@@ -1244,7 +1159,7 @@ footer{
   <div class="container">
     <div class="env-header">
       <div>
-        <span class="sec-num reveal">04</span>
+        <span class="sec-num reveal">03</span>
         <div class="label reveal">One screen. More places.</div>
         <h2 class="h2 reveal">Made for home.<br>Built for business.</h2>
       </div>
@@ -1282,7 +1197,7 @@ footer{
   <div class="container">
     <div class="mystery-grid">
       <div class="mystery-left">
-        <span class="sec-num reveal">05</span>
+        <span class="sec-num reveal">04</span>
         <div class="label reveal">Still under wraps</div>
         <h2 class="h2 reveal">We're not ready to show you everything yet.</h2>
         <p class="copy reveal">ZYPPYN is currently in stealth development. The full product, technology stack, and go-to-market strategy remain confidential until our public launch.</p>
@@ -1310,7 +1225,7 @@ footer{
         </div>
         <div class="mystery-fact reveal">
           <div class="mystery-fact-num">05</div>
-          <div class="mystery-fact-text">Target launch: 2026. Seed funding round currently open for qualified investors and strategic partners.</div>
+          <div class="mystery-fact-text">Target launch: 2027. Seed funding round currently open for qualified investors and strategic partners.</div>
         </div>
       </div>
     </div>
@@ -1321,7 +1236,7 @@ footer{
 <section class="section sec-light" id="partners">
   <div class="container">
     <div class="partner-header">
-      <span class="sec-num reveal">06</span>
+      <span class="sec-num reveal">05</span>
       <div class="label reveal">Partnerships</div>
       <h2 class="h2 reveal">Build the next generation with us.</h2>
       <p class="copy reveal" style="margin:20px auto 0">We're looking for partners who believe the television industry can work differently.</p>
@@ -1356,7 +1271,7 @@ footer{
 <section class="investor" id="investors">
   <div class="container inv-split">
     <div class="inv-left">
-      <span class="sec-num reveal">07</span>
+      <span class="sec-num reveal">06</span>
       <div class="label reveal">For Investors</div>
       <h2 class="h2 reveal">Invest in the future<br>of television.</h2>
       <p class="copy reveal">ZYPPYN is rethinking how premium screens reach consumers — and building a scalable business model around it.</p>
@@ -1370,10 +1285,6 @@ footer{
     <div class="inv-right-col">
     <div class="investor-stats reveal">
       <div class="inv-stat">
-        <div class="inv-stat-num">$250B+</div>
-        <div class="inv-stat-label">Global TV Market</div>
-      </div>
-      <div class="inv-stat">
         <div class="inv-stat-num">2x</div>
         <div class="inv-stat-label">Revenue Streams</div>
       </div>
@@ -1382,7 +1293,7 @@ footer{
         <div class="inv-stat-label">Dual Market</div>
       </div>
       <div class="inv-stat">
-        <div class="inv-stat-num">2026</div>
+        <div class="inv-stat-num">2027</div>
         <div class="inv-stat-label">Target Launch</div>
       </div>
     </div>
@@ -1436,7 +1347,7 @@ footer{
       <div class="footer-brand"><div class="logo">ZYPPYN</div><p>Premium Screens. Better Value.</p></div>
       <div class="footer-links">
         <a href="#vision">Vision</a><a href="#technology">Technology</a>
-        <a href="#model">Model</a><a href="#investors">Investors</a>
+        <a href="#investors">Investors</a>
         <a href="#partners">Partnerships</a><a href="#">Privacy</a>
       </div>
     </div>
@@ -1665,7 +1576,6 @@ function buildHeroTimeline() {
   const feats = [
     document.getElementById('feat0'),
     document.getElementById('feat1'),
-    document.getElementById('feat2'),
     document.getElementById('feat3')
   ];
 
@@ -1677,6 +1587,10 @@ function buildHeroTimeline() {
 
   const tv = calcTvLayout(wrap, screen);
   if (!tv) return;
+
+  /* Shift the TV right at rest so the 30% we hide lands just past the
+     viewport's right edge — the crop reads as the screen continuing off-frame. */
+  const restShift = 0.05 * window.innerWidth + 0.30 * wrap.offsetWidth;
 
   gsap.set(wrap, {
     x: tv.txFull,
@@ -1696,7 +1610,7 @@ function buildHeroTimeline() {
 
       /* ── FEATURES: 0.06 → 0.50 ── */
       const fStart = 0.06, fEnd = 0.50;
-      const fRange = fEnd - fStart, fStep = fRange / 4;
+      const fRange = fEnd - fStart, fStep = fRange / 3;
       let activeIdx = -1;
 
       feats.forEach(function(f, i) {
@@ -1729,7 +1643,7 @@ function buildHeroTimeline() {
       const zEased = zRaw < 0.5 ? 4 * zRaw * zRaw * zRaw : 1 - Math.pow(-2 * zRaw + 2, 3) / 2;
 
       const sc = tv.fullScale + (1 - tv.fullScale) * zEased;
-      const tx = tv.txFull * (1 - zEased);
+      const tx = tv.txFull * (1 - zEased) + restShift * zEased;
       const ty = tv.tyFull + (tv.tyNat - tv.tyFull) * zEased;
 
       wrap.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) scale(' + sc + ')';
@@ -1815,19 +1729,6 @@ function buildSectionAnimations() {
             }
           });
         });
-      }
-    });
-  }
-
-  var techVisual = document.querySelector('.tech-visual');
-  if (techVisual) {
-    gsap.fromTo(techVisual, { y: 60, scale: 0.95 }, {
-      y: 0, scale: 1,
-      scrollTrigger: {
-        trigger: techVisual,
-        start: 'top 85%',
-        end: 'top 30%',
-        scrub: 1.5
       }
     });
   }
@@ -1993,49 +1894,118 @@ function initAutoScroll() {
   overlay.addEventListener('click', function() {
     startAutoScroll();
   });
+  overlay.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+      e.preventDefault();
+      startAutoScroll();
+    }
+  });
 }
+
+/* ═══════════════════════════════════════════
+   CONFIG — set these before deploying
+   ═══════════════════════════════════════════ */
+/* Pitch-deck form: paste a form endpoint (e.g. a Formspree URL such as
+   "https://formspree.io/f/yourid") to send submissions via AJAX.
+   Leave it empty ('') to fall back to opening the visitor's email app. */
+var PITCH_ENDPOINT = '';
+var PITCH_EMAIL = 'invest@zyppyn.com';
 
 /* ═══════════════════════════════════════════
    INIT
    ═══════════════════════════════════════════ */
 window.addEventListener('DOMContentLoaded', function() {
-  gsap.registerPlugin(ScrollTrigger);
 
-  initHeroParticles();
-  buildHeroTimeline();
-  buildSectionAnimations();
-  initAutoScroll();
-
-  var resizeTimer;
-  window.addEventListener('resize', function() {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function() {
-      ScrollTrigger.getAll().forEach(function(st) { st.kill(); });
-      buildHeroTimeline();
-      buildSectionAnimations();
-    }, 200);
-  });
-
-  document.getElementById('menuBtn').addEventListener('click', function() {
-    var panel = document.getElementById('mobilePanel');
-    panel.classList.toggle('open');
-    document.getElementById('menuBtn').innerHTML = panel.classList.contains('open') ? '&times;' : '&#9776;';
-  });
-  document.querySelectorAll('#mobilePanel a').forEach(function(a) {
-    a.addEventListener('click', function() {
-      document.getElementById('mobilePanel').classList.remove('open');
-      document.getElementById('menuBtn').innerHTML = '&#9776;';
+  /* ── Always-on UI (must work even if GSAP fails) ── */
+  var menuBtn = document.getElementById('menuBtn');
+  var mobilePanel = document.getElementById('mobilePanel');
+  if (menuBtn && mobilePanel) {
+    menuBtn.addEventListener('click', function() {
+      mobilePanel.classList.toggle('open');
+      menuBtn.innerHTML = mobilePanel.classList.contains('open') ? '&times;' : '&#9776;';
     });
-  });
+    mobilePanel.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        mobilePanel.classList.remove('open');
+        menuBtn.innerHTML = '&#9776;';
+      });
+    });
+  }
 
-  document.getElementById('pitchForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    document.getElementById('formSuccess').style.display = 'block';
-    var btn = e.currentTarget.querySelector('button');
-    btn.textContent = 'Requested';
-    btn.disabled = true;
-    btn.style.opacity = '.65';
-  });
+  var pitchForm = document.getElementById('pitchForm');
+  if (pitchForm) {
+    pitchForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = pitchForm.querySelector('button[type="submit"]') || pitchForm.querySelector('button');
+      var success = document.getElementById('formSuccess');
+      var data = {
+        name: (document.getElementById('fname') || {}).value || '',
+        email: (document.getElementById('femail') || {}).value || '',
+        company: (document.getElementById('fcompany') || {}).value || '',
+        interest: (document.getElementById('finterest') || {}).value || '',
+        subject: 'Pitch Deck Request — ZYPPYN'
+      };
+      function finish(ok, msg) {
+        if (success) {
+          success.textContent = msg;
+          success.style.display = 'block';
+          success.style.color = ok ? '' : '#e79a8a';
+        }
+      }
+      if (PITCH_ENDPOINT) {
+        btn.disabled = true; btn.textContent = 'Sending…';
+        fetch(PITCH_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data)
+        }).then(function(res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          btn.textContent = 'Requested'; btn.style.opacity = '.65';
+          finish(true, "Thanks — we'll send the pitch deck to your email shortly.");
+        }).catch(function() {
+          btn.disabled = false; btn.textContent = 'Request Pitch Deck';
+          finish(false, 'Something went wrong. Please email ' + PITCH_EMAIL + '.');
+        });
+      } else {
+        var body = 'Name: ' + data.name + '\nEmail: ' + data.email +
+                   '\nCompany / Fund: ' + data.company + '\nInterest: ' + data.interest;
+        window.location.href = 'mailto:' + PITCH_EMAIL +
+          '?subject=' + encodeURIComponent(data.subject) +
+          '&body=' + encodeURIComponent(body);
+        btn.textContent = 'Requested'; btn.disabled = true; btn.style.opacity = '.65';
+        finish(true, 'Opening your email app — or email ' + PITCH_EMAIL + ' directly.');
+      }
+    });
+  }
+
+  /* ── Decorative hero particles (no GSAP dependency) ── */
+  try { initHeroParticles(); } catch (err) { /* non-critical */ }
+
+  /* ── GSAP-driven enhancements (degrade gracefully if unavailable) ── */
+  if (!window.gsap || !window.ScrollTrigger) {
+    document.documentElement.classList.add('no-gsap');
+    return;
+  }
+  try {
+    gsap.registerPlugin(ScrollTrigger);
+
+    buildHeroTimeline();
+    buildSectionAnimations();
+    initAutoScroll();
+
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        ScrollTrigger.getAll().forEach(function(st) { st.kill(); });
+        buildHeroTimeline();
+        buildSectionAnimations();
+      }, 200);
+    });
+  } catch (err) {
+    if (window.console && console.error) console.error('Animation init failed:', err);
+    document.documentElement.classList.add('no-gsap');
+  }
 });
 </script>
 
