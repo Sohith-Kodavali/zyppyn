@@ -128,6 +128,7 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
   position:relative;
   z-index:1
 }
+.hero-zone.hero-locked{height:100vh}
 .hero-sticky{
   position:sticky;top:0;
   height:100vh;width:100%;
@@ -888,6 +889,7 @@ footer{
   .partner-card:nth-child(2){border-right:0}
   .partner-card:nth-child(-n+2){border-bottom:1px solid var(--line)}
   .hero-zone{height:auto;min-height:100vh}
+  .hero-zone.hero-locked{height:auto;min-height:100vh}
   .hero-sticky{position:relative;display:flex;flex-direction:column;align-items:center;padding:84px 24px 40px;gap:24px}
   .hero-tv-wrap{position:static;width:90%;max-width:500px;transform:none!important}
   .hero-text{position:static;max-width:100%;opacity:1!important;transform:none!important;text-align:center;order:-1}
@@ -1583,9 +1585,13 @@ function calcTvLayout(wrap, screen) {
 /* Hero rest-mode carousel state — module scope so resize rebuilds don't leak timers */
 var heroAutoTimer = null;
 var heroCycleIndex = 0;
+var heroTrigger = null;        /* the hero ScrollTrigger instance */
+var heroLocked = false;        /* set once the entrance has played — no rewinding */
+var heroAutoScrollStop = null; /* set by initAutoScroll so lockHero can stop it */
 
 function buildHeroTimeline() {
   if (heroAutoTimer) { clearInterval(heroAutoTimer); heroAutoTimer = null; }
+  if (heroTrigger) { heroTrigger.kill(); heroTrigger = null; }
   if (window.innerWidth < 981) {
     var bo = document.getElementById('heroBootOverlay');
     if (bo) bo.style.display = 'none';
@@ -1612,22 +1618,12 @@ function buildHeroTimeline() {
 
   wrap.classList.remove('tv-rest');
 
-  gsap.set(heroText, { opacity: 0, y: '-50%', yPercent: 0 });
-  if (glow) gsap.set(glow, { opacity: 0 });
-  nav.classList.add('nav-hidden');
-
   const tv = calcTvLayout(wrap, screen);
   if (!tv) return;
 
   /* Shift the TV right at rest so the 30% we hide lands just past the
      viewport's right edge — the crop reads as the screen continuing off-frame. */
   const restShift = 0.05 * window.innerWidth + 0.30 * wrap.offsetWidth;
-
-  gsap.set(wrap, {
-    x: tv.txFull,
-    y: tv.tyFull,
-    scale: tv.fullScale
-  });
 
   let currentFeat = -1;
 
@@ -1665,7 +1661,27 @@ function buildHeroTimeline() {
     gsap.killTweensOf(feats);
   }
 
-  ScrollTrigger.create({
+  /* ── LOCKED: entrance already played — hold the settled state (no rewind) ── */
+  if (heroLocked) {
+    if (bootOverlay) { bootOverlay.style.opacity = '0'; bootOverlay.style.display = 'none'; }
+    if (glow) glow.style.opacity = '1';
+    if (scrollHint) scrollHint.style.opacity = '0';
+    heroText.style.opacity = '1';
+    heroText.style.transform = 'translateY(-50%)';
+    nav.classList.remove('nav-hidden');
+    gsap.set(wrap, { x: restShift, y: tv.tyNat, scale: 1 });
+    wrap.classList.add('tv-rest');
+    heroAtRest = true;
+    startHeroCycle();
+    return;
+  }
+
+  gsap.set(heroText, { opacity: 0, y: '-50%', yPercent: 0 });
+  if (glow) gsap.set(glow, { opacity: 0 });
+  nav.classList.add('nav-hidden');
+  gsap.set(wrap, { x: tv.txFull, y: tv.tyFull, scale: tv.fullScale });
+
+  heroTrigger = ScrollTrigger.create({
     trigger: '.hero-zone',
     start: 'top top',
     end: 'bottom bottom',
@@ -1749,8 +1765,25 @@ function buildHeroTimeline() {
       /* ── NAV ── */
       if (p > 0.5) nav.classList.remove('nav-hidden');
       else nav.classList.add('nav-hidden');
+
+      /* ── LOCK: once the entrance is fully played it can't be rewound ── */
+      if (!heroLocked && p >= 0.999) setTimeout(lockHero, 0);
     }
   });
+}
+
+/* Collapse the hero's scroll runway and hold the settled state, so scrolling up
+   after entering can no longer replay the TV zoom / boot overlay. */
+function lockHero() {
+  if (heroLocked || window.innerWidth < 981) return;
+  heroLocked = true;
+  if (heroAutoScrollStop) heroAutoScrollStop();
+  if (heroTrigger) { heroTrigger.kill(); heroTrigger = null; }
+  var zone = document.querySelector('.hero-zone');
+  if (zone) zone.classList.add('hero-locked');
+  window.scrollTo(0, 0);
+  if (window.ScrollTrigger) ScrollTrigger.refresh();
+  buildHeroTimeline();
 }
 
 /* ═══════════════════════════════════════════
@@ -1895,6 +1928,7 @@ function initAutoScroll() {
 
   var scrolling = false;
   var cancelled = false;
+  heroAutoScrollStop = function() { cancelled = true; };
 
   function cancelAutoScroll() {
     if (!scrolling) return;
@@ -1960,6 +1994,7 @@ function initAutoScroll() {
         window.removeEventListener('wheel', cancelAutoScroll);
         window.removeEventListener('touchstart', cancelAutoScroll);
         window.removeEventListener('keydown', cancelAutoScroll);
+        lockHero();
       }
     }
 
