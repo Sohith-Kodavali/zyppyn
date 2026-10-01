@@ -913,11 +913,16 @@ footer{
   .partner-card:nth-child(-n+2){border-bottom:1px solid var(--line)}
   .hero-zone{height:auto;min-height:100vh}
   .hero-zone.hero-locked{height:auto;min-height:100vh}
-  .hero-sticky{position:relative;display:flex;flex-direction:column;align-items:center;padding:84px 24px 40px;gap:24px}
-  .hero-tv-wrap{position:static;width:90%;max-width:500px;transform:none!important}
+  .hero-sticky{position:relative;display:flex;flex-direction:column;align-items:center;padding:84px 24px 40px;gap:24px;overflow:hidden}
+  /* TV bleeds off the right edge on mobile too, with content centred in the visible area */
+  .hero-tv-wrap{position:static;width:135%;max-width:none;flex-shrink:0;align-self:flex-start;transform:none!important}
+  .hero-tv-wrap .tv-feat{padding-right:21%}
+  .hero-tv-wrap .screen-boot{padding-right:21%}
+  .hero-tv-wrap .tv-dots{left:39.5%}
+  .hero-tv-wrap .tv-dot-extra{display:block}
   .hero-text{position:static;max-width:100%;opacity:1!important;transform:none!important;text-align:center;order:-1}
   .hero-text .hero-actions{justify-content:center}
-  .scroll-hint,.tv-feat,.tv-dots,.hero-bg-orb,.hero-aurora{display:none}
+  .scroll-hint,.hero-bg-orb,.hero-aurora{display:none}
   nav.nav-hidden{opacity:1;transform:none;pointer-events:all}
 }
 @media(max-width:680px){
@@ -1639,6 +1644,7 @@ function buildHeroTimeline() {
   if (window.innerWidth < 981) {
     var bo = document.getElementById('heroBootOverlay');
     if (bo) bo.style.display = 'none';
+    startMobileHeroCycle();
     return;
   }
 
@@ -1831,6 +1837,46 @@ function lockHero() {
   window.scrollTo(0, 0);
   if (window.ScrollTrigger) ScrollTrigger.refresh();
   buildHeroTimeline();
+}
+
+/* Mobile hero has no scroll animation — the TV bleeds off the right and its
+   frames simply cycle (3 feature slides + brand), pausing when off-screen. */
+function startMobileHeroCycle() {
+  var feats = [
+    document.getElementById('feat0'),
+    document.getElementById('feat1'),
+    document.getElementById('feat3')
+  ];
+  var screenContent = document.getElementById('screenContent');
+  var dotsWrap = document.getElementById('tvDots');
+  var dots = document.querySelectorAll('.tv-dot');
+  var BRAND = feats.length, LEN = feats.length + 1, idx = 0;
+
+  function show(i) {
+    feats.forEach(function(f, k) {
+      if (!f) return;
+      f.style.transform = 'translateY(0px)';
+      gsap.to(f, { opacity: k === i ? 1 : 0, duration: 0.5, ease: 'power2.out', overwrite: true });
+    });
+    if (screenContent) screenContent.style.opacity = (i === BRAND) ? '1' : '0';
+    if (dotsWrap) dotsWrap.style.opacity = '1';
+    dots.forEach(function(d, k) { d.classList.toggle('active', k === i); });
+  }
+
+  show(0);
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  heroAutoTimer = setInterval(function() {
+    var zone = document.querySelector('.hero-zone');
+    if (!zone) { stopMobileHeroCycle(); return; }
+    var r = zone.getBoundingClientRect();
+    /* off-screen: pause but keep the timer so it resumes on scroll back */
+    if (r.bottom <= 0 || r.top >= window.innerHeight) return;
+    idx = (idx + 1) % LEN;
+    show(idx);
+  }, 2500);
+}
+function stopMobileHeroCycle() {
+  if (heroAutoTimer) { clearInterval(heroAutoTimer); heroAutoTimer = null; }
 }
 
 /* ═══════════════════════════════════════════
