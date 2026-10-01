@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0e1f16">
+<title>Technology — ZYPPYN</title>
+<meta name="description" content="ZYPPYN is a connected screen platform — premium hardware, intelligent software and services in one evolving ecosystem.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://www.zyppyn.com/technology.html">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ZYPPYN">
+<meta property="og:title" content="Technology — ZYPPYN">
+<meta property="og:description" content="Premium hardware, intelligent software and services in one evolving ecosystem.">
+<meta property="og:url" content="https://www.zyppyn.com/technology.html">
+<meta property="og:image" content="https://www.zyppyn.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Technology — ZYPPYN">
+<meta name="twitter:description" content="Premium hardware, intelligent software and services in one evolving ecosystem.">
+<meta name="twitter:image" content="https://www.zyppyn.com/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --g100:#dde8d6;--g200:#c6debb;--g300:#8fc4a0;--g400:#5ba97a;--g500:#3a8f5e;
+  --g600:#2a7a4d;--g700:#1e6b40;--g800:#1a5936;--g900:#154a2d;
+  --dark:#0e1f16;--light:#f5f4f0;--ink:#1c2420;--muted:#5b6b60;
+  --line:#d4d8d0;--gold:#c9a84c;--max:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--light);color:var(--ink);font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+.container{width:min(calc(100% - 48px),var(--max));margin:auto}
+a:focus-visible,button:focus-visible{outline:2px solid var(--g400);outline-offset:3px;border-radius:4px}
+
+nav{position:sticky;top:0;z-index:50;height:74px;background:rgba(8,28,20,.92);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.06)}
+.navin{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;letter-spacing:.22em;color:#fff}
+.links{display:flex;align-items:center;gap:26px}
+.links a{font-size:14px;font-weight:600;color:rgba(255,255,255,.72);transition:.2s}
+.links a:hover{color:#fff}
+.links a.active{color:#fff}
+.btn{height:50px;padding:0 26px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:14px;transition:.3s ease}
+.btn-green{background:linear-gradient(135deg,var(--g500),var(--g700));color:#fff;box-shadow:0 4px 24px rgba(42,122,77,.25)}
+.btn-green:hover{transform:translateY(-2px)}
+.btn-green:hover{background:linear-gradient(135deg,var(--g400),var(--g600))}
+.btn-outline-light{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.2);color:#fff}
+.btn-outline-light:hover{background:rgba(255,255,255,.1)}
+
+.page-head{background:radial-gradient(120% 90% at 70% 0%,#17402d 0%,#0e3526 45%,#08160f 100%);color:#fff;padding:clamp(84px,13vh,140px) 0 clamp(64px,9vh,100px)}
+.sec-num{font-size:11px;font-weight:800;letter-spacing:.3em;color:var(--g400);display:block;margin-bottom:14px}
+.page-head h1{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(38px,5.5vw,76px);line-height:1.02;letter-spacing:-.03em}
+.lead{color:rgba(255,255,255,.62);font-size:clamp(16px,1.5vw,20px);line-height:1.75;max-width:680px;margin-top:22px}
+
+.section{padding:clamp(64px,9vh,110px) 0}
+.sec-head{max-width:720px;margin-bottom:52px}
+.sec-head h2{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(28px,3.6vw,48px);line-height:1.08;letter-spacing:-.02em}
+.sec-head p{color:var(--muted);font-size:17px;line-height:1.75;margin-top:16px}
+
+.pillars{display:grid;gap:0}
+.pillar{display:grid;grid-template-columns:64px 1fr 1.1fr;gap:32px;align-items:center;padding:34px 0;border-top:1px solid var(--line)}
+.pillar:last-child{border-bottom:1px solid var(--line)}
+.pillar-num{font-size:11px;font-weight:800;letter-spacing:.3em;color:var(--g500)}
+.pillar-name{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(20px,2vw,28px);letter-spacing:-.01em}
+.pillar-desc{font-size:15px;line-height:1.75;color:var(--muted)}
+
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;border-radius:16px;overflow:hidden}
+.card{background:linear-gradient(160deg,var(--g100),#f7faf5);padding:28px;min-height:200px;display:flex;flex-direction:column;justify-content:center;gap:8px}
+.card-num{font-size:10px;font-weight:800;letter-spacing:.3em;color:var(--g500)}
+.card-title{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:20px;letter-spacing:-.01em}
+.card-copy{font-size:12.5px;line-height:1.6;color:var(--muted);max-width:220px}
+
+.cta{background:linear-gradient(175deg,#153e2c,#1a4a34);color:#fff;padding:clamp(64px,9vh,100px) 0}
+.cta h2{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(28px,3.4vw,44px);letter-spacing:-.02em;max-width:620px}
+.cta p{color:rgba(255,255,255,.62);font-size:17px;line-height:1.75;margin:16px 0 30px;max-width:560px}
+.cta-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+footer{background:#123524;color:#fff;padding:56px 0 26px;border-top:1px solid rgba(42,122,77,.12)}
+.footer-top{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:start;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.06)}
+.footer-brand p{color:rgba(255,255,255,.5);margin-top:10px;font-size:14px}
+.footer-links{display:flex;gap:28px;flex-wrap:wrap}
+.footer-links a{color:rgba(255,255,255,.6);font-size:14px;transition:color .2s}
+.footer-links a:hover{color:var(--g400)}
+.footer-bottom{margin-top:24px;display:flex;justify-content:space-between;gap:20px;color:rgba(255,255,255,.45);font-size:12px}
+
+@media(max-width:760px){
+  .pillar{grid-template-columns:48px 1fr;gap:16px}
+  .pillar-desc{grid-column:1/-1;padding-left:64px}
+  .cards{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+  .navin{gap:14px}
+  .links{gap:16px}
+  .links a{font-size:12.5px}
+  .nav-right .btn{display:none}
+  .footer-top{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column}
+}
+
+/* ═══ PAGE TRANSITION LOADER ═══ */
+.page-loader{position:fixed;inset:0;z-index:9999;background:#0e1f16;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .2s ease}
+.page-loader.active{opacity:1;visibility:visible}
+.page-loader-inner{display:flex;flex-direction:column;align-items:center;gap:18px}
+.page-loader-logo{font-family:'Playfair Display',Georgia,serif;font-weight:700;letter-spacing:.35em;font-size:clamp(20px,3vw,30px);color:#fff}
+.page-loader-bar{width:clamp(120px,20vw,220px);height:2px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden}
+.page-loader-fill{width:0;height:100%;background:var(--g400);border-radius:2px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container navin">
+    <a href="index.html" class="logo">ZYPPYN</a>
+    <div class="links">
+      <a href="index.html#vision">Vision</a>
+      <a href="technology.html" class="active">Technology</a>
+      <a href="environments.html">Environments</a>
+      <a href="index.html#investors">Investors</a>
+    </div>
+    <div class="nav-right">
+      <a href="index.html#investors" class="btn btn-green">Request Pitch Deck</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <header class="page-head">
+    <div class="container">
+      <span class="sec-num">02 — Technology</span>
+      <h1>Built to evolve.</h1>
+      <p class="lead">ZYPPYN is a connected screen platform — combining premium hardware, intelligent software, and services into one evolving ecosystem.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <h2>Three pillars, one platform.</h2>
+        <p>Everything we ship is built on the same foundation.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-num">01</div>
+          <div class="pillar-name">Premium Display</div>
+          <p class="pillar-desc">Hardware foundation built on display quality that rivals screens at twice the price. Every size, every pixel, no compromise.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">02</div>
+          <div class="pillar-name">Software Platform</div>
+          <p class="pillar-desc">Software-driven and always evolving. OTA updates, intelligent ad placement, usage analytics, and content integration built from day one.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">03</div>
+          <div class="pillar-name">Revenue Engine</div>
+          <p class="pillar-desc">Ad-powered value creation. Intelligent, non-intrusive advertising subsidizes hardware costs while generating recurring revenue per screen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="sec-head"><h2>What's inside every screen.</h2></div>
+      <div class="cards">
+        <div class="card"><div class="card-num">01</div><div class="card-title">Premium Display</div><div class="card-copy">Immersive picture quality at every size — no compromise.</div></div>
+        <div class="card"><div class="card-num">02</div><div class="card-title">Software</div><div class="card-copy">OTA updates keep every screen current and evolving.</div></div>
+        <div class="card"><div class="card-num">03</div><div class="card-title">Services</div><div class="card-copy">Streaming, content and integrations built in from day one.</div></div>
+        <div class="card"><div class="card-num">04</div><div class="card-title">Platform</div><div class="card-copy">One connected system for the home and for business.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <h2>The opportunity is now.</h2>
+      <p>Television hasn't had a meaningful business-model innovation in decades. ZYPPYN is changing that.</p>
+      <div class="cta-actions">
+        <a href="index.html#investors" class="btn btn-green">Request a Pitch Deck</a>
+        <a href="environments.html" class="btn btn-outline-light">See the environments</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="logo">ZYPPYN</div><p>Premium Screens. Better Value.</p></div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#vision">Vision</a>
+        <a href="technology.html">Technology</a>
+        <a href="environments.html">Environments</a>
+        <a href="index.html#investors">Investors</a>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Zyppyn. All rights reserved.</span><span>A new generation of television.</span></div>
+  </div>
+</footer>
+
+<div class="page-loader" id="pageLoader" aria-hidden="true">
+  <div class="page-loader-inner">
+    <div class="page-loader-logo">ZYPPYN</div>
+    <div class="page-loader-bar"><div class="page-loader-fill" id="pageLoaderFill"></div></div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var loader = document.getElementById('pageLoader');
+  var fill = document.getElementById('pageLoaderFill');
+  if (!loader || !fill) return;
+
+  function isPageLink(a) {
+    var href = a.getAttribute('href');
+    if (!href || href.charAt(0) === '#' || href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0) return false;
+    if (a.target && a.target !== '_self') return false;
+    return /\.html($|[?#])/i.test(href);
+  }
+
+  document.addEventListener('click', function(e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target && e.target.closest ? e.target.closest('a') : null;
+    if (!a || !isPageLink(a)) return;
+    e.preventDefault();
+    var url = a.href;
+    var delay = 500 + Math.round(Math.random() * 500); /* 500-1000ms */
+    loader.classList.add('active');
+    fill.style.transition = 'none';
+    fill.style.width = '0';
+    void fill.offsetWidth;
+    fill.style.transition = 'width ' + delay + 'ms linear';
+    fill.style.width = '100%';
+    setTimeout(function() { window.location.href = url; }, delay + 40);
+  });
+
+  window.addEventListener('pageshow', function() {
+    loader.classList.remove('active');
+    fill.style.transition = 'none';
+    fill.style.width = '0';
+  });
+})();
+</script>
+
+</body>
+</html>

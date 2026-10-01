@@ -93,6 +93,7 @@ img{display:block;max-width:100%}
 .btn-dark:hover{background:linear-gradient(135deg,#243a2c,#2e4a36)}
 .btn-outline-dark{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
 .btn-outline-dark:hover{border-color:var(--g500);color:var(--g700)}
+.page-note{font-size:12.5px;line-height:1.55;margin-top:12px;opacity:.62}
 
 /* ═══ NAV ═══ */
 nav{
@@ -361,11 +362,6 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
   font-family:'Inter',system-ui,sans-serif;font-weight:900;
   font-size:clamp(24px,8vw,74px);letter-spacing:-.04em;color:var(--ink);line-height:1
 }
-.tv-feat-pill{
-  display:inline-flex;padding:clamp(2px,.28vw,5px) clamp(6px,1vw,15px);
-  border-radius:999px;background:rgba(42,122,77,.08);
-  font-size:clamp(4px,.7vw,10px);font-weight:800;letter-spacing:.1em;color:var(--g600)
-}
 .tv-feat-icon{
   width:clamp(18px,5vw,46px);height:clamp(18px,5vw,46px);color:var(--g500)
 }
@@ -601,6 +597,33 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
   font-size:clamp(18px,1.5vw,22px);color:var(--ink);letter-spacing:-.01em
 }
 .tech-vblock-copy{font-size:12.5px;line-height:1.6;color:var(--muted);max-width:220px}
+
+/* ── 02 Technology on dark: breaks the run of light sections ── */
+#technology::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;z-index:2;
+  background:linear-gradient(90deg,transparent,rgba(91,169,122,.25) 30%,rgba(91,169,122,.25) 70%,transparent)
+}
+#technology::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(70% 55% at 88% 0%,rgba(58,143,94,.16),transparent 62%)
+}
+#technology .container{position:relative;z-index:2}
+#technology .sec-num{color:var(--g400)}
+#technology .label{color:var(--g400)}
+#technology .copy{color:rgba(255,255,255,.6)}
+#technology .tech-pillar{border-top-color:rgba(255,255,255,.1)}
+#technology .tech-pillar:last-child{border-bottom-color:rgba(255,255,255,.1)}
+#technology .tech-pillar-num{color:var(--g400)}
+#technology .tech-pillar-icon{color:var(--g400)}
+#technology .tech-pillar-name{color:#fff}
+#technology .tech-pillar-desc{color:rgba(255,255,255,.6)}
+#technology .tech-vblock{
+  background:linear-gradient(160deg,#1f4a34,#153a29);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)
+}
+#technology .tech-vblock-num{color:var(--g400)}
+#technology .tech-vblock-title{color:#fff}
+#technology .tech-vblock-copy{color:rgba(255,255,255,.6)}
 
 /* ═══ 04 — ENVIRONMENTS ═══ */
 .env-header{
@@ -944,6 +967,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[t
   .hero-zone{height:auto}
   .hero-boot-overlay .boot-enter{opacity:1!important;transform:none!important}
 }
+
+/* ═══ ENV CARD LINK + PAGE TRANSITION LOADER ═══ */
+.env-card-more{display:inline-block;margin-top:16px;font-size:13px;font-weight:700;letter-spacing:.03em;color:var(--g600);transition:color .2s}
+.env-card:hover .env-card-more{color:var(--g700)}
+.page-loader{position:fixed;inset:0;z-index:9999;background:#0e1f16;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .2s ease}
+.page-loader.active{opacity:1;visibility:visible}
+.page-loader-inner{display:flex;flex-direction:column;align-items:center;gap:18px}
+.page-loader-logo{font-family:'Playfair Display',Georgia,serif;font-weight:700;letter-spacing:.35em;font-size:clamp(20px,3vw,30px);color:#fff}
+.page-loader-bar{width:clamp(120px,20vw,220px);height:2px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden}
+.page-loader-fill{width:0;height:100%;background:var(--g400);border-radius:2px}
 </style>
 <noscript><style>.hero-boot-overlay{display:none!important}#heroText{opacity:1!important;transform:none!important}.hero-tv-glow{opacity:1!important}.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -957,7 +990,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[t
     <a href="#top" class="logo">ZYPPYN</a>
     <div class="links">
       <a href="#vision">Vision</a>
-      <a href="#technology">Technology</a>
+      <a href="technology.html">Technology</a>
+      <a href="environments.html">Environments</a>
       <a href="#investors">Investors</a>
     </div>
     <div class="nav-right">
@@ -969,7 +1003,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[t
 
 <div class="mobile-panel" id="mobilePanel">
   <a href="#vision">Vision</a>
-  <a href="#technology">Technology</a>
+  <a href="technology.html">Technology</a>
+  <a href="environments.html">Environments</a>
   <a href="#investors">Investors</a>
   <a href="#partners">Partners</a>
 </div>
@@ -1023,10 +1058,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[t
             </div>
           </div>
           <div class="tv-feat" id="feat0">
-            <div class="tv-feat-big">Cinematic</div>
-            <div class="tv-feat-pill">HDR10+</div>
+            <div class="tv-feat-big">Immersive</div>
             <span class="tv-feat-title">Premium Display</span>
-            <span class="tv-feat-sub">Cinema-grade color accuracy at every size</span>
+            <span class="tv-feat-sub">Lifelike color at every size</span>
             <div class="tv-feat-spectrum"><span></span><span></span><span></span><span></span><span></span></div>
           </div>
           <div class="tv-feat" id="feat1">
@@ -1060,14 +1094,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[t
 <!-- ═══════════ MARQUEE ═══════════ -->
 <div class="marquee">
   <div class="track">
-    <span><b class="stat-val">Cinematic</b> Display</span>
+    <span><b class="stat-val">Immersive</b> Display</span>
     <span>Home + B2B</span>
     <span><b class="stat-val">OTA</b> Always Evolving</span>
     <span>Connected Platform</span>
     <span>Built to Last</span>
     <span>Premium at Every Size</span>
     <span>Pre-Launch 2027</span>
-    <span><b class="stat-val">Cinematic</b> Display</span>
+    <span><b class="stat-val">Immersive</b> Display</span>
     <span>Home + B2B</span>
     <span><b class="stat-val">OTA</b> Always Evolving</span>
     <span>Connected Platform</span>
@@ -1105,14 +1139,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[t
       </div>
       <div class="vision-closing reveal">
         <p class="copy">The television industry hasn't seen a fundamentally new business model in decades. ZYPPYN is building one — designed for today's market, not yesterday's assumptions.</p>
-        <a class="btn btn-dark" href="#technology" style="margin-top:28px">See the Technology</a>
+        <a class="btn btn-dark" href="technology.html" style="margin-top:28px">See the Technology &rarr;</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════ 02 — TECHNOLOGY ═══════════ -->
-<section class="section sec-light" id="technology">
+<section class="section sec-dark" id="technology">
   <div class="container tech-split">
     <div class="tech-left">
       <span class="sec-num reveal">02</span>
@@ -1152,7 +1186,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[t
         <div class="tech-vblock-body">
           <div class="tech-vblock-num">01</div>
           <div class="tech-vblock-title">Premium Display</div>
-          <div class="tech-vblock-copy">Cinematic panel quality at every size — no compromise.</div>
+          <div class="tech-vblock-copy">Immersive picture quality at every size — no compromise.</div>
         </div>
       </div>
       <div class="tech-vblock">
@@ -1177,6 +1211,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[t
         </div>
       </div>
     </div>
+    <div class="reveal" style="margin-top:40px">
+      <a class="btn btn-green" href="technology.html">See the full technology &rarr;</a>
+      <p class="page-note">Opens the dedicated Technology page.</p>
+    </div>
     </div>
   </div>
 </section>
@@ -1193,18 +1231,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[t
       <p class="copy reveal">From living rooms to restaurants, hotels, offices, retail and public spaces — designed for environments where screens matter.</p>
     </div>
     <div class="env-cards">
-      <div class="env-card reveal">
+      <a class="env-card reveal" href="environments.html">
         <div class="env-card-top">
           <span class="env-card-tag">Living Spaces</span>
           <div class="env-card-icon"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 26V14a2 2 0 012-2h20a2 2 0 012 2v12" stroke="currentColor" stroke-width="1.5"/><path d="M4 26h28M10 26v4M26 26v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M11 20h14M11 16h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".4"/></svg></div>
         </div>
         <div class="env-card-body">
           <div class="env-card-title">Home</div>
-          <p class="env-card-desc">Premium entertainment for living rooms, bedrooms, and personal spaces. Cinema-quality display at a fraction of the price.</p>
+          <p class="env-card-desc">Premium entertainment for living rooms, bedrooms, and personal spaces. Immersive display quality at a fraction of the price.</p>
+          <span class="env-card-more">Click to see more &rarr;</span>
         </div>
         <div class="env-card-line"></div>
-      </div>
-      <div class="env-card reveal">
+      </a>
+      <a class="env-card reveal" href="environments.html">
         <div class="env-card-top">
           <span class="env-card-tag">Commercial Spaces</span>
           <div class="env-card-icon"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="28" height="28" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M4 14h28M14 14v18M14 22h18" stroke="currentColor" stroke-width="1.5" opacity=".4"/><circle cx="9" cy="9" r="2" stroke="currentColor" stroke-width="1.5"/></svg></div>
@@ -1212,9 +1251,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[t
         <div class="env-card-body">
           <div class="env-card-title">Business</div>
           <p class="env-card-desc">Restaurants, hotels, offices, retail, and public spaces. Scalable deployment with centralized management and targeted content.</p>
+          <span class="env-card-more">Click to see more &rarr;</span>
         </div>
         <div class="env-card-line"></div>
-      </div>
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:44px" class="reveal">
+      <a class="btn btn-dark" href="environments.html">See the environments &rarr;</a>
+      <p class="page-note">Opens the dedicated Environments page.</p>
     </div>
   </div>
 </section>
@@ -1373,9 +1417,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[t
     <div class="footer-top">
       <div class="footer-brand"><div class="logo">ZYPPYN</div><p>Premium Screens. Better Value.</p></div>
       <div class="footer-links">
-        <a href="#vision">Vision</a><a href="#technology">Technology</a>
-        <a href="#investors">Investors</a>
-        <a href="#partners">Partnerships</a><a href="#">Privacy</a>
+        <a href="#vision">Vision</a><a href="technology.html">Technology</a>
+        <a href="environments.html">Environments</a><a href="#investors">Investors</a>
+        <a href="#partners">Partnerships</a>
       </div>
     </div>
     <div class="footer-bottom"><span>&copy; 2026 Zyppyn. All rights reserved.</span><span>A new generation of television.</span></div>
@@ -2117,7 +2161,56 @@ window.addEventListener('DOMContentLoaded', function() {
     document.documentElement.classList.add('no-gsap');
   }
 });
+
+/* ═══════════════════════════════════════════
+   PAGE TRANSITION LOADER (random 0.5–1s)
+   ═══════════════════════════════════════════ */
+(function() {
+  function init() {
+    var loader = document.getElementById('pageLoader');
+    var fill = document.getElementById('pageLoaderFill');
+    if (!loader || !fill) return;
+
+    function isPageLink(a) {
+      var href = a.getAttribute('href');
+      if (!href || href.charAt(0) === '#' || href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0) return false;
+      if (a.target && a.target !== '_self') return false;
+      return /\.html($|[?#])/i.test(href);
+    }
+
+    document.addEventListener('click', function(e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target && e.target.closest ? e.target.closest('a') : null;
+      if (!a || !isPageLink(a)) return;
+      e.preventDefault();
+      var url = a.href;
+      var delay = 500 + Math.round(Math.random() * 500); /* 500–1000ms */
+      loader.classList.add('active');
+      fill.style.transition = 'none';
+      fill.style.width = '0';
+      void fill.offsetWidth;
+      fill.style.transition = 'width ' + delay + 'ms linear';
+      fill.style.width = '100%';
+      setTimeout(function() { window.location.href = url; }, delay + 40);
+    });
+
+    window.addEventListener('pageshow', function() {
+      loader.classList.remove('active');
+      fill.style.transition = 'none';
+      fill.style.width = '0';
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
 </script>
+
+<div class="page-loader" id="pageLoader" aria-hidden="true">
+  <div class="page-loader-inner">
+    <div class="page-loader-logo">ZYPPYN</div>
+    <div class="page-loader-bar"><div class="page-loader-fill" id="pageLoaderFill"></div></div>
+  </div>
+</div>
 
 </body>
 </html>

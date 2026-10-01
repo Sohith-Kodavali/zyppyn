@@ -23,7 +23,7 @@ jobs:
       - name: Stage static site
         run: |
           mkdir -p _site
-          cp -R index.html 404.html robots.txt sitemap.xml site.webmanifest \
+          cp -R *.html robots.txt sitemap.xml site.webmanifest \
                 favicon.svg favicon-32.png apple-touch-icon.png og-image.png \
                 intro.mp3 vendor _site/
           touch _site/.nojekyll
