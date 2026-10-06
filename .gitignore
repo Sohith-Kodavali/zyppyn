@@ -1,6 +1,10 @@
 # Local tooling / agent state
 .commandcode/
 
+# Local backups
+backup-green/
+backup-navy/
+
 # OS
 .DS_Store
 Thumbs.db
