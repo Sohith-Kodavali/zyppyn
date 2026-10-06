@@ -9,7 +9,6 @@
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://www.zyppyn.com/environments.html">
 
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
@@ -43,7 +42,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--g400);outline-offse
 
 nav{position:sticky;top:0;z-index:50;height:74px;background:rgba(8,28,20,.92);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.06)}
 .navin{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.logo{font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;letter-spacing:.22em;color:#fff}
+.logo{display:inline-flex;align-items:center;gap:12px}
+.logo-img{height:38px;width:auto;display:block}
+.logo-mark-img{height:34px;width:auto;display:block}
+.logo-word{font-family:'Inter',system-ui,sans-serif;font-size:24px;font-weight:700;letter-spacing:.3em;line-height:1;color:#fff}
+.page-loader-logo-img{height:clamp(26px,3vw,34px);width:auto;display:block}
 .links{display:flex;align-items:center;gap:26px}
 .links a{font-size:14px;font-weight:600;color:rgba(255,255,255,.72);transition:.2s}
 .links a:hover{color:#fff}
@@ -112,7 +115,7 @@ footer{background:#123524;color:#fff;padding:56px 0 26px;border-top:1px solid rg
 
 <nav>
   <div class="container navin">
-    <a href="index.html" class="logo">ZYPPYN</a>
+    <a href="index.html" class="logo"><img src="logo-mark.png" alt="" class="logo-mark-img"><span class="logo-word">ZYPPYN</span></a>
     <div class="links">
       <a href="index.html#vision">Vision</a>
       <a href="technology.html">Technology</a>
@@ -190,7 +193,7 @@ footer{background:#123524;color:#fff;padding:56px 0 26px;border-top:1px solid rg
 <footer>
   <div class="container">
     <div class="footer-top">
-      <div class="footer-brand"><div class="logo">ZYPPYN</div><p>Premium Screens. Better Value.</p></div>
+      <div class="footer-brand"><div class="logo"><img src="logo.png" alt="ZYPPYN" class="logo-img"></div><p>Premium Screens. Better Value.</p></div>
       <div class="footer-links">
         <a href="index.html">Home</a>
         <a href="index.html#vision">Vision</a>
@@ -205,7 +208,7 @@ footer{background:#123524;color:#fff;padding:56px 0 26px;border-top:1px solid rg
 
 <div class="page-loader" id="pageLoader" aria-hidden="true">
   <div class="page-loader-inner">
-    <div class="page-loader-logo">ZYPPYN</div>
+    <div class="page-loader-logo"><img src="logo-mark.png" alt="ZYPPYN" class="page-loader-logo-img"></div>
     <div class="page-loader-bar"><div class="page-loader-fill" id="pageLoaderFill"></div></div>
   </div>
 </div>

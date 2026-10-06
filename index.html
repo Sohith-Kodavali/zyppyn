@@ -10,7 +10,6 @@
 <link rel="canonical" href="https://www.zyppyn.com/">
 
 <!-- Icons -->
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
@@ -104,7 +103,13 @@ nav{
 }
 nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
 .navin{height:100%;display:flex;align-items:center;justify-content:space-between;gap:32px}
-.logo{font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;letter-spacing:.22em;color:#fff}
+.logo{display:inline-flex;align-items:center;gap:12px}
+.logo-img{height:38px;width:auto;display:block}
+.logo-mark-img{height:34px;width:auto;display:block}
+.logo-word{font-family:'Inter',system-ui,sans-serif;font-size:24px;font-weight:700;letter-spacing:.3em;line-height:1;color:#fff}
+.boot-logo-img{height:clamp(30px,5vw,52px);width:auto;display:block}
+.screen-boot-logo-img{height:clamp(12px,4vw,32px);width:auto;display:block}
+.page-loader-logo-img{height:clamp(26px,3vw,34px);width:auto;display:block}
 .links{display:flex;align-items:center;gap:28px}
 .links a{font-size:14px;font-weight:600;color:rgba(255,255,255,.72);transition:.2s}
 .links a:hover{color:#fff}
@@ -994,7 +999,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[t
 
 <nav id="mainNav">
   <div class="container navin">
-    <a href="#top" class="logo">ZYPPYN</a>
+    <a href="#top" class="logo"><img src="logo-mark.png" alt="" class="logo-mark-img"><span class="logo-word">ZYPPYN</span></a>
     <div class="links">
       <a href="#vision">Vision</a>
       <a href="technology.html">Technology</a>
@@ -1030,7 +1035,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[t
     <div class="hero-aurora hero-aurora-2"></div>
 
     <div class="hero-boot-overlay" id="heroBootOverlay" role="button" tabindex="0" aria-label="Enter the ZYPPYN experience">
-      <div class="boot-logo">ZYPPYN</div>
+      <div class="boot-logo"><img src="logo-mark.png" alt="ZYPPYN" class="boot-logo-img"></div>
       <div class="boot-sub">Television, Redesigned.</div>
       <div class="boot-bar"><div class="boot-fill"></div></div>
       <div class="boot-enter">Click to Experience</div>
@@ -1059,7 +1064,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[t
         <div class="hero-tv-screen" id="heroScreen">
           <div class="screen-content" id="screenContent">
             <div class="screen-boot">
-              <span class="screen-boot-logo">ZYPPYN</span>
+              <span class="screen-boot-logo"><img src="logo-mark.png" alt="ZYPPYN" class="screen-boot-logo-img"></span>
               <span class="screen-boot-sub">Television, Redesigned.</span>
               <div class="screen-boot-bar"><div class="screen-boot-fill"></div></div>
             </div>
@@ -1420,7 +1425,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[t
 <footer>
   <div class="container">
     <div class="footer-top">
-      <div class="footer-brand"><div class="logo">ZYPPYN</div><p>Premium Screens. Better Value.</p></div>
+      <div class="footer-brand"><div class="logo"><img src="logo.png" alt="ZYPPYN" class="logo-img"></div><p>Premium Screens. Better Value.</p></div>
       <div class="footer-links">
         <a href="#vision">Vision</a><a href="technology.html">Technology</a>
         <a href="environments.html">Environments</a><a href="#contact">Contact</a>
@@ -2256,7 +2261,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 <div class="page-loader" id="pageLoader" aria-hidden="true">
   <div class="page-loader-inner">
-    <div class="page-loader-logo">ZYPPYN</div>
+    <div class="page-loader-logo"><img src="logo-mark.png" alt="ZYPPYN" class="page-loader-logo-img"></div>
     <div class="page-loader-bar"><div class="page-loader-fill" id="pageLoaderFill"></div></div>
   </div>
 </div>
