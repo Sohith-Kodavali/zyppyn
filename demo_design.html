@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f4ec">
+<title>ZYPPYN — Television, Reimagined.</title>
+<meta name="description" content="ZYPPYN is building a new generation of premium screens around better quality, smarter technology and better value.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --olive:#596B3D;
+  --deep:#354224;
+  --soft:#82935E;
+  --cream:#F5F4EC;
+  --paper:#FBFAF5;
+  --ink:#11130F;
+  --muted:#6D7168;
+  --line:#D9D9CF;
+  --white:#fff;
+  --radius:28px;
+  --max:1360px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden
+}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+img{display:block;max-width:100%}
+::selection{background:var(--olive);color:#fff}
+
+.container{width:min(calc(100% - 48px),var(--max));margin:auto}
+.section{padding:132px 0}
+.label{
+  font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--olive);margin-bottom:22px
+}
+.h1,.h2,.h3{
+  font-family:Manrope,Inter,sans-serif;margin:0;letter-spacing:-.055em;
+  font-weight:700
+}
+.h1{font-size:clamp(64px,9vw,142px);line-height:.88}
+.h2{font-size:clamp(48px,6.5vw,94px);line-height:.95}
+.h3{font-size:clamp(32px,4vw,56px);line-height:1}
+.copy{
+  color:var(--muted);font-size:clamp(17px,1.55vw,22px);
+  line-height:1.62;max-width:690px
+}
+.btn{
+  height:52px;padding:0 23px;border-radius:999px;border:1px solid transparent;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-weight:700;font-size:14px;transition:.22s ease;cursor:pointer
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-outline{border-color:#b9bcb2;background:transparent}
+.btn-light{background:#fff;color:var(--ink)}
+.btn-olive{background:var(--olive);color:#fff}
+
+nav{
+  height:78px;position:fixed;z-index:100;inset:0 0 auto;
+  background:rgba(251,250,245,.88);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(17,19,15,.07)
+}
+.navin{height:100%;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.logo{
+  font-family:Manrope,sans-serif;font-size:23px;font-weight:800;letter-spacing:.19em
+}
+.links{display:flex;align-items:center;gap:28px}
+.links a{font-size:14px;font-weight:600}
+.nav-right{display:flex;align-items:center;gap:10px}
+.menu{display:none;border:0;background:none;font-size:26px;cursor:pointer}
+
+.hero{
+  min-height:100vh;padding:152px 0 48px;display:flex;align-items:center;
+  position:relative;overflow:hidden
+}
+.hero-top{text-align:center;max-width:1160px;margin:0 auto}
+.hero .label{margin-bottom:18px}
+.hero .sub{
+  margin:28px auto 0;max-width:760px;color:#555a50;
+  font-size:clamp(18px,1.6vw,23px);line-height:1.55
+}
+.hero-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+
+.product-stage{
+  margin:70px auto 0;max-width:1180px;min-height:560px;position:relative;
+  display:grid;place-items:center
+}
+.product-stage:before{
+  content:"";position:absolute;width:760px;height:340px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(89,107,61,.18),rgba(89,107,61,0) 70%);
+  filter:blur(10px);bottom:48px
+}
+.screen-unit{
+  width:min(92%,980px);aspect-ratio:16/8.5;position:relative;
+  filter:drop-shadow(0 50px 55px rgba(0,0,0,.22));
+  transform:perspective(1200px) rotateX(1deg)
+}
+.frame{
+  position:absolute;inset:0;border-radius:14px;
+  padding:7px;background:linear-gradient(145deg,#242820,#090b08 58%,#31382a);
+}
+.display{
+  width:100%;height:100%;border-radius:9px;overflow:hidden;position:relative;
+  background:
+    radial-gradient(circle at 70% 24%,rgba(130,147,94,.36),transparent 26%),
+    linear-gradient(135deg,#11170d,#26331b 54%,#080a07);
+}
+.display:before{
+  content:"";position:absolute;inset:-20%;
+  background:linear-gradient(115deg,transparent 37%,rgba(255,255,255,.13) 48%,transparent 57%);
+  transform:translateX(-25%);
+}
+.display:after{
+  content:"ZYPPYN / DEVELOPMENT UNIT";
+  position:absolute;left:24px;bottom:20px;color:rgba(255,255,255,.48);
+  letter-spacing:.17em;font-size:9px
+}
+.product-blur{
+  position:absolute;left:11%;right:11%;bottom:10%;height:20%;
+  border-radius:14px;background:rgba(5,7,5,.38);backdrop-filter:blur(22px);
+  border:1px solid rgba(255,255,255,.07)
+}
+.stand{
+  position:absolute;left:50%;bottom:-65px;transform:translateX(-50%);
+  width:34%;height:68px
+}
+.stand:before{
+  content:"";position:absolute;width:7px;height:52px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(90deg,#171916,#3e4438,#121410)
+}
+.stand:after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:9px;border-radius:50%;
+  background:#282d24
+}
+.stage-note{
+  position:absolute;right:4%;top:13%;padding:10px 14px;border-radius:999px;
+  border:1px solid #d9dbd2;background:rgba(255,255,255,.72);backdrop-filter:blur(10px);
+  font-size:12px;font-weight:700;color:#5b6156
+}
+
+.statement{
+  background:var(--ink);color:#fff;padding:150px 0
+}
+.statement .label{color:#9AAA7E}
+.statement-grid{
+  display:grid;grid-template-columns:.76fr 1.24fr;gap:90px;align-items:start
+}
+.statement .copy{color:#afb4aa}
+.big-quote{
+  margin-top:54px;padding-top:38px;border-top:1px solid rgba(255,255,255,.15);
+  font-family:Manrope,sans-serif;font-weight:600;letter-spacing:-.045em;
+  font-size:clamp(32px,4.4vw,67px);line-height:1.05
+}
+.big-quote em{font-style:normal;color:#9EAF82}
+
+.feature{
+  padding:150px 0;background:var(--paper)
+}
+.feature-grid{
+  display:grid;grid-template-columns:.93fr 1.07fr;gap:82px;align-items:center
+}
+.feature-copy .copy{margin-top:26px}
+.feature-points{margin-top:44px;border-top:1px solid var(--line)}
+.point{
+  padding:22px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:20px
+}
+.point strong{font-size:17px}
+.point span{font-size:13px;color:#858a80}
+.visual-box{
+  min-height:650px;border-radius:34px;background:#e9eadf;position:relative;overflow:hidden
+}
+.visual-box:before{
+  content:"";position:absolute;width:580px;height:580px;border-radius:50%;
+  background:radial-gradient(circle,rgba(89,107,61,.28),transparent 68%);
+  right:-100px;top:-100px
+}
+.visual-screen{
+  position:absolute;left:9%;right:9%;top:18%;height:50%;
+  background:#0c0f0a;border:7px solid #20241d;border-radius:12px;
+  box-shadow:0 30px 60px rgba(0,0,0,.22)
+}
+.visual-screen:after{
+  content:"";position:absolute;inset:0;background:
+    radial-gradient(circle at 32% 24%,rgba(255,255,255,.08),transparent 20%),
+    radial-gradient(circle at 66% 40%,rgba(130,147,94,.46),transparent 28%),
+    linear-gradient(145deg,#0a0d09,#1d2816)
+}
+.console{
+  position:absolute;bottom:12%;left:19%;right:19%;height:14%;
+  background:#c6c8ba;border-radius:12px 12px 4px 4px
+}
+.console:before{
+  content:"";position:absolute;width:22%;height:54%;right:10%;top:-32%;
+  background:#abb09f;border-radius:10px
+}
+
+.marquee{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  overflow:hidden;background:#fff
+}
+.track{
+  display:flex;width:max-content;gap:42px;padding:23px 0;
+  font-family:Manrope,sans-serif;font-size:15px;font-weight:700;letter-spacing:.04em;
+  animation:scroll 24s linear infinite
+}
+.track span:after{content:"•";margin-left:42px;color:var(--olive)}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+.env{background:#fff}
+.env-head{display:flex;justify-content:space-between;gap:50px;align-items:end}
+.env-head .copy{max-width:510px;margin:0}
+.env-grid{
+  margin-top:58px;display:grid;grid-template-columns:1.25fr .75fr;gap:18px
+}
+.env-card{
+  min-height:620px;border-radius:30px;overflow:hidden;position:relative;
+  background:#e7e7dd
+}
+.env-card.small{min-height:620px;background:#dfe3d6}
+.env-label{
+  position:absolute;left:28px;top:28px;z-index:4;padding:9px 13px;border-radius:999px;
+  background:rgba(255,255,255,.74);backdrop-filter:blur(10px);font-size:12px;font-weight:700
+}
+.room-screen{
+  position:absolute;top:25%;left:12%;right:12%;height:39%;border:6px solid #22271e;
+  border-radius:8px;background:#0b0e09;box-shadow:0 24px 50px rgba(0,0,0,.2)
+}
+.room-screen:after{
+  content:"";position:absolute;inset:0;background:
+  radial-gradient(circle at 68% 32%,rgba(130,147,94,.45),transparent 32%),
+  linear-gradient(135deg,#10150e,#243019)
+}
+.furniture{
+  position:absolute;left:10%;right:10%;bottom:8%;height:19%;
+  background:#b8baad;border-radius:18px 18px 7px 7px
+}
+.small .room-screen{top:18%;height:30%;left:16%;right:16%}
+.small .furniture{height:30%;left:12%;right:12%;background:#c2c8b6}
+
+.value{
+  background:var(--cream)
+}
+.value-center{text-align:center;max-width:1020px;margin:auto}
+.value-center .copy{margin:26px auto 0}
+.model{
+  margin:72px auto 0;display:grid;grid-template-columns:1fr 100px 1fr;
+  max-width:1100px;align-items:stretch;gap:18px
+}
+.model-card{
+  background:#fff;border:1px solid var(--line);border-radius:28px;padding:34px;text-align:left;
+  min-height:380px
+}
+.model-card.dark{background:var(--deep);color:#fff;border-color:transparent}
+.model-label{font-size:11px;text-transform:uppercase;letter-spacing:.16em;font-weight:800;color:#777c72}
+.dark .model-label{color:#bdc8ac}
+.steps{margin-top:66px;display:grid;gap:16px}
+.steps strong{font-family:Manrope,sans-serif;font-size:clamp(27px,3vw,43px);letter-spacing:-.04em}
+.steps i{font-style:normal;color:var(--olive);font-size:25px}
+.dark .steps i{color:#9caf7d}
+.vs{display:grid;place-items:center;font-size:12px;font-weight:800;color:#7d8278}
+
+.mystery{
+  background:#0c0f0a;color:#fff;padding:170px 0;position:relative;overflow:hidden
+}
+.mystery:after{
+  content:"";position:absolute;width:780px;height:780px;border-radius:50%;
+  background:radial-gradient(circle,rgba(89,107,61,.24),transparent 67%);
+  right:-260px;top:-280px
+}
+.mystery .container{position:relative;z-index:2}
+.mystery-copy{max-width:1050px}
+.mystery .copy{color:#aeb3a8;margin-top:30px}
+.mission{
+  margin-top:58px;border-top:1px solid rgba(255,255,255,.15);padding-top:38px;
+  font-family:Manrope,sans-serif;font-size:clamp(34px,4.8vw,70px);
+  line-height:1.04;letter-spacing:-.05em;font-weight:600
+}
+.mission span{color:#9caf7d}
+
+.partners{background:#fff}
+.partner-row{
+  margin-top:60px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(4,1fr)
+}
+.partner-row div{
+  padding:28px;text-align:center;border-right:1px solid var(--line);
+  font-weight:700
+}
+.partner-row div:last-child{border-right:0}
+
+.signup{background:var(--olive);color:#fff}
+.signup-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.signup .label{color:#d6dec9}
+.signup .copy{color:#e0e5d8;margin-top:24px}
+.form{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+  border-radius:28px;padding:30px;backdrop-filter:blur(12px)
+}
+.field{margin-bottom:14px}
+.field label{
+  display:block;font-size:11px;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;margin-bottom:8px;color:#dfe5d7
+}
+.field input{
+  width:100%;height:54px;border-radius:13px;border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.08);padding:0 15px;color:#fff;outline:none
+}
+.field input::placeholder{color:rgba(255,255,255,.55)}
+.field input:focus{border-color:#fff}
+.form .btn{width:100%;margin-top:6px}
+.success{
+  display:none;margin-top:14px;padding:13px 14px;border-radius:12px;
+  background:rgba(255,255,255,.12);font-size:13px
+}
+
+footer{background:var(--ink);color:#fff;padding:70px 0 30px}
+.footer-top{display:flex;justify-content:space-between;gap:60px}
+.footer-brand p{color:#858b80;margin-top:12px}
+.footer-links{display:grid;grid-template-columns:repeat(2,1fr);gap:12px 34px}
+.footer-links a{color:#b9beb4;font-size:14px}
+.footer-bottom{
+  margin-top:60px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);
+  display:flex;justify-content:space-between;gap:24px;color:#74796f;font-size:12px
+}
+
+.reveal{
+  opacity:0;transform:translateY(28px);
+  transition:opacity .75s cubic-bezier(.2,.7,.2,1),transform .75s cubic-bezier(.2,.7,.2,1)
+}
+.reveal.show{opacity:1;transform:none}
+
+.mobile-panel{
+  display:none;position:fixed;inset:78px 0 0;background:var(--paper);z-index:90;
+  padding:36px 24px
+}
+.mobile-panel.open{display:block}
+.mobile-panel a{
+  display:block;font-family:Manrope,sans-serif;font-weight:700;
+  font-size:34px;letter-spacing:-.04em;padding:13px 0;border-bottom:1px solid var(--line)
+}
+
+@media(max-width:980px){
+  .links{display:none}.menu{display:block}
+  .statement-grid,.feature-grid,.signup-grid{grid-template-columns:1fr;gap:56px}
+  .env-head{display:block}.env-head .copy{margin-top:24px}
+  .env-grid{grid-template-columns:1fr}
+  .model{grid-template-columns:1fr}.vs{min-height:50px}
+  .partner-row{grid-template-columns:1fr 1fr}
+  .partner-row div:nth-child(2){border-right:0}
+  .partner-row div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+@media(max-width:680px){
+  .container{width:min(calc(100% - 28px),var(--max))}
+  .section,.feature{padding:92px 0}
+  nav{height:70px}.mobile-panel{inset:70px 0 0}
+  .nav-right .btn{display:none}
+  .hero{padding-top:124px}
+  .product-stage{min-height:390px;margin-top:38px}
+  .stand{bottom:-48px}
+  .stage-note{display:none}
+  .visual-box{min-height:460px}
+  .env-card,.env-card.small{min-height:430px}
+  .mystery{padding:110px 0}
+  .partner-row{grid-template-columns:1fr}
+  .partner-row div{border-right:0;border-bottom:1px solid var(--line)}
+  .partner-row div:last-child{border-bottom:0}
+  .footer-top,.footer-bottom{flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body>
+<nav>
+  <div class="container navin">
+    <a href="#top" class="logo">ZYPPYN</a>
+
+    <div class="links">
+      <a href="#vision">Vision</a>
+      <a href="#technology">Technology</a>
+      <a href="#commercial">Commercial</a>
+      <a href="#partners">Partners</a>
+    </div>
+
+    <div class="nav-right">
+      <a href="#early" class="btn btn-dark">Join Early Access</a>
+      <button class="menu" id="menuBtn" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-panel" id="mobilePanel">
+  <a href="#vision">Vision</a>
+  <a href="#technology">Technology</a>
+  <a href="#commercial">Commercial</a>
+  <a href="#partners">Partners</a>
+  <a href="#early">Early Access</a>
+</div>
+
+<main id="top">
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-top">
+      <div class="label reveal">A new generation of television</div>
+      <h1 class="h1 reveal">Television,<br>Reimagined.</h1>
+      <p class="sub reveal">
+        ZYPPYN is building premium screens around a simple belief:
+        high quality shouldn't have to mean high price.
+      </p>
+      <div class="hero-actions reveal">
+        <a class="btn btn-dark" href="#vision">Discover Zyppyn</a>
+        <a class="btn btn-outline" href="#early">Join Early Access</a>
+      </div>
+    </div>
+
+    <div class="product-stage reveal">
+      <div class="stage-note">Something different is coming to the screen.</div>
+      <div class="screen-unit">
+        <div class="frame">
+          <div class="display"><div class="product-blur"></div></div>
+        </div>
+        <div class="stand"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="track">
+    <span>Premium Screens</span><span>Better Value</span><span>Commercial Ready</span>
+    <span>Connected Technology</span><span>Built for the Future</span>
+    <span>Premium Screens</span><span>Better Value</span><span>Commercial Ready</span>
+    <span>Connected Technology</span><span>Built for the Future</span>
+  </div>
+</div>
+
+<section class="statement" id="vision">
+  <div class="container statement-grid">
+    <div>
+      <div class="label reveal">Why Zyppyn</div>
+      <h2 class="h2 reveal">Premium shouldn't automatically mean expensive.</h2>
+    </div>
+    <div>
+      <p class="copy reveal">
+        Customers and businesses are often forced to choose between an affordable television
+        and a genuinely premium screen experience. We believe there can be a different model.
+      </p>
+      <div class="big-quote reveal">
+        Better screens.<br>
+        Smarter technology.<br>
+        <em>Better value.</em>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="feature" id="technology">
+  <div class="container feature-grid">
+    <div class="feature-copy">
+      <div class="label reveal">More than a television</div>
+      <h2 class="h2 reveal">Built to evolve.</h2>
+      <p class="copy reveal">
+        ZYPPYN is being designed as a connected screen platform — combining modern hardware,
+        intelligent software and services into one evolving ecosystem.
+      </p>
+      <div class="feature-points reveal">
+        <div class="point"><strong>Premium display foundation</strong><span>Hardware</span></div>
+        <div class="point"><strong>Software-driven experience</strong><span>Platform</span></div>
+        <div class="point"><strong>Designed for what comes next</strong><span>Future</span></div>
+      </div>
+    </div>
+
+    <div class="visual-box reveal" aria-label="Abstract Zyppyn screen in a modern room">
+      <div class="visual-screen"></div>
+      <div class="console"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section env" id="commercial">
+  <div class="container">
+    <div class="env-head">
+      <div>
+        <div class="label reveal">One screen. More places.</div>
+        <h2 class="h2 reveal">Made for home.<br>Built for business.</h2>
+      </div>
+      <p class="copy reveal">
+        From living rooms to restaurants, hotels, offices, retail, gyms and public spaces,
+        Zyppyn is being designed for environments where screens matter.
+      </p>
+    </div>
+
+    <div class="env-grid">
+      <div class="env-card reveal">
+        <span class="env-label">Living spaces</span>
+        <div class="room-screen"></div>
+        <div class="furniture"></div>
+      </div>
+      <div class="env-card small reveal">
+        <span class="env-label">Commercial spaces</span>
+        <div class="room-screen"></div>
+        <div class="furniture"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section value">
+  <div class="container">
+    <div class="value-center">
+      <div class="label reveal">A different way to think about television</div>
+      <h2 class="h2 reveal">Change the model.<br>Change the value.</h2>
+      <p class="copy reveal">
+        Sometimes innovation isn't about making another television.
+        It's about rethinking the model behind it.
+      </p>
+    </div>
+
+    <div class="model">
+      <div class="model-card reveal">
+        <div class="model-label">Traditional model</div>
+        <div class="steps">
+          <strong>Premium Quality</strong>
+          <i>↓</i>
+          <strong>Premium Price</strong>
+        </div>
+      </div>
+
+      <div class="vs reveal">VS</div>
+
+      <div class="model-card dark reveal">
+        <div class="model-label">ZYPPYN</div>
+        <div class="steps">
+          <strong>Premium Quality</strong>
+          <i>↓</i>
+          <strong>Smarter Model</strong>
+          <i>↓</i>
+          <strong>Better Value</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mystery">
+  <div class="container">
+    <div class="mystery-copy">
+      <div class="label reveal">Still under wraps</div>
+      <h2 class="h2 reveal">We're not ready to show you everything yet.</h2>
+      <p class="copy reveal">
+        ZYPPYN is currently developing its next-generation screen concept.
+        The product architecture, technology and commercial model remain confidential during development.
+      </p>
+      <div class="mission reveal">
+        But the mission is simple:<br>
+        give people <span>better screens</span> without unnecessarily high prices.
+      </div>
+      <div style="margin-top:38px" class="reveal">
+        <a class="btn btn-light" href="#early">Be First to See It</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section partners" id="partners">
+  <div class="container">
+    <div class="label reveal">Partnerships</div>
+    <h2 class="h2 reveal">Build the next generation with us.</h2>
+    <p class="copy reveal" style="margin-top:26px">
+      We're interested in conversations with partners who believe the television industry can work differently.
+    </p>
+
+    <div class="partner-row reveal">
+      <div>Investors</div>
+      <div>Manufacturers</div>
+      <div>Technology Partners</div>
+      <div>Commercial Partners</div>
+    </div>
+
+    <div style="margin-top:34px" class="reveal">
+      <a class="btn btn-dark" href="#early">Partner With Zyppyn</a>
+    </div>
+  </div>
+</section>
+
+<section class="section signup" id="early">
+  <div class="container signup-grid">
+    <div>
+      <div class="label reveal">Early access</div>
+      <h2 class="h2 reveal">The screen is about to change.</h2>
+      <p class="copy reveal">
+        Join the Zyppyn early-access list for product announcements,
+        prototype reveals, partnerships and launch updates.
+      </p>
+    </div>
+
+    <form class="form reveal" id="signupForm">
+      <div class="field">
+        <label for="name">Name</label>
+        <input id="name" type="text" placeholder="Your name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="you@example.com" required>
+      </div>
+      <div class="field">
+        <label for="company">Company / Organization — optional</label>
+        <input id="company" type="text" placeholder="Company name">
+      </div>
+      <button class="btn btn-light" type="submit">Join Zyppyn</button>
+      <div class="success" id="success">Thanks — you're on the Zyppyn early-access list.</div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">ZYPPYN</div>
+        <p>Premium Screens. Better Value.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#vision">Vision</a>
+        <a href="#technology">Technology</a>
+        <a href="#commercial">Commercial</a>
+        <a href="#partners">Partnerships</a>
+        <a href="#early">Contact</a>
+        <a href="#">Privacy</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Zyppyn. All rights reserved.</span>
+      <span>A new generation of television.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:.12,rootMargin:"0px 0px -30px 0px"});
+
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+const menuBtn = document.getElementById('menuBtn');
+const mobilePanel = document.getElementById('mobilePanel');
+
+menuBtn.addEventListener('click',()=>{
+  mobilePanel.classList.toggle('open');
+  menuBtn.textContent = mobilePanel.classList.contains('open') ? '×' : '☰';
+});
+
+mobilePanel.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    mobilePanel.classList.remove('open');
+    menuBtn.textContent='☰';
+  });
+});
+
+document.getElementById('signupForm').addEventListener('submit',(e)=>{
+  e.preventDefault();
+  document.getElementById('success').style.display='block';
+  const btn=e.currentTarget.querySelector('button');
+  btn.textContent='Joined';
+  btn.disabled=true;
+  btn.style.opacity='.75';
+});
+</script>
+</body>
+</html>
