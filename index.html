@@ -505,7 +505,7 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
 /* ═══ 01 — VISION ═══ */
 #vision{overflow:visible}
 .vision-split{
-  display:grid;grid-template-columns:.38fr .58fr;gap:clamp(60px,8vw,120px)
+  display:grid;grid-template-columns:minmax(0,.4fr) minmax(0,.6fr);gap:clamp(60px,8vw,120px)
 }
 .vision-left{
   position:sticky;top:clamp(100px,14vh,160px);align-self:start;
@@ -540,7 +540,7 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
 /* ═══ 02 — TECHNOLOGY ═══ */
 #technology{overflow:visible}
 .tech-split{
-  display:grid;grid-template-columns:.38fr .58fr;gap:clamp(60px,8vw,120px)
+  display:grid;grid-template-columns:minmax(0,.4fr) minmax(0,.6fr);gap:clamp(60px,8vw,120px)
 }
 .tech-left{
   position:sticky;top:clamp(100px,14vh,160px);align-self:start
@@ -751,7 +751,7 @@ nav.nav-hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
 /* ═══ 06 — CONTACT ═══ */
 #contact{overflow:visible}
 .inv-split{
-  display:grid;grid-template-columns:.38fr .58fr;gap:clamp(60px,8vw,120px)
+  display:grid;grid-template-columns:minmax(0,.4fr) minmax(0,.6fr);gap:clamp(60px,8vw,120px)
 }
 .inv-left{
   position:sticky;top:clamp(100px,14vh,160px);align-self:start
@@ -1139,10 +1139,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[t
         <div class="vision-stat reveal">
           <div class="vision-stat-val">Smart</div>
           <div class="vision-stat-label">A connected software platform built into every ZYPPYN screen.</div>
-        </div>
-        <div class="vision-stat reveal">
-          <div class="vision-stat-val">OTA</div>
-          <div class="vision-stat-label">Over-the-air updates keep every screen current and evolving over time.</div>
         </div>
         <div class="vision-stat reveal">
           <div class="vision-stat-val" data-count="2027">2027</div>
